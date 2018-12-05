@@ -1,0 +1,25 @@
+# Tempon
+  Front-end part for basic warehouse website.
+
+## Uses:
+  - [x] elm for front-end part
+  - [x] javascript es6 implementation via babel transpile
+  - [x] modern and future css via postcss
+  - [x] image comprassion via webpack
+  - [x] hot module replacement for not reloading pages via webpack
+  - [x] editor config for basic text settings (like new lines etc)
+  - [x] eslint for code linting (extended airbnb rules)
+  - [ ] tests
+  - [x] git pre hooks for defending for bad commits and pushes
+  - [x] mock server (via json-serverr)
+
+
+## How to develop:
+  - npm install
+  - npm start
+
+  And visit `localhost:1234`
+
+
+## Production:
+  > npm run build

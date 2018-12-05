@@ -1,0 +1,19 @@
+extends:
+  - airbnb
+
+rules:
+  object-curly-newline: off
+  object-curly-spacing: off
+  no-use-before-define: off # allows hoisting for functions
+  import/no-extraneous-dependencies: off # use json server for mock
+
+  # TODO under: remove when projects starts on and grows
+  no-unused-vars: off
+  import/prefer-default-export: off
+
+
+env:
+  browser: true
+  node: true
+  amd: true
+  jest: true

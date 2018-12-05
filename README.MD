@@ -12,6 +12,7 @@
   - [ ] tests
   - [x] git pre hooks for defending for bad commits and pushes
   - [x] mock server (via json-serverr)
+  - [x] foreman to simplify development (all processes in single console)
 
 
 ## How to develop:

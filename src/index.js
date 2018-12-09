@@ -3,4 +3,11 @@ import styles from './index.scss';
 import {Elm} from './app/Main.elm';
 
 
-Elm.Main.init({node: window.elmapp});
+Elm.Main.init({
+  node: window.elmapp,
+  // flags: null
+});
+
+if (module.hot) {
+  module.hot.accept();
+}

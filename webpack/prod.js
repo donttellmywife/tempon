@@ -3,7 +3,7 @@ const CSS = require('mini-css-extract-plugin')
 
 const {smart} = require('webpack-merge')
 const common = smart('./config.js')
-module.exports = merge({
+module.exports = smart({
   mode: 'production',
 
   devtool: false,

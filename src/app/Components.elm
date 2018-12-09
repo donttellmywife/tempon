@@ -40,3 +40,19 @@ postCard post =
                 ]
              ]
         ]
+
+
+readBundleDescription : Bundle -> Html msg
+readBundleDescription post =
+    main_ [ class "container" ]
+        [ div [ class "row" ]
+            [ div [ class "col l6 offset-l3" ]
+                [ h1 [] [ text <| "ID " ++ post.id ++ ": "++ post.client  ]
+                , List.repeat 10 post.description |> List.map (\par -> p [] [ text par ]) |> div []
+                ]
+            ]
+        ]
+
+error : a -> Html msg
+error a =
+    main_ [ class "container" ] [ text <| Debug.toString a ]

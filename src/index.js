@@ -5,7 +5,6 @@ import {Elm} from './app/Main.elm';
 
 Elm.Main.init({
   node: window.elmapp,
-  // flags: null
 });
 
 if (module.hot) {

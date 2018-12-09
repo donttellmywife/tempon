@@ -21,7 +21,7 @@ type alias Document msg =
 main : Program Value Model msg
 main = Browser.document
   { init = \flags -> (initialModel, Cmd.none)
-  , view = \model -> Document "asd" [Pages.landing initialModel]
+  , view = \model -> Document "asd" [Pages.readBundle "3" model]
   , update = \msg model -> (model, Cmd.none)
   , subscriptions = \model -> Sub.none
   }

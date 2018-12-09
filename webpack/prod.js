@@ -2,7 +2,7 @@ const Compress = require('compression-webpack-plugin')
 const CSS = require('mini-css-extract-plugin')
 
 const {smart} = require('webpack-merge')
-const common = smart('./config.js')
+const common = require('./config.js')
 module.exports = smart({
   mode: 'production',
 

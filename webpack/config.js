@@ -1,7 +1,7 @@
 const {resolve} = require('path')
 
+// PLUGINS
 const {DefinePlugin} = require('webpack')
-
 const HTML = require('html-webpack-plugin')
 
 

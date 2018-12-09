@@ -9,7 +9,8 @@
     "build": "webpack --config webpack/prod.js",
     "test": "echo \"Error: no test specified\" && exit 0",
     "mock": "node server/api.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "elm": "elm package install"
   },
   "husky": {
     "hooks": {

@@ -2,6 +2,7 @@ syntax:
   postcss-scss
 
 plugins:
+  postcss-import: true
   postcss-preset-env:
     stage: 2
     features:

@@ -2,7 +2,7 @@ module Components exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Models exposing (Bundle)
+import Models exposing (Bundle, User)
 
 layout : Html msg -> Html msg -> Html msg
 layout header main =
@@ -21,6 +21,20 @@ authHeader =
                 ]
             ]
         ]
+
+userHeader : User -> Html msg
+userHeader user =
+  header []
+      [ nav []
+          [ div [ class "nav-wrapper container" ]
+              [ a [class "btn" ] [ text "New Post" ]
+              , ul [ class "right" ]
+                  [ li [] [ text user.email ]
+                  , li [] [ a [class "btn" ] [ text "Logout" ] ]
+                  ]
+              ]
+          ]
+      ]
 
 landingBody : List Bundle -> Html msg
 landingBody posts =
@@ -56,3 +70,16 @@ readBundleDescription post =
 error : a -> Html msg
 error a =
     main_ [ class "container" ] [ text <| Debug.toString a ]
+
+
+createBundleBody : Html msg
+createBundleBody =
+  main_ [ class "container " ]
+      [ div [ class "row" ]
+          [ Html.form [ class "col s12 m8 offset-m2" ]
+              [ div [ class "input-field" ] [ input [ placeholder "Post Title", type_ "text" ] [] ]
+              , div [ class "input-field" ] [ textarea [ placeholder "Enter post here..." ] [] ]
+              , a [ class "btn right" ] [ text "Create" ]
+              ]
+          ]
+      ]

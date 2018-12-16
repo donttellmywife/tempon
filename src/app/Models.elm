@@ -1,6 +1,7 @@
 module Models exposing (..)
 
 import Lorem
+import Routes exposing (Route)
 
 type alias User =
   { email : String
@@ -19,6 +20,7 @@ type alias Bundle =
 type alias Model =
   { bundles: List Bundle
   , user: User
+  , route: Route
   }
 
 initialBundle : String -> Bundle
@@ -33,4 +35,5 @@ initialModel : Model
 initialModel =
     { bundles = List.range 1 10 |> List.map Debug.toString |> List.map initialBundle
     , user = { email = "email@gmail.com" }
+    , route = Routes.Home
     }

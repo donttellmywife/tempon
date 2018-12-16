@@ -3,6 +3,7 @@ module Components exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Models exposing (Bundle, User)
+import Routes exposing (href)
 
 layout : Html msg -> Html msg -> Html msg
 layout header main =
@@ -15,8 +16,8 @@ authHeader =
         [ nav []
             [ div [ class "nav-wrapper container" ]
                 [ ul [ class "right" ]
-                    [ li [] [ a [class "btn" ] [ text "Login" ] ]
-                    , li [] [ a [class "btn" ] [ text "Sign Up" ] ]
+                    [ li [] [ a [class "btn", Routes.href Routes.Login] [ text "Login" ] ]
+                    , li [] [ a [class "btn", Routes.href Routes.Register] [ text "Sign Up" ] ]
                     ]
                 ]
             ]

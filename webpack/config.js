@@ -3,6 +3,7 @@ const {resolve} = require('path')
 // PLUGINS
 const {DefinePlugin} = require('webpack')
 const HTML = require('html-webpack-plugin')
+const {VueLoaderPlugin} = require('vue-loader')
 
 
 module.exports = {
@@ -29,11 +30,8 @@ module.exports = {
         },
       },
       {
-        test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        use: {
-          loader: 'elm-webpack-loader',
-        },
+        test: /\.vue$/,
+        use: 'vue-loader',
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -67,5 +65,6 @@ module.exports = {
     new HTML({
       template: 'index.html',
     }),
+    new VueLoaderPlugin(),
   ],
 };

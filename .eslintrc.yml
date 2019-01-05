@@ -2,6 +2,7 @@ extends:
   - airbnb
 
 rules:
+  semi: off
   object-curly-newline: off
   object-curly-spacing: off
   no-use-before-define: off # allows hoisting for functions

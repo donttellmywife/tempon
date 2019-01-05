@@ -1,12 +1,11 @@
-// import * as fontAwesome from 'font-awesome/css/font-awesome.css';
+import * as fontAwesome from 'font-awesome/css/font-awesome.css';
+import Vue from 'vue';
 import styles from './index.scss';
-import {Elm} from './app/Main.elm';
+import App from './app/App.vue';
 
+const app = new Vue({
+  el: '#vueapp',
+  render: h => h(App),
+})
 
-Elm.Main.init({
-  node: window.elmapp,
-});
-
-if (module.hot) {
-  module.hot.accept();
-}
+console.log(app)

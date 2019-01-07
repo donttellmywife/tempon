@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import MainLayout from '../layouts/Main.vue'
+  import {MainLayout} from 'LAYOUT'
 
   export default {
     components: {

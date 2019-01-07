@@ -16,11 +16,12 @@ module.exports = {
 
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      '~': resolve('src/'), // in case
       'COMPONENT': resolve('src/app/components/'),
       'PAGE': resolve('src/app/pages/'),
       'LAYOUT': resolve('src/app/layouts/'),
-      '~': resolve('src/'),
+
+      'vue$': 'vue/dist/vue.esm.js', // for local develompent
     },
   },
 

@@ -1,15 +1,6 @@
 <template>
-  <main-layout>
-    <p>Welcome home</p>
-  </main-layout>
+  <ul>
+    <li><router-link to="/about">/about</router-link></li>
+    <li><router-link to="/">HOME</router-link></li>
+  </ul>
 </template>
-
-<script>
-  import MainLayout from '../layouts/Main.vue'
-
-  export default {
-    components: {
-      MainLayout
-    }
-  }
-</script>

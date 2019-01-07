@@ -11,7 +11,7 @@ module.exports = smart({
     port: 1234,
     inline: true,
     stats: { colors: true },
-    // historyApiFallback: true,
+    historyApiFallback: true,
     watchOptions: {
       poll: true,
     },

@@ -13,14 +13,23 @@ module.exports = {
     path: resolve('dist'),
   },
 
+
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      'COMPONENT': resolve('src/app/components/'),
+      'PAGE': resolve('src/app/pages/'),
+      'LAYOUT': resolve('src/app/layouts/'),
+      '~': resolve('src/'),
+    },
+  },
+
+
   module: {
     rules: [
       {
-        test: /\.(s?css)$/,
-        use: [
-          'css-loader',
-          'postcss-loader',
-        ],
+        test: /\.vue$/,
+        use: 'vue-loader',
       },
       {
         test: /\.js$/,
@@ -30,8 +39,11 @@ module.exports = {
         },
       },
       {
-        test: /\.vue$/,
-        use: 'vue-loader',
+        test: /\.(s?css)$/,
+        use: [
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

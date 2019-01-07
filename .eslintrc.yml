@@ -7,10 +7,17 @@ rules:
   object-curly-spacing: off
   no-use-before-define: off # allows hoisting for functions
   import/no-extraneous-dependencies: off # use json server for mock
+  import/extensions: off
 
   # TODO under: remove when projects starts on and grows
   no-unused-vars: off
   import/prefer-default-export: off
+  no-new: off
+
+settings:
+  import/resolver:
+    webpack:
+      config: 'webpack/config.js'
 
 
 env:

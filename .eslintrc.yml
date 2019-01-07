@@ -13,6 +13,7 @@ rules:
   no-unused-vars: off
   import/prefer-default-export: off
   no-new: off
+  max-len: warn
 
 settings:
   import/resolver:

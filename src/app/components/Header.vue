@@ -4,3 +4,7 @@
     <li><router-link to="/">HOME</router-link></li>
   </ul>
 </template>
+
+<script>
+  
+</script>

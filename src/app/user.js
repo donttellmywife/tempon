@@ -4,7 +4,28 @@
 // assistant - can update records of clients (approve, disapprove)
 // base on type of user we determine possible actions and routes for user
 export default {
-  isGuest: true,
-  isClient: false,
-  isAssistant: false,
+  login,
+  register,
+  logout,
+  update,
 }
+
+const api = 'http://localhost:4000'
+
+function register(email, password, role) {
+
+}
+
+function login(email, password) {
+  // simple login mock
+  return fetch(`${api}/users?email=${email}&password=${password}`)
+    .then(res => res.json())
+    .then(([user]) => {
+      if (!user) return Promise.reject('Email or password incorrect')
+      return user
+    })
+}
+
+function update() {}
+
+function logout() {}

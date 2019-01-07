@@ -2,7 +2,8 @@
   Front-end part for basic warehouse website.
 
 ## Uses:
-  - [x] elm for front-end part
+  - [] elm for front-end part (partly, in `feat/conduit`)
+  - [x] vue for front-end part (in `feat/vue`)
   - [x] javascript es6 implementation via babel transpile
   - [x] modern and future css via postcss
   - [x] image comprassion via webpack

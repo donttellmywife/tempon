@@ -8,12 +8,14 @@ rules:
   no-use-before-define: off # allows hoisting for functions
   import/no-extraneous-dependencies: off # use json server for mock
   import/extensions: off
+  no-param-reassign: off
+  max-len: warn
 
   # TODO under: remove when projects starts on and grows
   no-unused-vars: off
   import/prefer-default-export: off
   no-new: off
-  max-len: warn
+  prefer-promise-reject-errors: off
 
 settings:
   import/resolver:

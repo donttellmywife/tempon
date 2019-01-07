@@ -1,22 +1,18 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import routes from './routes.js'
+import Vuex from 'vuex'
+// import { sync } from 'vuex-router-sync'
+
+import router from './router.js'
+import store from './store.js'
+
 import './app.css'
 
-
-Vue.use(VueRouter)
-
-
-const router = new VueRouter({
-  mode: 'history',
-  routes,
-})
-
-
+// const unsync = sync(store, router)
 const app = ($root) => {
   new Vue({
     el: $root,
     router,
+    store,
     template: '<router-view class="view" />',
   })
 }

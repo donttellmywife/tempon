@@ -1,10 +1,213 @@
 {
-  "players": [
-    { "id": "1", "name": "Sally", "level": 2 },
-    { "id": "2", "name": "Lance", "level": 1 },
-    { "id": "3", "name": "Aki", "level": 3 },
-    { "id": "4", "name": "Maria", "level": 4 },
-    { "id": "5", "name": "Julian", "level": 1 },
-    { "id": "6", "name": "Jaime", "level": 1 }
+  "cargos": [
+    {
+      "id": "1",
+      "createdAt": "2nd January 2019",
+      "author": "1",
+      "tracking": "1XBT2",
+      "labels": "",
+      "comment": "",
+      "status": "ongoing",
+
+      "description": {
+        "hopes": "Pink Headset with knifes",
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "actual": ""
+        }
+      },
+
+      "amount": {
+        "hopes": 5,
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "actual": ""
+        }
+      },
+
+      "size": {
+        "weight": "1",
+        "width": "100",
+        "height": "100",
+        "deep": "50"
+      },
+
+      "updatedAt": "2nd January 2019",
+      "updatedBy": "1",
+
+      "options": [],
+      "price": {
+        "unit": "$1.00",
+        "total": "$5.00"
+      }
+    },
+
+    {
+      "id": "2",
+      "createdAt": "2nd January 2019",
+      "author": "1",
+      "tracking": "XX66WWAAS",
+      "labels": "",
+      "comment": "",
+      "status": "ongoing",
+
+      "description": {
+        "should": "Snowboard bag",
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "amount": {
+        "should": 1,
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "size": {
+        "weight": "1",
+        "width": "100",
+        "height": "100",
+        "deep": "50"
+      },
+
+      "updatedAt": "2nd January 2019",
+      "updatedBy": "1",
+
+      "options": [],
+      "price": {
+        "unit": "$1.00",
+        "total": "$5.00"
+      }
+    },
+
+    {
+      "id": "3",
+      "createdAt": "2nd January 2019",
+      "author": "2",
+      "tracking": "XX66WWAAS",
+      "labels": "",
+      "comment": "",
+      "status": "ongoing",
+
+      "description": {
+        "should": "Snowboard bag",
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "amount": {
+        "should": 1,
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "size": {
+        "weight": "1",
+        "width": "100",
+        "height": "100",
+        "deep": "50"
+      },
+
+      "updatedAt": "2nd January 2019",
+      "updatedBy": "1",
+
+      "options": [],
+      "price": {
+        "unit": "$1.00",
+        "total": "$5.00"
+      }
+    },
+
+    {
+      "id": "4",
+      "createdAt": "2nd January 2019",
+      "author": "1",
+      "tracking": "XX66WWAAS",
+      "labels": "",
+      "comment": "",
+      "status": "ongoing",
+
+      "description": {
+        "should": "Snowboard bag",
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "amount": {
+        "should": 1,
+        "approved": {
+          "status": false,
+          "at": null,
+          "by": null,
+          "is": ""
+        }
+      },
+
+      "size": {
+        "weight": "1",
+        "width": "100",
+        "height": "100",
+        "deep": "50"
+      },
+
+      "updatedAt": "2nd January 2019",
+      "updatedBy": "1",
+
+      "options": [],
+      "price": {
+        "unit": "$1.00",
+        "total": "$5.00"
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "1",
+      "password": "2",
+      "role": "client"
+    },
+    {
+      "id": 2,
+      "email": "best@google.com",
+      "password": "none",
+      "role": "client"
+    },
+    {
+      "id": 3,
+      "email": "something.big.on@tv.com",
+      "password": "123321",
+      "role": "assistant"
+    },
+    {
+      "id": 4,
+      "email": "admin@here.com",
+      "password": "admin",
+      "role": "admin"
+    }
   ]
 }

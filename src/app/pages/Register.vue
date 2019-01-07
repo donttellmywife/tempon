@@ -1,11 +1,12 @@
 <template>
   <main-layout>
-    <h2>Login</h2>
+    <h2>Register</h2>
 
-    <form @submit.prevent="login">
+    <form @submit.prevent="register">
       <label><input v-model="email" placeholder="email"></label>
-      <label><input v-model="pwd" placeholder="password" type="password"></label>
-      <button type="submit">login</button>
+      <label><input v-model="pwd" placeholder="password" type="password"></label>(hint: not everyday password)<br>
+      <label>assistant: <input v-model="pwd" placeholder="password" type="checkbox"></label><br>
+      <button type="submit">register</button>
       <p v-if="error" class="error">{{ error }}</p>
     </form>
   </main-layout>
@@ -24,14 +25,15 @@
         email: '',
         pwd: '',
         error: '',
+        role: 'client'
       }
     },
     components: {
       MainLayout
     },
     methods: {
-      login() {
-        user.login(this.email, this.pwd)
+      register() {
+        user.register(this.email, this.pwd, this.role)
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }

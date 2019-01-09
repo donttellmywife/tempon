@@ -4,9 +4,9 @@
 
     <form @submit.prevent="register">
       <label><input v-model="email" placeholder="email"></label>
-      <label><input v-model="pwd" placeholder="password" type="password"></label>(hint: not everyday password)<br>
-      <label>assistant: <input v-model="pwd" placeholder="password" type="checkbox"></label><br>
-      <button type="submit">register</button>
+      <label><input v-model="pwd" placeholder="password" type="password">(hint: not everyday password)</label><br>
+      <label>assistant: <input v-model="assistant" type="checkbox"></label><br>
+      <button type="submit">register</button><br>
       <p v-if="error" class="error">{{ error }}</p>
     </form>
   </main-layout>
@@ -14,9 +14,9 @@
 
 
 <script>
-  import {MainLayout} from 'LAYOUT'
   import store from '../store.js'
   import user from '../user.js'
+  import { MainLayout } from 'LAYOUT'
 
 
   export default {
@@ -25,7 +25,7 @@
         email: '',
         pwd: '',
         error: '',
-        role: 'client'
+        assistant: false,
       }
     },
     components: {
@@ -33,7 +33,9 @@
     },
     methods: {
       register() {
-        user.register(this.email, this.pwd, this.role)
+        const role = this.assistant ? 'assistant' : 'client'
+        user.register(this.email, this.pwd, role)
+          .then(user => { console.log(user); return user })
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }

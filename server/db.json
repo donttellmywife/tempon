@@ -8,7 +8,6 @@
       "labels": "",
       "comment": "",
       "status": "ongoing",
-
       "description": {
         "hopes": "Pink Headset with knifes",
         "approved": {
@@ -18,7 +17,6 @@
           "actual": ""
         }
       },
-
       "amount": {
         "hopes": 5,
         "approved": {
@@ -28,24 +26,20 @@
           "actual": ""
         }
       },
-
       "size": {
         "weight": "1",
         "width": "100",
         "height": "100",
         "deep": "50"
       },
-
       "updatedAt": "2nd January 2019",
       "updatedBy": "1",
-
       "options": [],
       "price": {
         "unit": "$1.00",
         "total": "$5.00"
       }
     },
-
     {
       "id": "2",
       "createdAt": "2nd January 2019",
@@ -54,7 +48,6 @@
       "labels": "",
       "comment": "",
       "status": "ongoing",
-
       "description": {
         "should": "Snowboard bag",
         "approved": {
@@ -64,7 +57,6 @@
           "is": ""
         }
       },
-
       "amount": {
         "should": 1,
         "approved": {
@@ -74,24 +66,20 @@
           "is": ""
         }
       },
-
       "size": {
         "weight": "1",
         "width": "100",
         "height": "100",
         "deep": "50"
       },
-
       "updatedAt": "2nd January 2019",
       "updatedBy": "1",
-
       "options": [],
       "price": {
         "unit": "$1.00",
         "total": "$5.00"
       }
     },
-
     {
       "id": "3",
       "createdAt": "2nd January 2019",
@@ -100,7 +88,6 @@
       "labels": "",
       "comment": "",
       "status": "ongoing",
-
       "description": {
         "should": "Snowboard bag",
         "approved": {
@@ -110,7 +97,6 @@
           "is": ""
         }
       },
-
       "amount": {
         "should": 1,
         "approved": {
@@ -120,24 +106,20 @@
           "is": ""
         }
       },
-
       "size": {
         "weight": "1",
         "width": "100",
         "height": "100",
         "deep": "50"
       },
-
       "updatedAt": "2nd January 2019",
       "updatedBy": "1",
-
       "options": [],
       "price": {
         "unit": "$1.00",
         "total": "$5.00"
       }
     },
-
     {
       "id": "4",
       "createdAt": "2nd January 2019",
@@ -146,7 +128,6 @@
       "labels": "",
       "comment": "",
       "status": "ongoing",
-
       "description": {
         "should": "Snowboard bag",
         "approved": {
@@ -156,7 +137,6 @@
           "is": ""
         }
       },
-
       "amount": {
         "should": 1,
         "approved": {
@@ -166,17 +146,14 @@
           "is": ""
         }
       },
-
       "size": {
         "weight": "1",
         "width": "100",
         "height": "100",
         "deep": "50"
       },
-
       "updatedAt": "2nd January 2019",
       "updatedBy": "1",
-
       "options": [],
       "price": {
         "unit": "$1.00",
@@ -208,6 +185,30 @@
       "email": "admin@here.com",
       "password": "admin",
       "role": "admin"
+    },
+    {
+      "email": "22",
+      "password": "22",
+      "role": "client",
+      "id": 5
+    },
+    {
+      "email": "44",
+      "password": "33",
+      "role": "client",
+      "id": 6
+    },
+    {
+      "email": "23",
+      "password": "23",
+      "role": "client",
+      "id": 7
+    },
+    {
+      "email": "45",
+      "password": "45",
+      "role": "assistant",
+      "id": 8
     }
   ]
 }

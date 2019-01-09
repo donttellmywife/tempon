@@ -4,8 +4,8 @@
 
     <form @submit.prevent="login">
       <label><input v-model="email" placeholder="email"></label>
-      <label><input v-model="pwd" placeholder="password" type="password"></label>
-      <button type="submit">login</button>
+      <label><input v-model="pwd" placeholder="password" type="password"></label><br>
+      <button type="submit">login</button><br>
       <p v-if="error" class="error">{{ error }}</p>
     </form>
   </main-layout>
@@ -13,9 +13,9 @@
 
 
 <script>
-  import {MainLayout} from 'LAYOUT'
   import store from '../store.js'
   import user from '../user.js'
+  import { MainLayout } from 'LAYOUT'
 
 
   export default {

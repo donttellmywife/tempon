@@ -13,11 +13,23 @@ export default {
 const api = 'http://localhost:4000'
 
 function register(email, password, role) {
+  const body = JSON.stringify({email, password, role})
 
+  return fetch(`${api}/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body,
+  })
+    .then(res => res.json())
+    .then((user) => {
+      if (!user) return Promise.reject('Something went wrong on server side')
+      return user
+    })
 }
 
 function login(email, password) {
-  // simple login mock
   return fetch(`${api}/users?email=${email}&password=${password}`)
     .then(res => res.json())
     .then(([user]) => {

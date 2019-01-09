@@ -13,8 +13,7 @@
 
 
 <script>
-  import store from '../store.js'
-  import user from '../user.js'
+  import { user, store } from 'APP'
   import { MainLayout } from 'LAYOUT'
 
 
@@ -26,9 +25,13 @@
         error: '',
       }
     },
+
+
     components: {
       MainLayout
     },
+
+
     methods: {
       login() {
         user.login(this.email, this.pwd)

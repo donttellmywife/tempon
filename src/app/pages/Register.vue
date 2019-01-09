@@ -5,7 +5,7 @@
     <form @submit.prevent="register">
       <label><input v-model="email" placeholder="email"></label>
       <label><input v-model="pwd" placeholder="password" type="password">(hint: not everyday password)</label><br>
-      <label>assistant: <input v-model="assistant" type="checkbox"></label><br>
+      <label>assistant<input v-model="assistant" type="checkbox"></label><br>
       <button type="submit">register</button><br>
       <p v-if="error" class="error">{{ error }}</p>
     </form>
@@ -14,8 +14,7 @@
 
 
 <script>
-  import store from '../store.js'
-  import user from '../user.js'
+  import { user, store } from 'APP'
   import { MainLayout } from 'LAYOUT'
 
 
@@ -28,14 +27,17 @@
         assistant: false,
       }
     },
+
+
     components: {
       MainLayout
     },
+
+
     methods: {
       register() {
         const role = this.assistant ? 'assistant' : 'client'
         user.register(this.email, this.pwd, role)
-          .then(user => { console.log(user); return user })
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }

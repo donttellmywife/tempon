@@ -17,6 +17,7 @@ module.exports = {
   resolve: {
     alias: {
       '~': resolve('src/'), // in case
+      'APP': resolve('src/app/'), // in case
       'COMPONENT': resolve('src/app/components/'),
       'PAGE': resolve('src/app/pages/'),
       'LAYOUT': resolve('src/app/layouts/'),

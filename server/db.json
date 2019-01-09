@@ -209,6 +209,12 @@
       "password": "45",
       "role": "assistant",
       "id": 8
+    },
+    {
+      "email": "1",
+      "password": "2",
+      "role": "client",
+      "id": 9
     }
   ]
 }

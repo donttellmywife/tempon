@@ -17,8 +17,8 @@
       </ul>
 
       <ul v-if="!isGuest">
-        <router-link to="/add">/add post</router-link>
-        <li @click="logout"><a href=#>/logout</a></li>
+        <router-link to="/new">/new</router-link>
+        <a href='/' @click.prevent="logout">/logout</a>
       </ul>
     </nav>
   </header>
@@ -57,6 +57,6 @@
   }
 
   .assistant {
-    color: --blue;
+    color: blue;
   }
 </style>

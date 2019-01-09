@@ -10,12 +10,12 @@ export default {
   update,
 }
 
-const api = 'http://localhost:4000'
+const API = 'http://localhost:4000'
 
 function register(email, password, role) {
   const body = JSON.stringify({email, password, role})
 
-  return fetch(`${api}/users`, {
+  return fetch(`${API}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function register(email, password, role) {
 }
 
 function login(email, password) {
-  return fetch(`${api}/users?email=${email}&password=${password}`)
+  return fetch(`${API}/users?email=${email}&password=${password}`)
     .then(res => res.json())
     .then(([user]) => {
       if (!user) return Promise.reject('Email or password incorrect')

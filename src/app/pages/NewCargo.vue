@@ -4,6 +4,7 @@
   </main-layout>
 </template>
 
+
 <script>
   import {MainLayout} from 'LAYOUT'
 

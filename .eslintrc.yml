@@ -9,6 +9,7 @@ rules:
   import/no-extraneous-dependencies: off # use json server for mock
   import/extensions: off
   no-param-reassign: off
+  import/no-cycle: off # to import app from index
   max-len: warn
 
   # TODO under: remove when projects starts on and grows

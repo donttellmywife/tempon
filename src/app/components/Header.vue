@@ -17,7 +17,7 @@
       </ul>
 
       <ul v-if="!isGuest">
-        <router-link to="/new">/new</router-link>
+        <router-link to="/orders/new">/new</router-link>
         <a href='/' @click.prevent="logout">/logout</a>
       </ul>
     </nav>

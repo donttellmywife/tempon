@@ -14,7 +14,7 @@
 
 
 <script>
-  import { user, store } from 'APP'
+  import { user } from 'API'
   import { MainLayout } from 'LAYOUT'
 
 
@@ -29,11 +29,6 @@
     },
 
 
-    components: {
-      MainLayout
-    },
-
-
     methods: {
       register() {
         const role = this.assistant ? 'assistant' : 'client'
@@ -41,6 +36,11 @@
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }
-    }
+    },
+
+
+    components: {
+      MainLayout
+    },
   }
 </script>

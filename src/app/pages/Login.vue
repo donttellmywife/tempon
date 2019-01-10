@@ -13,7 +13,7 @@
 
 
 <script>
-  import { user, store } from 'APP'
+  import { user } from 'API'
   import { MainLayout } from 'LAYOUT'
 
 

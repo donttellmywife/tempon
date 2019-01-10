@@ -1,1 +1,1 @@
-export {default as MainLayout} from './Main.vue'
+export { default as MainLayout } from './Main.vue'

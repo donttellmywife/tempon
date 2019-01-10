@@ -8,7 +8,7 @@
 
 
 <script>
-  import {Header} from 'COMPONENT'
+  import { Header } from 'COMPONENT'
 
   export default {
     components: {

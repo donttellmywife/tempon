@@ -9,8 +9,8 @@ import './app.css'
 const app = ($root) => {
   new Vue({
     el: $root,
-    router,
     store,
+    router,
     template: '<router-view class="view" />',
   })
 }

@@ -47,7 +47,7 @@ const router = new VueRouter({
 export default router
 
 
-// access rights validations
+// ACCESS VALIDATORS
 function notGuest(to, from, next) {
   const { role } = store.state.user
 

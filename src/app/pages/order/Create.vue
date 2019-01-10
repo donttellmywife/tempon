@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <p>Add Cargo</p>
+    <p>NEW ORDER</p>
   </main-layout>
 </template>
 

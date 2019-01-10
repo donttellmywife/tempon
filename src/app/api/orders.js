@@ -1,10 +1,11 @@
 import config from './config'
 
 export default {
-  login,
-  register,
-  logout,
-  update,
+  // create,
+  // read,
+  // update,
+  // remove,
+  list,
 }
 
 const { API } = config
@@ -26,15 +27,9 @@ function register(email, password, role) {
     })
 }
 
-function login(email, password) {
-  return fetch(`${API}/users?email=${email}&password=${password}`)
+function list(id) {
+  const params = id ? `?author=${id}` : ''
+
+  return fetch(`${API}/orders${params}`)
     .then(res => res.json())
-    .then(([user]) => {
-      if (!user) return Promise.reject('Email or password incorrect')
-      return user
-    })
 }
-
-function update() {}
-
-function logout() {}

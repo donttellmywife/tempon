@@ -8,6 +8,14 @@ const store = new Vuex.Store({
   state: {
     user: {
       role: 'guest',
+      // id: 1, // for test
+    },
+  },
+
+
+  getters: {
+    user(state) {
+      return state.user
     },
   },
 

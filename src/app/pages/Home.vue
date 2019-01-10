@@ -1,9 +1,11 @@
 <template>
   <main-layout>
     <p>Welcome home</p>
-    List of Client Cargos (for client)
-    <br>
-    Or List of Clients Cargos (for assistant)
+
+    <span v-if="id">For client: list of his orders</span>
+    <span v-if="!id">For assistant: list of all orders</span>
+
+    <Orders :client-id="id" />
   </main-layout>
 </template>
 
@@ -14,29 +16,11 @@
 
 
   export default {
-    deta: {
-      list: [],
-      loading: false,
-      error: '',
-    },
-
-
-    created() {
-      this.fetchData()
-    },
-
-
-    methods: {
-      fetchData() {
-        this.loading = true
-        this.error = ''
-        this.$store.user;
-
-        // getPost(this.$route.params.id, (err, post) => {
-        //   this.loading = false
-        //   if (err) this.error = err.toString()
-        //   else this.post = post
-        // })
+    computed: {
+      id() {
+        return this.$store.getters.user.role === 'client'
+          ? this.$store.getters.user.id
+          : ''
       }
     },
 

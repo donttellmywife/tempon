@@ -10,21 +10,17 @@
       "status": "ongoing",
       "description": {
         "hopes": "Pink Headset with knifes",
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "actual": ""
-        }
+        "status": true,
+        "at": null,
+        "by": null,
+        "actual": ""
       },
-      "amount": {
+      "quantity": {
         "hopes": 5,
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "actual": ""
-        }
+        "status": false,
+        "at": null,
+        "by": null,
+        "actual": 3
       },
       "size": {
         "weight": "1",
@@ -49,22 +45,18 @@
       "comment": "",
       "status": "ongoing",
       "description": {
-        "should": "Snowboard bag",
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+        "hopes": "Snowboard bag",
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
-      "amount": {
-        "should": 1,
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+      "quantity": {
+        "hopes": 1,
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
       "size": {
         "weight": "1",
@@ -89,22 +81,18 @@
       "comment": "",
       "status": "ongoing",
       "description": {
-        "should": "Snowboard bag",
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+        "hopes": "Snowboard bag",
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
-      "amount": {
-        "should": 1,
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+      "quantity": {
+        "hopes": 1,
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
       "size": {
         "weight": "1",
@@ -129,22 +117,18 @@
       "comment": "",
       "status": "ongoing",
       "description": {
-        "should": "Snowboard bag",
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+        "hopes": "Snowboard bag",
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
-      "amount": {
-        "should": 1,
-        "approved": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "is": ""
-        }
+      "quantity": {
+        "hopes": 1,
+        "status": false,
+        "at": null,
+        "by": null,
+        "is": ""
       },
       "size": {
         "weight": "1",
@@ -165,27 +149,46 @@
       "status": 0,
       "description": {
         "hopes": "asdasd",
-        "approve": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "actual": ""
-        }
+        "status": false,
+        "at": null,
+        "by": null,
+        "actual": ""
       },
       "quantity": {
         "hopes": "2",
-        "approve": {
-          "status": false,
-          "at": null,
-          "by": null,
-          "actual": ""
-        }
+        "status": false,
+        "at": null,
+        "by": null,
+        "actual": ""
       },
       "tracking": "asdasdasd",
       "labels": "asdasd",
       "createdAt": "2019-01-11T08:55:38.269Z",
       "comment": "",
       "id": "TJYrOkW"
+    },
+    {
+      "author": 1,
+      "status": 0,
+      "description": {
+        "hopes": "www",
+        "status": false,
+        "at": null,
+        "by": null,
+        "actual": ""
+      },
+      "quantity": {
+        "hopes": "2",
+        "status": false,
+        "at": null,
+        "by": null,
+        "actual": ""
+      },
+      "tracking": "www",
+      "labels": "www",
+      "createdAt": "2019-01-11T15:15:27.368Z",
+      "comment": "",
+      "id": "VabJUuQ"
     }
   ],
   "users": [

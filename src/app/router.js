@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
-import { Create } from 'PAGE/order'
+import { Create, Update, Read } from 'PAGE/order'
 
 
 Vue.use(VueRouter)
@@ -18,8 +18,18 @@ const routes = [
 
   // TODO:
   // { path: '/orders', component: NewCargo, beforeEnter: notGuest },
-  // { path: '/orders/:oid', component: NewCargo, beforeEnter: notGuest },
-  // { path: '/orders/:oid/edit', component: NewCargo, beforeEnter: notGuest },
+  {
+    path: '/orders/:oid',
+    name: 'viewOrder',
+    component: Read,
+    beforeEnter: notGuest,
+  },
+  {
+    path: '/orders/:oid/edit',
+    name: 'editOrder',
+    component: Update,
+    beforeEnter: notGuest,
+  },
 
 
   // for assistant

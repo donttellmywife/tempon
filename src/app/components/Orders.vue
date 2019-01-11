@@ -1,25 +1,27 @@
 <template>
   <div>
-    <Loading v-if="loading" />
+    <Loading v-if="isLoading" />
 
-    <div v-if="!loading">
+    <div v-if="!isLoading">
       <div v-if="error">{{ error }}</div>
-      <order
-        v-if="items.length"
-        v-for="ord in items"
-        :key="ord.id"
-        :oid="ord.id"
-      />
+
+      <ul v-if="items.length">
+        <li v-for="ord in items" :key="ord.id">
+          {{ ord.id }} | {{ ord.description }}
+
+          <router-link :to="{ name: 'editOrder', params: { oid: ord.id } }">/edit</router-link>
+          <router-link :to="{ name: 'viewOrder', params: { oid: ord.id } }">/view</router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 
 <script>
-  import { Loading, OrderPreview } from 'COMPONENT'
+  import { Loading } from 'COMPONENT'
   import { orders } from 'API'
   const { list } = orders
-
 
   export default {
     props: {
@@ -29,7 +31,7 @@
 
     data() {
       return {
-        loading: true,
+        isLoading: true,
         items: [],
         error: '',
         id: this.$props.clientId || '' // client - show his orders; ass - show all orders
@@ -44,14 +46,14 @@
 
     methods: {
       fetchData() {
-        this.loading = true
+        this.isLoading = true
         this.error = ''
 
         list(this.id)
           .then(res => [].concat(res)) // make it always array
           .then(items => { this.$store.commit('setOrders', items); this.items = items; })
           .catch(err => this.error = err.toString())
-          .then(() => this.loading = false)
+          .then(() => this.isLoading = false)
       }
     },
 
@@ -59,7 +61,6 @@
 
     components: {
       Loading,
-      order: OrderPreview,
     }
   }
 </script>

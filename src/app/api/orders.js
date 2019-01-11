@@ -28,6 +28,7 @@ function add(order) {
 
 
 function get(id) {
+  // TODO: add user validation for data retrieving - on server?
   return fetch(`${API}/orders/${id}`).then(getJson)
 }
 

@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const { parse, stringify } = JSON
+const prevUser = parse(localStorage.getItem('user')) || {}
+const guest = { role: 'guest' }
+
 
 const store = new Vuex.Store({
   state: {
     user: {
-      role: 'guest',
-      // id: 1, // for test
+      ...guest,
+      ...prevUser,
     },
   },
 
@@ -22,10 +26,12 @@ const store = new Vuex.Store({
 
   mutations: {
     login(state, user) {
+      localStorage.setItem('user', JSON.stringify(user))
       state.user = user
     },
     logout(state) {
-      state.user = { role: 'guest' }
+      localStorage.setItem('user', JSON.stringify(guest))
+      state.user = guest
     },
   },
 

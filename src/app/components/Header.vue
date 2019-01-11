@@ -29,13 +29,13 @@
   export default {
     computed: {
       isGuest() {
-        return this.$store.state.user.role === 'guest'
+        return this.$store.getters.user.role === 'guest'
       },
       isClient() {
-        return this.$store.state.user.role === 'client'
+        return this.$store.getters.user.role === 'client'
       },
       isAssistant() {
-        return this.$store.state.user.role === 'assistant'
+        return this.$store.getters.user.role === 'assistant'
       }
     },
     methods: {

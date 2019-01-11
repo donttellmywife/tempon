@@ -14,13 +14,14 @@ const store = new Vuex.Store({
       ...guest,
       ...prevUser,
     },
+    orders: [],
   },
 
 
   getters: {
-    user(state) {
-      return state.user
-    },
+    user: state => state.user,
+    orders: state => state.orders,
+    order: state => fid => state.orders.filter(({ id }) => id === parseInt(fid, 10)).pop(),
   },
 
 
@@ -32,6 +33,9 @@ const store = new Vuex.Store({
     logout(state) {
       localStorage.setItem('user', JSON.stringify(guest))
       state.user = guest
+    },
+    setOrders(state, orders) {
+      state.orders = orders
     },
   },
 

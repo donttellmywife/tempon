@@ -1,35 +1,51 @@
 import config from './config'
 
 export default {
-  // create,
-  // read,
-  // update,
-  // remove,
+  add,
+  get,
+  update,
   list,
+  // remove,
 }
 
 const { API } = config
 
-function register(email, password, role) {
-  const body = JSON.stringify({email, password, role})
 
-  return fetch(`${API}/users`, {
+function add(order) {
+  return fetch(`${API}/orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body,
+    body: JSON.stringify(order),
   })
-    .then(res => res.json())
-    .then((user) => {
-      if (!user) return Promise.reject('Something went wrong on server side')
-      return user
+    .then(getJson)
+    .then((ord) => {
+      if (!ord) return Promise.reject('Something went wrong on server side')
+      return ord
     })
 }
 
+
+function get(id) {
+  return fetch(`${API}/orders/${id}`).then(getJson)
+}
+
+
+function update(order) {
+  return fetch(`${API}/orders/${order.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(order),
+  }).then(getJson)
+}
+
+
 function list(id) {
   const params = id ? `?author=${id}` : ''
-
-  return fetch(`${API}/orders${params}`)
-    .then(res => res.json())
+  return fetch(`${API}/orders${params}`).then(getJson)
 }
+
+function getJson(res) { return res.json() }

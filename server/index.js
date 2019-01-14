@@ -1,19 +1,36 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
-const { connect } = require('./db/db.js')
+const cors = require('cors')
+
+const { connect, user } = require('./db/db.js')
 
 
 const PORT = 4001
 
+// TODO: add jwt
+// TODO: take port from build
+
+
 // app init, connect db etc
 connect()
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.listen(PORT, () => console.log(`listening on ${PORT}`))
+app.use(bodyParser.json())
 
 
-app.get('/', (req, res) => res.send('Hello dd'))
+app.listen(PORT, () => console.log(`starting server on ${PORT}`))
 
+
+// USERS
 app.post('/users', (req, res) => {
-  console.log('users creation etc')
+  user.create(req.body)
+    .then(account => res.send(account))
+    .catch(err => res.send(err))
+})
+
+app.post('/login', (req, res) => {
+  user.find(req.body)
+    .then(account => res.send(account))
+    .catch(err => res.send(err))
 })

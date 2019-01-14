@@ -39,17 +39,6 @@
     },
 
 
-    computed: {
-      editLink() {
-        if (this.$store.getters.user.role === 'client') return 'a'
-        return 'b'
-      },
-      readLink() {
-
-      },
-    },
-
-
     mounted() {
       this.fetchData()
     },
@@ -69,9 +58,8 @@
     },
 
 
-
     components: {
       Loading,
-    }
+    },
   }
 </script>

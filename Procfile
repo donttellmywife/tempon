@@ -1,2 +1,2 @@
 client: npm run start:dev
-api: npm run mock
+api: cd server && npm start

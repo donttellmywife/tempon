@@ -18,6 +18,7 @@
   export default {
     computed: {
       id() {
+        // show either client list either all list
         return this.$store.getters.user.role === 'client'
           ? this.$store.getters.user.id
           : ''

@@ -8,7 +8,7 @@
     "start:dev": "webpack-dev-server --config webpack/dev.js",
     "build": "webpack --config webpack/prod.js",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "mock": "node server/api.js",
+    "mock": "node mock/api.js",
     "lint": "eslint src"
   },
   "husky": {
@@ -72,7 +72,10 @@
   },
   "keywords": [
     "javascript",
-    "webpack"
+    "webpack",
+    "vue",
+    "express",
+    "mongo"
   ],
   "author": "Vova Puchkov",
   "license": "ISC"

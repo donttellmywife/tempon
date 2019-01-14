@@ -5,7 +5,6 @@ export default {
   get,
   update,
   list,
-  // remove,
 }
 
 const { API } = config

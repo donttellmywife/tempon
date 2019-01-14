@@ -7,7 +7,7 @@
 
       <ul v-if="items.length">
         <li v-for="ord in items" :key="ord.id">
-          {{ ord.id }} | {{ ord.description }}
+          {{ ord.id }} | {{ ord.description.hopes }}
 
           <router-link :to="{ name: 'editOrder', params: { oid: ord.id } }">/edit</router-link>
           <router-link :to="{ name: 'viewOrder', params: { oid: ord.id } }">/view</router-link>
@@ -39,6 +39,17 @@
     },
 
 
+    computed: {
+      editLink() {
+        if (this.$store.getters.user.role === 'client') return 'a'
+        return 'b'
+      },
+      readLink() {
+
+      },
+    },
+
+
     mounted() {
       this.fetchData()
     },
@@ -51,7 +62,7 @@
 
         list(this.id)
           .then(res => [].concat(res)) // make it always array
-          .then(items => { this.$store.commit('setOrders', items); this.items = items; })
+          .then(items => { this.$store.commit('setOrders', items); this.items = items })
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
       }

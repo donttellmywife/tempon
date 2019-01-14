@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
-import { Create, Update, Read } from 'PAGE/order'
+import { Create, Update, Read, Assist } from 'PAGE/order'
 
 
 Vue.use(VueRouter)
@@ -28,7 +28,21 @@ const routes = [
     path: '/orders/:oid/edit',
     name: 'editOrder',
     component: Update,
-    beforeEnter: notGuest,
+    beforeEnter: isAssistant,
+    // redirect: to => {
+    //   const { hash, params, query } = to
+    //   if (query.to === 'foo') {
+    //     return { path: '/foo', query: null }
+    //   }
+    //   if (hash === '#baz') {
+    //     return { name: 'baz', hash: '' }
+    //   }
+    //   if (params.id) {
+    //     return '/with-params/:id'
+    //   } else {
+    //     return '/bar'
+    //   }
+    // }
   },
 
 
@@ -37,7 +51,12 @@ const routes = [
   // { path: '/client/:id', component: NewCargo, beforeEnter: notGuest },
   // { path: '/client/:id/orders', component: NewCargo, beforeEnter: notGuest },
   // { path: '/client/:id/orders/:oid', component: NewCargo, beforeEnter: notGuest },
-  // { path: '/client/:id/orders/:oid/edit', component: NewCargo, beforeEnter: notGuest },
+  {
+    path: '/client/orders/:oid/edit',
+    name: 'assistOrder',
+    component: Assist,
+    beforeEnter: notGuest,
+  },
 
   // for guest
   { path: '/login', component: Login, beforeEnter: isGuest },
@@ -77,4 +96,10 @@ function isGuest(to, from, next) {
   return role === 'guest'
     ? next()
     : next({ path: '/' })
+}
+
+function isAssistant(to, from, next) {
+  return store.getters.user.role === 'assistant'
+    ? next({ path: `/client${to.path}` })
+    : next({ path: to })
 }

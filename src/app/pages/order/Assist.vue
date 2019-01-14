@@ -1,18 +1,32 @@
 <template>
   <main-layout>
-    <h2>UPDATE ORDER</h2>
+    <h2>ASSIST WITH ORDER</h2>
 
     <span v-if="loading">loading...</span>
 
     <p v-if="error" class="error">{{ error }}</p>
 
     <form v-if="!(loading && error)" @submit.prevent="update">
-      <label>what's in the box?<input v-model="order.description.hopes" placeholder="description" type="text"></label><br>
-      <label>and how many?<input v-model="order.quantity.hopes" placeholder="quantity" type="number"></label><br>
-      <label>how to find it<input v-model="order.tracking" placeholder="tracking" type="text"></label><br>
-      <label>labels<input v-model="order.labels" placeholder="link to gdocs" type="text"></label><br>
+      <div>
+        IS IN: <span>{{ order.description.hopes }}</span><br>
+        <label>YES! <input type="checkbox" v-model="order.description.status"></label>
+        <label v-if="!order.description.status">
+          Tell client more whats up <input type="text" v-model="order.description.actual" placeholder="what's in there?">
+        </label>
+      </div>
 
-      <button type="submit">soon we will see something fresh</button><br>
+      <div>
+        THIS MANY: {{ order.quantity.hopes }}<br>
+        <label>YES! <input v-model="order.quantity.status" type="checkbox"></label>
+        <label v-if="!order.quantity.status">
+          Tell client more whats up <input v-model="order.quantity.actual" placeholder="amount" type="number">
+        </label>
+      </div>
+
+      <div>how to find it {{ order.tracking }}</div>
+      <div>labels {{ order.labels }}</div>
+
+      <button type="submit">soon we will see something fresh</button>
     </form>
   </main-layout>
 </template>
@@ -29,16 +43,16 @@ export default {
       order: {
         description: {
           hopes: '',
-          status: false,
-          at: null,
-          by: null,
+          status: true,
+          // at: null,
+          // by: null,
           actual: '',
         },
         quantity: {
           hopes: '',
-          status: false,
-          at: null,
-          by: null,
+          status: true,
+          // at: null,
+          // by: null,
           actual: '',
         },
         tracking: '',

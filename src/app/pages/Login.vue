@@ -5,7 +5,7 @@
     <form @submit.prevent="login">
       <label><input v-model="email" placeholder="email" type="text"></label>
       <label><input v-model="pwd" placeholder="password" type="password"></label><br>
-      <button type="submit">login</button><br>
+      <button type="submit" class="button--grey">login</button><br>
       <p v-if="error" class="error">{{ error }}</p>
     </form>
   </main-layout>

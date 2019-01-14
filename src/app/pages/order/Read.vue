@@ -36,7 +36,7 @@
       with tracking: {{ order.tracking }}<br>
       and labels: {{ order.labels }}<br>
 
-      <button type="edit">update</button><br>
+      <router-link :to="{ name: 'editOrder', params: { oid: order.id } }">/edit</router-link>
     </div>
   </main-layout>
 </template>

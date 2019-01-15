@@ -1,5 +1,5 @@
 import { connect } from 'mongoose'
-import User from './schema.js'
+import User from './model.js'
 
 // TODO: more generic errors
 

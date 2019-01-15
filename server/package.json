@@ -1,10 +1,10 @@
 {
-  "name": "cargo_server",
-  "version": "0.0.1",
+  "name": "tempoff",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js",
+    "start": "nodemon --exec babel-node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -15,6 +15,9 @@
     "mongoose": "^5.4.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
     "nodemon": "^1.18.9"
   },
   "keywords": [],

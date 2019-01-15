@@ -1,6 +1,6 @@
-const {HotModuleReplacementPlugin} = require('webpack')
+const { HotModuleReplacementPlugin } = require('webpack')
 
-const {smart} = require('webpack-merge')
+const { smart } = require('webpack-merge')
 // respect previous loaders loaders, and concatinates to them
 const common = require('./config.js')
 module.exports = smart({

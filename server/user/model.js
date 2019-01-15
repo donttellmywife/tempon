@@ -27,12 +27,14 @@ const user = new Schema({
     type: Boolean,
     default: false,
   },
+
   orders: [{
     type: String,
     default: [],
   }],
-  created: Date,
-}, { timestamps: true })
+}, {
+  timestamps: true
+})
 
 const User = model('user', user)
 

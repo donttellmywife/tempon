@@ -2,6 +2,8 @@ import { Router } from 'express'
 import user from './db.js'
 
 const api = Router()
+
+// MIDDLEWARE: add user to request
 api.param('email', (req, res, next, email) => {
   user.find({ email })
     .then((user) => {
@@ -14,15 +16,22 @@ api.param('email', (req, res, next, email) => {
 
 // TODO: add jwt
 api.route('/')
+  .get((req, res) => {
+    user.list()
+      .then(users => res.json(users))
+  })
   .post((req, res) => {
     user.create(req.body)
-      .then(account => res.send(account))
-      .catch(err => res.send(err))
+      .then(account => res.json(account))
+      .catch(err => res.json(err))
   })
 
+
 api.route('/:email')
-  .get((req, res) => {
-    res.send(req.user)
-  })
+  .get((req, res) => res.json(req.user))
+  // TODO: update, delete
+
+api.route('/:email/orders')
+  .get((req, res) => res.json([]))
 
 export default api

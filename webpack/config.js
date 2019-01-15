@@ -1,9 +1,9 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 
 // PLUGINS
-const {DefinePlugin} = require('webpack')
+const { DefinePlugin } = require('webpack')
 const HTML = require('html-webpack-plugin')
-const {VueLoaderPlugin} = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader')
 
 
 module.exports = {

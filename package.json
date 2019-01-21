@@ -28,8 +28,7 @@
     "ramda": "^0.26.1",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
-    "vuex": "^3.0.1",
-    "vuex-router-sync": "^5.0.0"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -76,7 +75,8 @@
     "webpack",
     "vue",
     "express",
-    "mongo"
+    "mongoose",
+    "ramda"
   ],
   "author": "Vova Puchkov",
   "license": "ISC"

@@ -1,7 +1,9 @@
-import { merge } from 'ramda'
+import { merge, mergeAll } from 'ramda'
 import common from './common.js'
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+const { NODE_ENV, JWT_SECRET } = process.env
+
+process.env.NODE_ENV = NODE_ENV || 'development'
 
 
 function getConfig(env) {
@@ -21,4 +23,15 @@ function getConfig(env) {
   }
 }
 
-export default merge(common, getConfig(process.env.NODE_ENV))
+
+export default mergeAll([
+  common,
+
+  getConfig(process.env.NODE_ENV),
+
+  {
+    secrets: {
+      jwt: JWT_SECRET,
+    },
+  }
+])

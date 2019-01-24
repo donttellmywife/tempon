@@ -18,11 +18,12 @@ module.exports = {
     alias: {
       '~': resolve('src/'), // in case
 
-      'APP': resolve('src/app/'),
-      'API': resolve('src/app/api/'),
-      'COMPONENT': resolve('src/app/components/'),
-      'PAGE': resolve('src/app/pages/'),
-      'LAYOUT': resolve('src/app/layouts/'),
+      'APP': resolve('src/modules/'),
+      'API': resolve('src/api/'),
+      'COMPONENT': resolve('src/components/'),
+      'PAGE': resolve('src/pages/'),
+      'LAYOUT': resolve('src/layouts/'),
+      'CONST': resolve('src/const/'),
 
       'vue$': 'vue/dist/vue.esm.js', // for local develompent
     },

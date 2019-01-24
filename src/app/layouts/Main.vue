@@ -1,9 +1,11 @@
 <template>
-  <div class="main-layout">
-    <Header />
+<div class="main-layout">
+  <Header />
 
-    <slot></slot>
-  </div>
+  <main class="main-content">
+    <slot />
+  </main>
+</div>
 </template>
 
 

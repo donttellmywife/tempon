@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import { router, store } from 'APP'
 
-import './theme/superhero.min.css';
+import './theme/index.css';
 
 
 const app = ($root) => {

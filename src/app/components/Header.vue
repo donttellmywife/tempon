@@ -1,27 +1,26 @@
 <template>
-  <header class="navbar navbar-light" v-bind:class="{
-    guest: isGuest,
-    client: isClient,
-    assistant: isAssistant
-  }">
-    <router-link to="/" class="navbar-brand">/LOGO</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <router-link to="/" class="navbar-brand">
+      TEMP<span v-if="isGuest" class="text-danger">OFF</span><span v-if="!isGuest" class="text-success">ON</span>
+    </router-link>
 
-    <span v-if="isGuest">GUEST MODE</span>
-    <span v-if="isClient">CLIENT MODE</span>
-    <span v-if="isAssistant">ASSISTANT MODE</span>
+    <span>
+      <span>FOR DEV:&nbsp;</span>
+      <span v-if="isGuest">GUEST MODE</span>
+      <span v-if="isClient">CLIENT MODE</span>
+      <span v-if="isAssistant">ASSISTANT MODE</span>
+    </span>
 
-    <nav class="nav navbar-nav pull-xs-right">
-      <ul v-if="isGuest">
-        <router-link to="/login">/login</router-link>
-        <router-link to="/register">/register</router-link>
-      </ul>
+    <ul v-if="isGuest" class="navbar-nav navbar-nav--row">
+      <li class="nav-item"><router-link to="/login">/login</router-link></li>
+      <li class="nav-item"><router-link to="/register">/register</router-link></li>
+    </ul>
 
-      <ul v-if="!isGuest">
-        <router-link to="/orders/new">/new</router-link>
-        <a href='/' @click.prevent="logout">/logout</a>
-      </ul>
-    </nav>
-  </header>
+    <ul v-if="!isGuest" class="navbar-nav navbar-nav--row">
+      <li class="nav-item"><router-link to="/orders/new">/new</router-link></li>
+      <li class="nav-item"><a href='/' @click.prevent="logout">/logout</a></li>
+    </ul>
+  </nav>
 </template>
 
 
@@ -38,6 +37,8 @@
         return this.$store.getters.user.role === 'assistant'
       }
     },
+
+
     methods: {
       logout() {
         this.$store.commit('logout')
@@ -45,18 +46,3 @@
     }
   }
 </script>
-
-
-<style scoped>
-  .guest {
-    color: green;
-  }
-
-  .client {
-    color: red;
-  }
-
-  .assistant {
-    color: blue;
-  }
-</style>

@@ -24,6 +24,7 @@ export const login = (req, res, next) => {
   // look user up in the DB so we can check
   // if the passwords match for the username
   User.find({ email })
+    .exec()
     .then(([ user ]) => {
       if (!user) res.status(401).send('No user with the given username')
       if (!compareSync(password, user.hash)) next(new Error({ message: 'wrong password' }))

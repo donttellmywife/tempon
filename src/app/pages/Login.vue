@@ -1,14 +1,20 @@
 <template>
-  <main-layout>
-    <h2>Login</h2>
-
-    <form @submit.prevent="login">
-      <label><input v-model="email" placeholder="email" type="text"></label>
-      <label><input v-model="pwd" placeholder="password" type="password"></label><br>
-      <button type="submit" class="button--grey">login</button><br>
-      <p v-if="error" class="error">{{ error }}</p>
-    </form>
-  </main-layout>
+<main-layout>
+  <form @submit.prevent="login">
+    <fieldset>
+      <legend>LOGIN</legend>
+      <div class="form-group">
+        <!-- TODO: type email after dev done -->
+        <label>Email address<input v-model="email" class="form-control" placeholder="email" type="text" aria-describedby="emailHelp"></label>
+      </div>
+      <div class="form-group">
+        <label>Password<input v-model="pwd" placeholder="password" type="password" class="form-control"></label><br>
+      </div>
+      <button type="submit" class="btn btn-primary">ENTER</button>
+      <p v-if="error" class="text-danger">{{ error }}</p>
+    </fieldset>
+  </form>
+</main-layout>
 </template>
 
 
@@ -27,17 +33,17 @@
     },
 
 
-    components: {
-      MainLayout
-    },
-
-
     methods: {
       login() {
         user.login(this.email, this.pwd)
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }
-    }
+    },
+
+
+    components: {
+      MainLayout
+    },
   }
 </script>

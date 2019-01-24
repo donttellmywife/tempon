@@ -1,0 +1,37 @@
+/* OVERRIDES AND ADDITIONS FOR THEME */
+@import url('./offline.css');
+@import url('./superhero.min.css');
+
+
+/* COMMON */
+html,
+body {
+  height: 100%;
+}
+
+a {
+  /* TODO: user root colors */
+  color: #fff;
+}
+
+
+/* NAVIGATION  */
+.navbar-nav--row {
+  display: flex;
+  flex-direction: row;
+
+  & .nav-item:not(:last-of-type) {
+    margin-right: 1em;
+  }
+}
+
+
+/* LAYOUT */
+.main-layout {
+  /* background-color: #4E5D6C */
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+}

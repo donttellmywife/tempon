@@ -44,7 +44,6 @@ function login(email, password) {
     .then(res => res.json())
     .then((user) => {
       if (!user) return Promise.reject('Email or password incorrect')
-      console.log(user)
       return user
     })
 }

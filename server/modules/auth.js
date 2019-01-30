@@ -19,14 +19,14 @@ export const login = (req, res, next) => {
   const { email, password } = req.body
 
   // if no username or password then send error
-  if (!email || !password) return res.status(400).send('You need a username and password')
+  if (!email || !password) return res.status(400).json({ message: 'You need a username and password' })
 
   // look user up in the DB so we can check
   // if the passwords match for the username
   User.find({ email })
     .exec()
     .then(([ user ]) => {
-      if (!user) res.status(401).send('No user with the given username')
+      if (!user) res.status(401).json({ message: 'No user with the given username' })
       if (!compareSync(password, user.hash)) next(new Error({ message: 'wrong password' }))
 
       const forClient = {

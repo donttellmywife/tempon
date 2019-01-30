@@ -44,8 +44,8 @@ function update(order) {
 
 
 function list(id) {
-  const params = id ? `?author=${id}` : ''
-  return fetch(`${API}/orders${params}`).then(getJson)
+  const url = id ? `${API}/users/${id}/orders` : `${API}/orders`
+  return fetch(url).then(getJson)
 }
 
 function getJson(res) { return res.json() }

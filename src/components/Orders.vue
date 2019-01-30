@@ -34,7 +34,7 @@
         isLoading: true,
         items: [],
         error: '',
-        id: this.$props.clientId || '' // client - show his orders; ass - show all orders
+        id: this.$props.clientId || '' // client - show his orders; assistant - show all orders
       }
     },
 

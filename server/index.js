@@ -3,7 +3,7 @@ import { urlencoded, json } from 'body-parser';
 import cors from 'cors'
 import { connect } from 'mongoose'
 
-import { api as UserApi, db } from 'USER'
+import { api as UserApi } from 'USER'
 import { handleError, login } from 'MODULES'
 
 // config will differ on env (dev, prod, test)

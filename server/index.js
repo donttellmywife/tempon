@@ -2,6 +2,7 @@ import express from 'express'
 import { urlencoded, json } from 'body-parser';
 import cors from 'cors'
 import { connect } from 'mongoose'
+import morgan from 'morgan'
 
 import { api as UserApi } from 'USER'
 import { handleError, login } from 'MODULES'
@@ -21,6 +22,7 @@ const app = express()
 app.use(cors())
 app.use(urlencoded({ extended: true }))
 app.use(json())
+app.use(morgan('dev'))
 app.use(handleError)
 
 app.use('/users', UserApi)

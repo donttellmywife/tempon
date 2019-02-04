@@ -31,7 +31,7 @@ export default mergeAll([
 
   {
     secrets: {
-      jwt: JWT_SECRET,
+      jwt: JWT_SECRET || 'SOME_BASIC_SHIT',
     },
   }
 ])

@@ -32,7 +32,7 @@
     methods: {
       register() {
         const role = this.assistant ? 'assistant' : 'client'
-        user.register(this.email, this.pwd, role)
+        user.signup(this.email, this.pwd, role)
           .then(user => this.$store.commit('login', user))
           .catch(err => {
             console.log(err)

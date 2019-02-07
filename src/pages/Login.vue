@@ -35,7 +35,7 @@
 
     methods: {
       login() {
-        user.login(this.email, this.pwd)
+        user.signin(this.email, this.pwd)
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }

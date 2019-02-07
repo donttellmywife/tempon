@@ -8,16 +8,15 @@ const { API } = config
 // assistant - can update records of clients (approve, disapprove)
 // base on type of user we determine possible actions and routes for user
 export default {
-  login,
-  logout,
-  register,
-  update,
+  signup,
+  signin,
 }
 
-function register(email, password, role) {
+
+function signup(email, password, role) {
   const body = JSON.stringify({ email, password, role })
 
-  return fetch(`${API}/users/`, {
+  return fetch(`${API}/signup/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,10 +30,10 @@ function register(email, password, role) {
     })
 }
 
-function login(email, password) {
+function signin(email, password) {
   const body = JSON.stringify({ email, password })
 
-  return fetch(`${API}/login`, {
+  return fetch(`${API}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +46,3 @@ function login(email, password) {
       return user
     })
 }
-
-function update() {}
-
-function logout() {}

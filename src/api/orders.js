@@ -1,3 +1,4 @@
+import { store } from 'APP'
 import config from './config'
 
 export default {
@@ -11,9 +12,12 @@ const { API } = config
 
 
 function add(order) {
+  const { token } = store.getters.user
+
   return fetch(`${API}/orders`, {
     method: 'POST',
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(order),
@@ -27,7 +31,6 @@ function add(order) {
 
 
 function get(id) {
-  // TODO: add user validation for data retrieving - on server?
   return fetch(`${API}/orders/${id}`).then(getJson)
 }
 
@@ -43,9 +46,15 @@ function update(order) {
 }
 
 
-function list(id) {
-  const url = id ? `${API}/users/${id}/orders` : `${API}/orders`
-  return fetch(url).then(getJson)
+function list() {
+  const { token } = store.getters.user
+
+  return fetch(`${API}/orders`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(getJson)
 }
 
 function getJson(res) { return res.json() }

@@ -16,6 +16,7 @@ const routes = [
   // for client
   { path: '/orders/new', component: Create, beforeEnter: notGuest },
 
+
   // TODO:
   // { path: '/orders', component: NewCargo, beforeEnter: notGuest },
   {
@@ -29,20 +30,6 @@ const routes = [
     name: 'editOrder',
     component: Update,
     beforeEnter: isAssistant,
-    // redirect: to => {
-    //   const { hash, params, query } = to
-    //   if (query.to === 'foo') {
-    //     return { path: '/foo', query: null }
-    //   }
-    //   if (hash === '#baz') {
-    //     return { name: 'baz', hash: '' }
-    //   }
-    //   if (params.id) {
-    //     return '/with-params/:id'
-    //   } else {
-    //     return '/bar'
-    //   }
-    // }
   },
 
 
@@ -81,11 +68,7 @@ function notGuest(to, from, next) {
   const { role } = store.state.user
 
   return role === 'guest'
-    ? next({
-      path: '/login',
-      // query: {redirect: to.fullPath},
-      // path query on redirect for analitycs or redirect after login
-    })
+    ? next({ path: '/login' })
     : next()
 }
 

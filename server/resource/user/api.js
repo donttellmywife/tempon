@@ -1,8 +1,7 @@
 import { Router } from 'express'
-import bcrypt from 'bcryptjs'
 
 import User from './model.js'
-import { login, log } from 'MODULES'
+import { login } from 'MODULES/auth.js'
 
 const api = Router()
 export default api
@@ -24,21 +23,6 @@ api.param('email', (req, res, next, email) => {
 
 api.route('/')
   .get((req, res) => User.find({}))
-  .post(createUser)
-
-function createUser(req, res, next) {
-  const { email, password, role } = req.body
-  if (!email || !password || !role) return res.status(400).json({ message: 'Validation failed' })
-  // TODO: add email and password validation
-
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(password, salt)
-
-  User.create({ email, role, hash })
-    .then(user => login(req, res, next))
-    // TODO: add specific errors
-    .catch(err => res.status(400).json({ message: 'unable to register user' }))
-}
 
 
 // TODO: update, delete

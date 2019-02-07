@@ -53,9 +53,6 @@ const store = new Vuex.Store({
   //   }
   // },
 })
-// store.commit('login')
-// setTimeout(() => { store.commit('login') }, 1000)
-// for test purposes
 
 
 export default store

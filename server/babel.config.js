@@ -1,8 +1,8 @@
 module.exports = {
   presets: [
     ['@babel/preset-env', {
-      "targets": {
-        "node": "current",
+      'targets': {
+        'node': 'current',
       }
     }]
   ],
@@ -12,11 +12,11 @@ module.exports = {
     ['module-resolver', {
       root: ['./'],
       alias: {
-        'USER': './user/',
-        'MODULES': './modules/',
+        'USER': './resource/user/',
+        'MODULES': './module/',
         'CONFIG': './config/',
       },
     }],
-    "@babel/plugin-syntax-dynamic-import",
+    '@babel/plugin-syntax-dynamic-import',
   ],
 };

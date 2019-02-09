@@ -22,13 +22,6 @@
   import { orders } from 'API'
   import { MainLayout } from 'LAYOUT'
 
-  const approve = {
-    status: false,
-    at: null,
-    by: null,
-    actual: ""
-  }
-
 
   export default {
     data() {
@@ -39,9 +32,6 @@
         labels: '',
         error: '',
         loading: false,
-        // comment: '',
-        // options: '',
-        // assistant: false,
       }
     },
 
@@ -49,19 +39,14 @@
     methods: {
       create() {
         const order = {
-          author: this.$store.getters.user.id,
-          status: 0,
           description: {
-            hopes: this.description,
-            approve
+            expected: this.description,
           },
           quantity: {
-            hopes: this.quantity,
-            approve,
+            expected: this.quantity,
           },
           tracking: this.tracking,
           labels: this.labels,
-          createdAt: new Date(),
           comment: '',
         }
 

@@ -42,17 +42,11 @@ export default {
     return {
       order: {
         description: {
-          hopes: '',
-          status: true,
-          // at: null,
-          // by: null,
+          expected: '',
           actual: '',
         },
         quantity: {
-          hopes: '',
-          status: true,
-          // at: null,
-          // by: null,
+          expected: '',
           actual: '',
         },
         tracking: '',

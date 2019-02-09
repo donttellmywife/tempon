@@ -36,9 +36,12 @@ function get(id) {
 
 
 function update(order) {
-  return fetch(`${API}/orders/${order.id}`, {
+  const { token } = store.getters.user
+
+  return fetch(`${API}/orders/${order._id}`, {
     method: 'PUT',
     headers: {
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(order),

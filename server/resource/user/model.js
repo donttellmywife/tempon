@@ -23,18 +23,6 @@ const schema = new Schema({
     default: 'client',
     validate: () => true,
   },
-
-
-  isActive: {
-    type: Boolean,
-    default: false,
-  },
-
-
-  orders: [{
-    type: String,
-    default: [],
-  }],
 }, {
   timestamps: true
 })

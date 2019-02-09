@@ -3,9 +3,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+
 const { parse, stringify } = JSON
-const prevUser = parse(localStorage.getItem('user')) || {}
 const guest = { role: 'guest' }
+const prevUser = parse(localStorage.getItem('user')) || {}
 
 
 const store = new Vuex.Store({
@@ -38,20 +39,6 @@ const store = new Vuex.Store({
       state.orders = orders
     },
   },
-
-
-  // actions: {
-  //   login({ commit }, user) {
-  //     commit('login', user)
-  //   }
-  // },
-  //
-  //
-  // methods: {
-  //   login() {
-  //     this.$store.dispatch('login')
-  //   }
-  // },
 })
 
 

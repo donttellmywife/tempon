@@ -1,5 +1,5 @@
 <template>
-  <div>{{ msg }}</div>
+  <div>{{ msg || 'ERROR' }}</div>
 </template>
 
 
@@ -9,10 +9,10 @@
       msg: String
     },
 
-    data() {
-      return {
-        msg: this.$props.msg || 'ERROR',
-      }
-    },
+    // data() {
+    //   return {
+    //     msg: this.$props.msg || 'ERROR',
+    //   }
+    // },
   }
 </script>

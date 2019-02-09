@@ -1,4 +1,3 @@
-import expressJwt from 'express-jwt'
 import { sign, verify } from 'jsonwebtoken'
 import { merge } from 'ramda'
 
@@ -65,6 +64,7 @@ export const signin = async (req, res) => {
 }
 
 
+// MIDDLEWARE: add user to request
 export const protect = async (req, res, next) => {
   const bearer = req.headers.authorization
 

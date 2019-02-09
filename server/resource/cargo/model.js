@@ -14,10 +14,6 @@ const schema = new Schema({
       required: true,
     },
     actual: String,
-    isMatch: {
-      type: Boolean,
-      default: true,
-    }
   },
 
 
@@ -27,33 +23,33 @@ const schema = new Schema({
       required: true,
     },
     actual: String,
-    isMatch: {
-      type: Boolean,
-      default: true,
-    }
   },
 
 
-  createdBy: { 
+  createdBy: {
     ref: 'user',
     type: SchemaTypes.ObjectId,
     required: true,
   },
 
 
-  verifiedBy: {
+  assistedBy: {
     ref: 'user',
     type: SchemaTypes.ObjectId,
   },
-  verifiedAt: Date,
+  assistedAt: Date,
 
 
   comment: String,
   labels: String,
+  status: {
+    type: String,
+    default: 'todo' // one of ['todo', 'done', 'fail']
+  },
 }, {
   timestamps: true
 })
 
 
-const Order = model('order', schema)
-export default Order
+const Cargo = model('cargo', schema)
+export default Cargo

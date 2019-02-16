@@ -8,9 +8,9 @@
       <div v-if="error">{{ error }}</div>
 
       <ul v-if="items.length">
-        <cargo-client v-if="isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
+        <fba-client v-if="isClient" v-for="ship in items" :key="ship._id" :shipment="ship" />
 
-        <cargo-assist v-if="!isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
+        <fba-assist v-if="!isClient" v-for="ship in items" :key="ship._id" :shipment="ship" />
       </ul>
     </div>
   </main-layout>
@@ -19,9 +19,9 @@
 
 <script>
   import { MainLayout } from 'LAYOUT'
-  import { Loading, CargoClient, CargoAssist } from 'COMPONENT'
-  import { orders } from 'API'
-  const { list } = orders
+  import { Loading, FbaClient, FbaAssist } from 'COMPONENT'
+  import { fba } from 'API'
+
 
   export default {
     data() {
@@ -44,12 +44,9 @@
         this.isLoading = true
         this.error = ''
 
-        list()
+        fba.list()
           .then(res => res.data)
-          .then(items => {
-            // this.$store.commit('setOrders', items)
-            this.items = items
-          })
+          .then(items => this.items = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
       }
@@ -59,8 +56,8 @@
     components: {
       MainLayout,
       Loading,
-      CargoClient,
-      CargoAssist
+      FbaClient,
+      FbaAssist
     },
   }
 </script>

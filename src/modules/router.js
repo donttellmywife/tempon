@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
 import { Create, Update, Read, Assist } from 'PAGE/order'
+import { CreateFBA } from 'PAGE/shipment/fba'
+import ListFBA from 'PAGE/shipment/List.vue'
 
 
 Vue.use(VueRouter)
@@ -31,6 +33,11 @@ const routes = [
     component: Update,
     beforeEnter: isAssistant,
   },
+
+
+  { path: '/shipment/fba/new', component: CreateFBA, beforeEnter: notGuest },
+
+  { path: '/shipment/fba/', component: ListFBA, beforeEnter: notGuest },
 
 
   // for assistant
@@ -65,18 +72,13 @@ export default router
 
 // ACCESS VALIDATORS
 function notGuest(to, from, next) {
-  const { role } = store.state.user
-
-  return role === 'guest'
+  return store.state.user.role === 'guest'
     ? next({ path: '/login' })
     : next()
 }
 
-
 function isGuest(to, from, next) {
-  const { role } = store.state.user
-
-  return role === 'guest'
+  return store.state.user.role === 'guest'
     ? next()
     : next({ path: '/' })
 }

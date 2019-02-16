@@ -8,7 +8,6 @@ const schema = new Schema({
     required: true,
     unique: true,
     lowercase: true,
-    validate: () => true,
   },
 
 
@@ -20,8 +19,8 @@ const schema = new Schema({
 
   role: {
     type: String,
+    enum: ['client', 'assistant'],
     default: 'client',
-    validate: () => true,
   },
 }, {
   timestamps: true

@@ -15,6 +15,7 @@ module.exports = {
         'USER': './resource/user/',
         'MODULES': './module/',
         'CONFIG': './config/',
+        'RESOURCE': './resource/',
       },
     }],
     '@babel/plugin-syntax-dynamic-import',

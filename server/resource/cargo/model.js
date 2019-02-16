@@ -19,10 +19,20 @@ const schema = new Schema({
 
   quantity: {
     expected: {
-      type: String,
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    actual: {
+      type: Number,
+      min: 0,
+    },
+    left: {
+      type: Number,
+      min: 0,
+      default: 0,
       required: true,
     },
-    actual: String,
   },
 
 
@@ -33,22 +43,23 @@ const schema = new Schema({
   },
 
 
-  assistedBy: {
-    ref: 'user',
-    type: SchemaTypes.ObjectId,
+  status: {
+    type: String,
+    enum: ['todo', 'done', 'fail'],
+    default: 'todo',
   },
-  assistedAt: Date,
 
 
   comment: String,
   labels: String,
-  status: {
-    type: String,
-    default: 'todo' // one of ['todo', 'done', 'fail']
-  },
 }, {
   timestamps: true
 })
+
+
+schema.methods.canShip = function(wantToShip) {
+  return wantToShip < this.quantity.left
+}
 
 
 const Cargo = model('cargo', schema)

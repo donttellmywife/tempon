@@ -12,7 +12,9 @@ import connect from 'MODULES/db.js'
 import handleError from 'MODULES/error.js'
 import { api as UserApi } from 'USER'
 import { signin, signup, protect } from 'MODULES/auth.js'
-import OrdApi from './resource/cargo/router.js'
+
+import OrdApi from 'RESOURCE/cargo/router.js'
+import ShipApi from 'RESOURCE/shipment/router.js'
 
 
 const app = express()
@@ -31,6 +33,7 @@ app.post('/signin', signin)
 app.post('/signup', signup)
 
 app.use('/orders', protect, OrdApi)
+app.use('/shipment', protect, ShipApi)
 
 
 export const start = async () => {

@@ -13,8 +13,6 @@ router.route('/:id')
   .put(updateOne)
 
 
-// CARGO
-// create - owner
 async function createCargo(req, res) {
   const createdBy = req.user._id
   try {
@@ -26,10 +24,7 @@ async function createCargo(req, res) {
   }
 }
 
-// delete - owner
-// read - owner and assistant
 
-// list -  - owner and assistant
 async function getMany(req, res) {
   const lookFor = {}
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
@@ -48,7 +43,6 @@ async function getMany(req, res) {
 }
 
 
-// update - owner and assistant
 async function updateOne(req, res) {
   const lookFor = {
     _id: req.params.id

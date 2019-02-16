@@ -44,6 +44,7 @@
           },
           quantity: {
             expected: this.quantity,
+            left: this.quantity,
           },
           tracking: this.tracking,
           labels: this.labels,

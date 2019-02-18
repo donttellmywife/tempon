@@ -13,11 +13,11 @@
     </div>
 
     <form v-if="shipment.status === 'todo'" @submit.prevent="update">
-      How big is the box?
-      <label>Depth<input v-model="dimensions.depth" placeholder="depth" type="number"></label><br>
-      <label>Height<input v-model="dimensions.height" placeholder="height" type="number"></label><br>
-      <label>Width<input v-model="dimensions.width" placeholder="width" type="number"></label><br>
-      <label>Weight<input v-model="dimensions.weight" placeholder="weight" type="text"></label><br>
+      How big is the box?<br>
+      <label>Depth<br><input v-model="dimensions.depth" placeholder="depth" type="number"></label><br>
+      <label>Height<br><input v-model="dimensions.height" placeholder="height" type="number"></label><br>
+      <label>Width<br><input v-model="dimensions.width" placeholder="width" type="number"></label><br>
+      <label>Weight<br><input v-model="dimensions.weight" placeholder="weight" type="text"></label><br>
 
       <button type="submit">let us handle it!</button><br>
     </form>

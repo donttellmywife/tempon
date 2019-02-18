@@ -18,13 +18,22 @@
 
 
     <main>
-      <label>fnsku: <input type="text" v-model="fnsku"></label>
-      <label>what's in the box?<input v-model="description" placeholder="description" type="text"></label><br>
+      <label>fnsku: <br>
+        <input type="text" v-model="fnsku">
+      </label><br>
+
+      <label>what's in the box?<br>
+        <input v-model="description" placeholder="description" type="text">
+      </label><br>
 
       <div v-if="cargos.length">
+        <hr>
         <div v-for="ord in cargos">
           <div>{{ ord.description.expected }}</div>
-          <label>and how many?<input placeholder="quantity" type="number" v-model="ord.quantity.left"></label><br>
+
+          <label>and how many?<br>
+            <input placeholder="quantity" type="number" v-model="ord.quantity.left">
+          </label>
         </div>
       </div>
 

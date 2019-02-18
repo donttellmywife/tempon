@@ -11,8 +11,10 @@
 
     <div v-bind:class="{ success: !cargo.quantity.actual, fail: cargo.quantity.actual }">
 
-      In amount of:
-      <b>{{ cargo.quantity.expected }}</b>
+      Was in amount of:
+      <b>{{ cargo.quantity.expected }}</b><br>
+      Left in amount of:
+      <b>{{ cargo.quantity.left }}</b>
       <span v-if="cargo.quantity.actual">
         but actualy we've found there <b>{{ cargo.quantity.actual }}</b>
       </span>

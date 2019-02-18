@@ -16,6 +16,10 @@ a {
 
 
 /* NAVIGATION  */
+.navbar {
+  justify-content: space-between;
+}
+
 .navbar-nav--row {
   display: flex;
   flex-direction: row;
@@ -34,4 +38,5 @@ a {
 .main-content {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }

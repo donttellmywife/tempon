@@ -7,12 +7,24 @@
     <p v-if="error" class="error">{{ error }}</p>
 
     <form v-if="!loading" @submit.prevent="create">
-      <label>what's in the box?<input v-model="description" placeholder="description" type="text"></label><br>
-      <label>and how many?<input v-model="quantity" placeholder="quantity" type="number"></label><br>
-      <label>how to find it<input v-model="tracking" placeholder="tracking" type="text"></label><br>
-      <label>labels<input v-model="labels" placeholder="link to gdocs" type="text"></label><br>
+      <label>what's in the box?<br>
+        <input v-model="description" placeholder="description" type="text">
+      </label>
+      <br>
 
-      <button type="submit">let us handle it!</button><br>
+      <label>and how many?<br>
+        <input v-model="quantity" placeholder="quantity" type="number">
+      </label><br>
+
+      <label>how to find it<br>
+        <input v-model="tracking" placeholder="tracking" type="text">
+      </label><br>
+
+      <label>labels<br>
+        <input v-model="labels" placeholder="link to gdocs" type="text">
+      </label><br>
+
+      <button type="submit">let us handle it!</button>
     </form>
   </main-layout>
 </template>

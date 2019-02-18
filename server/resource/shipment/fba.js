@@ -19,22 +19,26 @@ const schema = new Schema({
   description: String,
 
 
-  cargos: [
-    {
-      _id: {
-        ref: 'cargo',
-        type: SchemaTypes.ObjectId,
-        required: true,
-      },
+  cargos: {
+    type: [
+      {
+        _id: {
+          ref: 'cargo',
+          type: SchemaTypes.ObjectId,
+          required: true,
+        },
 
 
-      quantity: {
-        type: Number,
-        min: 0,
-        required: true,
+        quantity: {
+          type: Number,
+          min: 0,
+          required: true,
+        },
       },
-    },
-  ],
+    ],
+
+    required: true,
+  },
 
 
   createdBy: {

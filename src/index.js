@@ -1,12 +1,19 @@
-// import * as fontAwesome from 'font-awesome/css/font-awesome.css';
-import styles from './index.scss';
-import {Elm} from './app/Main.elm';
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import { router, store } from 'APP'
+
+import './theme/index.css';
 
 
-Elm.Main.init({
-  node: window.elmapp,
-});
-
-if (module.hot) {
-  module.hot.accept();
+const app = ($root) => {
+  new Vue({
+    el: $root,
+    store,
+    router,
+    template: '<router-view class="view" />',
+  })
 }
+export default app
+
+app('#vueapp')

@@ -1,8 +1,9 @@
-const {resolve} = require('path')
+const { resolve } = require('path')
 
 // PLUGINS
-const {DefinePlugin} = require('webpack')
+const { DefinePlugin } = require('webpack')
 const HTML = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 
 module.exports = {
@@ -12,14 +13,28 @@ module.exports = {
     path: resolve('dist'),
   },
 
+
+  resolve: {
+    alias: {
+      '~': resolve('src/'), // in case
+
+      'APP': resolve('src/modules/'),
+      'API': resolve('src/api/'),
+      'COMPONENT': resolve('src/components/'),
+      'PAGE': resolve('src/pages/'),
+      'LAYOUT': resolve('src/layouts/'),
+      'CONST': resolve('src/const/'),
+
+      'vue$': 'vue/dist/vue.esm.js', // for local develompent
+    },
+  },
+
+
   module: {
     rules: [
       {
-        test: /\.(s?css)$/,
-        use: [
-          'css-loader',
-          'postcss-loader',
-        ],
+        test: /\.vue$/,
+        use: 'vue-loader',
       },
       {
         test: /\.js$/,
@@ -29,11 +44,11 @@ module.exports = {
         },
       },
       {
-        test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        use: {
-          loader: 'elm-webpack-loader',
-        },
+        test: /\.(s?css)$/,
+        use: [
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -58,14 +73,14 @@ module.exports = {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
       },
-    ],
-
-    noParse: /\.elm$/,
+    ]
   },
+
 
   plugins: [
     new HTML({
       template: 'index.html',
     }),
+    new VueLoaderPlugin(),
   ],
 };

@@ -44,7 +44,7 @@
 
 
 <script>
-  import { orders, fba } from 'API'
+  import { orders, fbm } from 'API'
   import { MainLayout } from 'LAYOUT'
   import { Loading } from 'COMPONENT'
 
@@ -78,7 +78,7 @@
           cargos,
         }
 
-        fba.add(shipment).then(console.log).catch(err => this.error = err)
+        fbm.add(shipment).then(console.log).catch(err => this.error = err)
       },
 
 

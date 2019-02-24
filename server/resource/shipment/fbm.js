@@ -2,64 +2,62 @@ import { Schema, SchemaTypes, model } from 'mongoose'
 
 
 const schema = new Schema({
-  tracking: {
-    type: String,
-    required: true,
-  },
-
-
-  type: {
-    type: String,
-    enum: ['amazon', 'post'],
-    default: 'amazon',
-  },
-
-
   status: {
+    required: true,
     type: String,
-    enum: ['todo', 'in progress', 'done'],
+    enum: ['todo', 'shipped'],
     default: 'todo',
   },
 
 
-  fromOrders: {
-    ref: 'cargo',
-    type: [SchemaTypes.ObjectId],
-    required: true,
+  cargos: {
+    type: [
+      {
+        _id: {
+          required: true,
+          ref: 'cargo',
+          type: SchemaTypes.ObjectId,
+        },
+
+
+        quantity: {
+          required: true,
+          type: Number,
+          min: 0,
+        },
+      },
+    ],
+    validate: [atleastOne, '{PATH} need atleast one cargo'],
   },
 
 
-  description: {
+  address: {
+    required: true,
     type: String,
-    required: true,
   },
 
 
-  quantity: {
-    type: String,
-    required: true,
-  },
+  description: String,
 
 
   createdBy: {
-    ref: 'user',
-    type: SchemaTypes.ObjectId,
     required: true,
-  },
-
-
-  assistedBy: {
     ref: 'user',
     type: SchemaTypes.ObjectId,
   },
-  assistedAt: Date,
 
 
-  comment: String,
-  labels: String,
+  price: String,
+  tracking: String,
 }, {
   timestamps: true
 })
+
+
+// VALIDATORS
+function atleastOne(array) {
+  return array.length > 0
+}
 
 
 const FBM = model('fbm', schema)

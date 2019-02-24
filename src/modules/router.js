@@ -5,6 +5,7 @@ import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
 import { Create, Update, Read, Assist } from 'PAGE/order'
 import { CreateFBA } from 'PAGE/shipment/fba'
+import { CreateFBM } from 'PAGE/shipment/fbm'
 import ListFBA from 'PAGE/shipment/List.vue'
 
 
@@ -19,8 +20,6 @@ const routes = [
   { path: '/orders/new', component: Create, beforeEnter: notGuest },
 
 
-  // TODO:
-  // { path: '/orders', component: NewCargo, beforeEnter: notGuest },
   {
     path: '/orders/:oid',
     name: 'viewOrder',
@@ -36,21 +35,20 @@ const routes = [
 
 
   { path: '/shipment/fba/new', component: CreateFBA, beforeEnter: notGuest },
-
   { path: '/shipment/fba/', component: ListFBA, beforeEnter: notGuest },
 
 
-  // for assistant
-  // TODO:
-  // { path: '/client/:id', component: NewCargo, beforeEnter: notGuest },
-  // { path: '/client/:id/orders', component: NewCargo, beforeEnter: notGuest },
-  // { path: '/client/:id/orders/:oid', component: NewCargo, beforeEnter: notGuest },
+  { path: '/shipment/fbm/new', component: CreateFBM, beforeEnter: notGuest },
+  // { path: '/shipment/fbm/', component: ListFBM, beforeEnter: notGuest },
+
+
   {
     path: '/client/orders/:oid/edit',
     name: 'assistOrder',
     component: Assist,
     beforeEnter: notGuest,
   },
+
 
   // for guest
   { path: '/login', component: Login, beforeEnter: isGuest },

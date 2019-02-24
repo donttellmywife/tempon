@@ -13,7 +13,7 @@ const { API } = config
 function add(shipment) {
   const { token } = store.getters.user
 
-  return fetch(`${API}/shipment/fba`, {
+  return fetch(`${API}/shipment/fbm`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ function add(shipment) {
 function update(shipment) {
   const { token } = store.getters.user
 
-  return fetch(`${API}/shipment/fba/${shipment._id}`, {
+  return fetch(`${API}/shipment/fbm/${shipment._id}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ function update(shipment) {
 function list() {
   const { token } = store.getters.user
 
-  return fetch(`${API}/shipment/fba`, {
+  return fetch(`${API}/shipment/fbm`, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',

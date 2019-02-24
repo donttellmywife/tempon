@@ -36,6 +36,10 @@
     methods: {
       login() {
         user.signin(this.email, this.pwd)
+          .then(res => {
+            if (res.message) return Promise.reject(res)
+            return res
+          })
           .then(user => this.$store.commit('login', user))
           .catch(err => this.error = err)
       }

@@ -20,7 +20,7 @@
 <script>
   import { MainLayout } from 'LAYOUT'
   import { Loading, FbaClient, FbaAssist } from 'COMPONENT'
-  import { fba } from 'API'
+  import { fba, shipment } from 'API'
 
 
   export default {

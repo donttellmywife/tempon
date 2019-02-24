@@ -18,8 +18,10 @@
 
     <ul v-if="!isGuest" class="navbar-nav navbar-nav--row">
       <li class="nav-item"><router-link to="/orders/new">/new order</router-link></li>
-      <li class="nav-item"><router-link to="/shipment/fba/new">/new shipment</router-link></li>
-      <li class="nav-item"><router-link to="/shipment/fba">/shipments</router-link></li>
+      <li class="nav-item"><router-link to="/shipment/fba/new">/new FBA shipment</router-link></li>
+      <li class="nav-item"><router-link to="/shipment/fba">/FBA shipments</router-link></li>
+      <li class="nav-item"><router-link to="/shipment/fbm/new">/new FBM shipment</router-link></li>
+      <!-- <li class="nav-item"><router-link to="/shipment/fba">/FBA shipments</router-link></li> -->
       <li class="nav-item"><a href='/' @click.prevent="logout">/logout</a></li>
     </ul>
   </nav>

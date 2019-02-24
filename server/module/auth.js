@@ -48,7 +48,6 @@ export const signin = async (req, res) => {
     if (!user) return res.status(401).send(invalid)
 
     const match = await user.checkPassword(req.body.password)
-
     if (!match) return res.status(401).send(invalid)
 
     const token = newToken(user)

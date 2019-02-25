@@ -33,13 +33,11 @@
   export default {
     props: ['shipment'],
 
+
     data() {
       return {
         labels: '',
       }
-    },
-
-    mounted() {
     },
 
 

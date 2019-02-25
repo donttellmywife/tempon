@@ -7,10 +7,20 @@
     <div v-if="!isLoading">
       <div v-if="error">{{ error }}</div>
 
-      <ul v-if="items.length">
-        <fba-client v-if="isClient" v-for="ship in items" :key="ship._id" :shipment="ship" />
+      <ul v-if="fbas.length">
+        FBAS:
+        <fba-client v-if="isClient" v-for="ship in fbas" :key="ship._id" :shipment="ship" />
 
-        <fba-assist v-if="!isClient" v-for="ship in items" :key="ship._id" :shipment="ship" />
+        <fba-assist v-if="!isClient" v-for="ship in fbas" :key="ship._id" :shipment="ship" />
+      </ul>
+
+      <hr />
+
+      <ul v-if="fbms.length">
+        FBMS:
+        <fbm-client v-if="isClient" v-for="ship in fbms" :key="ship._id" :shipment="ship" />
+
+        <fbm-assist v-if="!isClient" v-for="ship in fbms" :key="ship._id" :shipment="ship" />
       </ul>
     </div>
   </main-layout>
@@ -19,15 +29,16 @@
 
 <script>
   import { MainLayout } from 'LAYOUT'
-  import { Loading, FbaClient, FbaAssist } from 'COMPONENT'
-  import { fba, shipment } from 'API'
+  import { Loading, FbaClient, FbaAssist, FbmClient, FbmAssist } from 'COMPONENT'
+  import { fba, fbm, shipment } from 'API'
 
 
   export default {
     data() {
       return {
         isLoading: true,
-        items: [],
+        fbas: [],
+        fbms: [],
         error: '',
         isClient: this.$store.getters.user.role === 'client',
       }
@@ -46,7 +57,13 @@
 
         fba.list()
           .then(res => res.data)
-          .then(items => this.items = items)
+          .then(items => this.fbas = items)
+          .catch(err => this.error = err.toString())
+          .then(() => this.isLoading = false)
+
+        fbm.list()
+          .then(res => res.data)
+          .then(items => this.fbms = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
       }
@@ -57,7 +74,9 @@
       MainLayout,
       Loading,
       FbaClient,
-      FbaAssist
+      FbaAssist,
+      FbmClient,
+      FbmAssist,
     },
   }
 </script>

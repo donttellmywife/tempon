@@ -1,3 +1,3 @@
 export default {
-  API: 'http://localhost:4001',
+  API: 'http://139.59.136.63:4001',
 }

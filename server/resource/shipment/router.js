@@ -148,7 +148,7 @@ async function createFBM(req, res) {
     const orders = await Cargo.find({ _id: { $in: ids }}).exec()
 
     // if amount of items is bigger then there is - don't ship
-    if (orders.some((ord, i) => !ord.canShip(req.body.cargos[i].quantity))) res.status(400).json({ error: `not possible amount` })
+    if (orders.some((ord, i) => !ord.canShip(req.body.cargos[i].quantity))) return res.status(400).json({ error: `not possible amount` })
 
     await Promise.all(ids.map(async (_id, i) => {
       const ord = await Cargo.findById(_id)

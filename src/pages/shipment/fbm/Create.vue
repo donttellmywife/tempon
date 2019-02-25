@@ -18,8 +18,8 @@
 
 
     <main>
-      <label>fnsku: <br>
-        <input type="text" v-model="fnsku">
+      <label>Where to? <br>
+        <input type="text" v-model="address">
       </label><br>
 
       <label>what's in the box?<br>
@@ -55,7 +55,7 @@
         description: '',
         orders: [],
         cargos: [],
-        fnsku: '',
+        address: '',
 
         error: '',
         isLoading: false,
@@ -74,7 +74,7 @@
 
         const shipment = {
           description: this.description,
-          fnsku: this.fnsku,
+          address: this.address,
           cargos,
         }
 

@@ -3,6 +3,7 @@
   <form @submit.prevent="login">
     <fieldset>
       <legend>LOGIN</legend>
+      <p v-if="error" class="text-danger">{{ error }}</p>
       <div class="form-group">
         <!-- TODO: type email after dev done -->
         <label>Email address<input v-model="email" class="form-control" placeholder="email" type="text" aria-describedby="emailHelp"></label>
@@ -11,7 +12,6 @@
         <label>Password<input v-model="pwd" placeholder="password" type="password" class="form-control"></label><br>
       </div>
       <button type="submit" class="btn btn-primary">ENTER</button>
-      <p v-if="error" class="text-danger">{{ error }}</p>
     </fieldset>
   </form>
 </main-layout>
@@ -21,6 +21,11 @@
 <script>
   import { user } from 'API'
   import { MainLayout } from 'LAYOUT'
+
+  function emailValidation(email) {
+    // any chras till @ any chars till dot any chars after
+    return /^.+[@].+\..+$/.test(email)
+  }
 
 
   export default {
@@ -35,6 +40,11 @@
 
     methods: {
       login() {
+        if (!emailValidation(this.email)) {
+          this.error = 'Please enter correct email'
+          return
+        }
+
         user.signin(this.email, this.pwd)
           .then(res => {
             if (res.message) return Promise.reject(res)

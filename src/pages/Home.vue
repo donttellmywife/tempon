@@ -7,7 +7,7 @@
     <div v-if="!isLoading">
       <div v-if="error">{{ error }}</div>
 
-      <ul v-if="items.length">
+      <ul v-if="items.length && !error">
         <cargo-client v-if="isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
 
         <cargo-assist v-if="!isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />

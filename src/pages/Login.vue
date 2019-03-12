@@ -51,6 +51,9 @@
             return res
           })
           .then(user => this.$store.commit('login', user))
+          .then(() => {
+            this.$router.push('/')
+          })
           .catch(err => this.error = err)
       }
     },

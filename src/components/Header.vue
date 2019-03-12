@@ -13,7 +13,7 @@
 
     <ul v-if="isGuest" class="navbar-nav navbar-nav--row">
       <li class="nav-item"><router-link to="/login">/login</router-link></li>
-      <li class="nav-item"><router-link to="/register">/register</router-link></li>
+      <!-- <li class="nav-item"><router-link to="/register">/register</router-link></li> -->
     </ul>
 
     <ul v-if="!isGuest" class="navbar-nav navbar-nav--row">
@@ -45,6 +45,7 @@
     methods: {
       logout() {
         this.$store.commit('logout')
+        this.$router.push('/login')
       }
     }
   }

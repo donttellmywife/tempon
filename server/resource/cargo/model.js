@@ -1,10 +1,11 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
+import { atleastOne } from '../validator.js'
 
 
 const schema = new Schema({
   tracking: {
-    type: String,
-    required: true,
+    type: [String],
+    validate: [atleastOne, '{PATH} need at least one tracking'],
   },
 
 
@@ -55,6 +56,12 @@ const schema = new Schema({
 }, {
   timestamps: true
 })
+
+
+// TODO: set 'left' on creation
+schema.pre('save', function(next) {
+  next();
+});
 
 
 schema.methods.canShip = function(wantToShip) {

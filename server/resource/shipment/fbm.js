@@ -1,4 +1,5 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
+import { atleastOne } from '../validator.js'
 
 
 const schema = new Schema({
@@ -52,12 +53,6 @@ const schema = new Schema({
 }, {
   timestamps: true
 })
-
-
-// VALIDATORS
-function atleastOne(array) {
-  return array.length > 0
-}
 
 
 const FBM = model('fbm', schema)

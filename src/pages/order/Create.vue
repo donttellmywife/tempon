@@ -17,7 +17,10 @@
       </label><br>
 
       <label>how to find it<br>
-        <input v-model="tracking" placeholder="tracking" type="text">
+        <div v-for="track in tracking">
+          <input v-model="track.value" placeholder="tracking" type="text">
+        </div>
+        <button @click="addEmptyTrack">add tracking</button>
       </label><br>
 
       <label>labels<br>
@@ -40,7 +43,9 @@
       return {
         description: '',
         quantity: '',
-        tracking: '',
+        tracking: [{
+          value: '',
+        }],
         labels: '',
         error: '',
         loading: false,
@@ -58,12 +63,22 @@
             expected: this.quantity,
             left: this.quantity,
           },
-          tracking: this.tracking,
+          tracking: this.tracking.map(track => track.value)
+            .map(track => track.trim())
+            .filter(track => track.length > 0),
           labels: this.labels,
           comment: '',
         }
 
-        orders.add(order).then(console.log).catch(err => this.error = err)
+        orders.add(order).then(() => this.$router.push('/')).catch(err => this.error = err)
+      },
+
+      addEmptyTrack(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        this.tracking = this.tracking.concat({
+          value: '',
+        })
       }
     },
 

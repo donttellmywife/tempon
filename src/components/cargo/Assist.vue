@@ -3,7 +3,7 @@
     <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
     <div>
       Client expects:
-      <span>{{ cargo.description.expected }}</span>
+      <span>{{ cargo.description.expected }}</span><br>
 
       <label>
         Exectly the same!
@@ -20,7 +20,7 @@
 
     <div>
       In amount of:
-      <b>{{ cargo.quantity.expected }}</b>
+      <b>{{ cargo.quantity.expected }}</b><br>
 
       <label>
         Exectly the same!
@@ -54,11 +54,11 @@
     data() {
       return {
         description: {
-          same: true,
+          same: false,
           actual: ''
         },
         quantity: {
-          same: true,
+          same: false,
           actual: ''
         },
       }

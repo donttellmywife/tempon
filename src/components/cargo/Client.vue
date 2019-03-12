@@ -14,8 +14,12 @@
 
       Was in amount of:
       <b>{{ cargo.quantity.expected }}</b><br>
-      Left in amount of:
-      <b>{{ cargo.quantity.left }}</b>
+
+      <div v-if="cargo.status === 'done'">
+        Left in amount of:
+        <b>{{ cargo.quantity.left }}</b>
+      </div>
+
       <span v-if="cargo.quantity.actual">
         but actualy we've found there <b>{{ cargo.quantity.actual }}</b>
       </span>

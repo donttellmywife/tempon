@@ -23,14 +23,17 @@ export const verifyToken = token =>
   })
 
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   if (!req.body.email || !req.body.password) return res.status(400).send({ message: 'need email and password' })
 
   try {
     const user = await User.create(req.body)
     return signin(req, res)
   } catch (e) {
-    return res.status(500).end()
+    if (e.code === 11000) {
+      res.status(500).json({ error: 'duplicate email' })
+    }
+    return res.status(500).end('something went wrong due to singup on server')
   }
 }
 

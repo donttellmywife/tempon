@@ -24,9 +24,10 @@ function signup(email, password, role) {
     body,
   })
     .then(res => res.json())
-    .then((user) => {
-      if (!user) return Promise.reject('Something went wrong on server side')
-      return user
+    .then((res) => {
+      if (!res) return Promise.reject('Something went wrong on server side')
+      if (res.error) return Promise.reject(res.error)
+      return res
     })
 }
 

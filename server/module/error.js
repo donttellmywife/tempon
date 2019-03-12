@@ -1,3 +1,4 @@
 export default function(error, req, res, next) {
-  res.status(500).json(error.message || error.toString())
+  console.log('error:!!!!', error, error.message)
+  res.status(505).json('error.message || error.toString()')
 }

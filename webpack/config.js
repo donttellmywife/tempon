@@ -24,6 +24,7 @@ module.exports = {
       'PAGE': resolve('src/pages/'),
       'LAYOUT': resolve('src/layouts/'),
       'CONST': resolve('src/const/'),
+      'MIXIN': resolve('src/mixin/'),
 
       'vue$': 'vue/dist/vue.esm.js', // for local develompent
     },

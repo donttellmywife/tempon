@@ -1,5 +1,6 @@
 <template>
   <li>
+    <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
     <div>
       <span>STATUS: {{ shipment.status }}</span>
       <span>DESCRIPTION: {{ shipment.description }}</span>
@@ -20,7 +21,9 @@
 
 
 <script>
+  import { methodDate } from 'MIXIN'
   export default {
     props: ['shipment'],
+    mixins: [ methodDate ],
   }
 </script>

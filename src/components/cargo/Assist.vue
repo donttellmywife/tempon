@@ -1,5 +1,6 @@
 <template>
   <li>
+    <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
     <div>
       Client expects:
       <span>{{ cargo.description.expected }}</span>
@@ -43,10 +44,12 @@
 
 <script>
   import { orders } from 'API'
+  import { methodDate } from 'MIXIN'
 
 
   export default {
     props: ['cargo'],
+
 
     data() {
       return {
@@ -74,5 +77,7 @@
         orders.update(cargo).then(console.log).catch(err => this.error = err)
       }
     },
+
+    mixins: [methodDate],
   }
 </script>

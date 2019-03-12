@@ -1,5 +1,6 @@
 <template>
   <li v-if="!loading">
+    <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
     <div>
       <span>{{ shipment.status }}</span>
       <span>{{ shipment.description }}</span>
@@ -29,6 +30,7 @@
 
 <script>
   import { fba } from 'API'
+  import { methodDate } from 'MIXIN'
 
 
   export default {
@@ -64,5 +66,7 @@
         fba.update(this.$props.shipment).then(console.log).catch(err => this.error = err)
       }
     },
+
+    mixins: [methodDate],
   }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <li>
     <div v-bind:class="{ success: !cargo.description.actual, fail: cargo.description.actual }">
+      <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
       STATUS: {{ cargo.status }} <br>
       You expecting:
       <span>{{ cargo.description.expected }}</span>
@@ -27,7 +28,10 @@
 
 
 <script>
+  import { methodDate } from 'MIXIN'
+
   export default {
     props: ['cargo'],
+    mixins: [methodDate],
   }
 </script>

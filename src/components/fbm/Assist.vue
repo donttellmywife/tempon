@@ -1,5 +1,6 @@
 <template>
   <li>
+    <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
     <div>
       <span>STATUS: {{ shipment.status }}</span>
       <span>DESCRIPTION: {{ shipment.description }}</span>
@@ -21,7 +22,7 @@
 
 <script>
   import { fbm } from 'API'
-
+  import { methodDate } from 'MIXIN'
 
   export default {
     props: ['shipment'],
@@ -44,5 +45,7 @@
         fbm.update(shipment).then(console.log).catch(err => this.error = err)
       }
     },
+
+    mixins: [ methodDate ],
   }
 </script>

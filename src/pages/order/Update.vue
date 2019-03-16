@@ -2,13 +2,13 @@
   <main-layout>
     <h2>UPDATE ORDER</h2>
 
-    <span v-if="loading">loading...</span>
+    <span v-if="isLoading">loading...</span>
 
     <p v-if="error" class="error">{{ error }}</p>
 
-    <form v-if="!(loading && error)" @submit.prevent="update">
-      <label>what's in the box?<input v-model="order.description.hopes" placeholder="description" type="text"></label><br>
-      <label>and how many?<input v-model="order.quantity.hopes" placeholder="quantity" type="number"></label><br>
+    <form v-if="!(isLoading && error)" @submit.prevent="update">
+      <label>what's in the box?<input v-model="order.description.expected" placeholder="description" type="text"></label><br>
+      <label>and how many?<input v-model="order.quantity.expected" placeholder="quantity" type="number"></label><br>
       <label>how to find it<input v-model="order.tracking" placeholder="tracking" type="text"></label><br>
       <label>labels<input v-model="order.labels" placeholder="link to gdocs" type="text"></label><br>
 
@@ -28,24 +28,20 @@ export default {
     return {
       order: {
         description: {
-          hopes: '',
+          expected: '',
           status: false,
-          at: null,
-          by: null,
           actual: '',
         },
         quantity: {
-          hopes: '',
+          expected: '',
           status: false,
-          at: null,
-          by: null,
           actual: '',
         },
         tracking: '',
         labels: '',
       },
       error: '',
-      loading: false,
+      isLoading: false,
     }
   },
 

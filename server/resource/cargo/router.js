@@ -48,7 +48,7 @@ async function updateOne(req, res) {
     _id: req.params.id
   }
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
-  req.body.status = Boolean(req.body.description.actual || req.body.quantity.actual) ? 'fail' : 'done'
+  if (req.user.role === 'assistant') req.body.status = Boolean(req.body.description.actual || req.body.quantity.actual) ? 'fail' : 'done'
 
   try {
     const updatedDoc = await Cargo

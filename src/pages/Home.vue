@@ -9,7 +9,6 @@
 
       <ul v-if="items.length && !error">
         <cargo-client v-if="isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
-
         <cargo-assist v-if="!isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
       </ul>
     </div>

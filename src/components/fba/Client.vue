@@ -13,6 +13,7 @@
       </li>
     </div>
 
+
     <div v-if="shipment.status === 'in progress'">
       {{ shipment.dimensions.depth }}
       {{ shipment.dimensions.height }}
@@ -22,6 +23,13 @@
       <input type="text" v-model="labels" />
 
       <button v-on:click="update">Agree, we can ship it?</button>
+    </div>
+
+
+    <div v-if="shipment.status === 'todo'">
+      {{ description }}
+      {{ fnsku }}
+      {{ cargos }}
     </div>
   </li>
 </template>
@@ -37,8 +45,14 @@
 
 
     data() {
+      const { description, fnsku, cargos } = this.$props.shipment
       return {
+        description,
+        fnsku,
+        cargos,
+
         labels: '',
+        isEditMode: false,
       }
     },
 

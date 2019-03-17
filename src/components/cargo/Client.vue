@@ -2,6 +2,7 @@
 <article>
   <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
   STATUS: {{ cargo.status }} <br>
+  <router-link :to="{ name: 'viewOrder', params: { oid: cargo._id }}">{{ cargo.description.expected }}</router-link>
 
   <div v-if="cargo.status !== 'todo'">
     <div v-bind:class="{ success: !cargo.description.actual, fail: cargo.description.actual }">
@@ -34,6 +35,7 @@
 
 
   <div v-if="cargo.status === 'todo'">
+    <router-link :to="{ name: 'editOrder', params: { oid: cargo._id }}">EDIT</router-link>
     <button v-if="isEditMode" @click="exitViewMode">View</button>
     <button v-if="!isEditMode" @click="goEditMode">Edit</button>
 
@@ -102,6 +104,7 @@
           ? this.$props.cargo.tracking.map(makeValueObject)
           : [''].map(makeValueObject),
         labels: this.$props.cargo.labels,
+        link: `/orders/${this.$props.cargo._id}`,
 
         error: '',
         isEditMode: false,
@@ -133,7 +136,7 @@
           quantity: {
             expected: this.quantity,
           },
-          tracking: this.tracking.map(({ value }) => value),
+          tracking: this.tracking.map(({ value }) => value).filter(track => track.length > 0),
           labels: this.labels,
         }
 

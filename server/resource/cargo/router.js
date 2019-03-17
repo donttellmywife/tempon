@@ -10,6 +10,7 @@ router.route('/')
   .post(createCargo)
 
 router.route('/:id')
+  .get(getOne)
   .put(updateOne)
 
 
@@ -27,6 +28,26 @@ async function createCargo(req, res) {
 
 async function getMany(req, res) {
   const lookFor = {}
+  if (req.user.role === 'client') lookFor.createdBy = req.user._id
+
+  try {
+    const docs = await Cargo
+      .find(lookFor)
+      .lean()
+      .exec()
+
+    res.status(200).json({ data: docs })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+
+async function getOne(req, res) {
+  const lookFor = {
+    _id: req.params.id
+  }
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
 
   try {

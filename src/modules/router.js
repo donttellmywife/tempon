@@ -30,7 +30,7 @@ const routes = [
     path: '/orders/:oid/edit',
     name: 'editOrder',
     component: Update,
-    beforeEnter: isAssistant,
+    beforeEnter: notGuest,
   },
 
 

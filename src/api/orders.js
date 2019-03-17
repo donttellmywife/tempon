@@ -10,16 +10,19 @@ export default {
 
 const { API } = config
 
+function authHeader() {
+  const { token } = store.getters.user
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  }
+}
+
 
 function add(order) {
-  const { token } = store.getters.user
-
   return fetch(`${API}/orders`, {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
+    headers: authHeader(),
     body: JSON.stringify(order),
   })
     .then(getJson)
@@ -31,32 +34,24 @@ function add(order) {
 
 
 function get(id) {
-  return fetch(`${API}/orders/${id}`).then(getJson)
+  return fetch(`${API}/orders/${id}`, {
+    headers: authHeader(),
+  }).then(getJson)
 }
 
 
 function update(order) {
-  const { token } = store.getters.user
-
   return fetch(`${API}/orders/${order._id}`, {
     method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
+    headers: authHeader(),
     body: JSON.stringify(order),
   }).then(getJson)
 }
 
 
 function list() {
-  const { token } = store.getters.user
-
   return fetch(`${API}/orders`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
+    headers: authHeader(),
   }).then(getJson)
 }
 

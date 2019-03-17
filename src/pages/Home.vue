@@ -45,10 +45,7 @@
 
         list()
           .then(res => res.data)
-          .then(items => {
-            // this.$store.commit('setOrders', items)
-            this.items = items
-          })
+          .then(items => this.items = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
       }

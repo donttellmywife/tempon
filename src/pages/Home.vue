@@ -8,8 +8,7 @@
       <div v-if="error">{{ error }}</div>
 
       <ul v-if="items.length && !error">
-        <cargo-client v-if="isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
-        <cargo-assist v-if="!isClient" v-for="ord in items" :key="ord._id" :cargo="ord" />
+        <cargo-client v-for="ord in items" :key="ord._id" :cargo="ord" />
       </ul>
     </div>
   </main-layout>
@@ -22,13 +21,25 @@
   import { orders } from 'API'
   const { list } = orders
 
+
+  function makeValueObject(value) {
+    return { value }
+  }
+
+  function parse(order) {
+    return {
+      ...order,
+      tracking: order.tracking.map(makeValueObject),
+    }
+  }
+
   export default {
     data() {
       return {
-        isLoading: true,
         items: [],
+
         error: '',
-        isClient: this.$store.getters.user.role === 'client',
+        isLoading: true,
       }
     },
 
@@ -45,6 +56,7 @@
 
         list()
           .then(res => res.data)
+          .then(items => items.map(parse))
           .then(items => this.items = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
@@ -56,7 +68,6 @@
       MainLayout,
       Loading,
       CargoClient,
-      CargoAssist
     },
   }
 </script>

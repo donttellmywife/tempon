@@ -10,14 +10,6 @@ export default {
 
 const { API } = config
 
-function authHeader() {
-  const { token } = store.getters.user
-  return {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  }
-}
-
 
 function add(order) {
   return fetch(`${API}/orders`, {
@@ -55,4 +47,14 @@ function list() {
   }).then(getJson)
 }
 
+
+// HELPERS
 function getJson(res) { return res.json() }
+
+function authHeader() {
+  const { token } = store.getters.user
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  }
+}

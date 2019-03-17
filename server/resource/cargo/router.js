@@ -51,12 +51,12 @@ async function getOne(req, res) {
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
 
   try {
-    const docs = await Cargo
+    const [doc] = await Cargo
       .find(lookFor)
       .lean()
       .exec()
 
-    res.status(200).json({ data: docs })
+    res.status(200).json({ data: doc })
   } catch (e) {
     console.error(e)
     res.status(400).end()
@@ -81,9 +81,7 @@ async function updateOne(req, res) {
       .lean()
       .exec()
 
-    if (!updatedDoc) {
-      return res.status(400).end()
-    }
+    if (!updatedDoc) return res.status(400).end()
 
     res.status(200).json({ data: updatedDoc })
   } catch (e) {

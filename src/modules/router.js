@@ -32,6 +32,12 @@ const routes = [
     component: Update,
     beforeEnter: notGuest,
   },
+  {
+    path: '/orders/:oid/assist',
+    name: 'assistOrder',
+    component: Assist,
+    beforeEnter: isAssistant,
+  },
 
 
   { path: '/shipment/fba/new', component: CreateFBA, beforeEnter: notGuest },
@@ -40,14 +46,6 @@ const routes = [
 
   { path: '/shipment/fbm/new', component: CreateFBM, beforeEnter: notGuest },
   // { path: '/shipment/fbm/', component: ListFBM, beforeEnter: notGuest },
-
-
-  {
-    path: '/client/orders/:oid/edit',
-    name: 'assistOrder',
-    component: Assist,
-    beforeEnter: notGuest,
-  },
 
 
   // for guest
@@ -83,6 +81,6 @@ function isGuest(to, from, next) {
 
 function isAssistant(to, from, next) {
   return store.getters.user.role === 'assistant'
-    ? next({ path: `/client${to.path}` })
+    ? next({ path: to })
     : next({ path: to })
 }

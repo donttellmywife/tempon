@@ -1,4 +1,5 @@
-import { store } from 'APP'
+// import { store } from 'APP'
+import { getJson, authHeader } from './common.js'
 import config from './config'
 
 export default {
@@ -49,12 +50,12 @@ function list() {
 
 
 // HELPERS
-function getJson(res) { return res.json() }
-
-function authHeader() {
-  const { token } = store.getters.user
-  return {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  }
-}
+// function getJson(res) { return res.json() }
+//
+// function authHeader() {
+//   const { token } = store.getters.user
+//   return {
+//     Authorization: `Bearer ${token}`,
+//     'Content-Type': 'application/json',
+//   }
+// }

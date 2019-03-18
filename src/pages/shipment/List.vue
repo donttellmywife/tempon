@@ -7,7 +7,14 @@
     <div v-if="!isLoading">
       <div v-if="error">{{ error }}</div>
 
-      <ul v-if="fbas.length">
+      <div>
+        SHOWING ONLY: {{ activeTab.toUpperCase() || 'ALL' }}
+        <div @click="(e) => chooseTab('')">ALL</div>
+        <div @click="(e) => chooseTab('fbas')">TO AMAZON</div>
+        <div @click="(e) => chooseTab('fbms')">TO CLIENT</div>
+      </div>
+
+      <ul v-if="fbas.length && (!activeTab || activeTab === 'fbas')">
         FBAS:
         <fba-client v-if="isClient" v-for="ship in fbas" :key="ship._id" :shipment="ship" />
 
@@ -16,7 +23,7 @@
 
       <hr />
 
-      <ul v-if="fbms.length">
+      <ul v-if="fbms.length && (!activeTab || activeTab === 'fbms')">
         FBMS:
         <fbm-client v-if="isClient" v-for="ship in fbms" :key="ship._id" :shipment="ship" />
 
@@ -36,10 +43,13 @@
   export default {
     data() {
       return {
-        isLoading: true,
         fbas: [],
         fbms: [],
+
+        activeTab: '',
+
         error: '',
+        isLoading: true,
         isClient: this.$store.getters.user.role === 'client',
       }
     },
@@ -66,6 +76,11 @@
           .then(items => this.fbms = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
+      },
+
+
+      chooseTab(tabName) {
+        this.activeTab = tabName
       }
     },
 

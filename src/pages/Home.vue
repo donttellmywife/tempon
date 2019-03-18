@@ -7,8 +7,17 @@
     <div v-if="!isLoading">
       <div v-if="error">{{ error }}</div>
 
+      <div>
+        TABS IN A WAY:
+        <div @click="(e) => chooseTab('')">ALL</div>
+        <div @click="(e) => chooseTab('todo')">TODO</div>
+        <div @click="(e) => chooseTab('done')">DONE</div>
+        <div @click="(e) => chooseTab('fail')">FAIL</div>
+      </div>
+
       <ul v-if="items.length && !error">
-        <cargo-client v-for="ord in items" :key="ord._id" :cargo="ord" />
+        SHOWING ONLY: {{ activeTab.toUpperCase() || 'ALL' }}
+        <cargo-client v-for="ord in items" v-if="!activeTab || ord.status === activeTab" :key="ord._id" :cargo="ord" />
       </ul>
     </div>
   </main-layout>
@@ -38,6 +47,7 @@
       return {
         items: [],
 
+        activeTab: '',
         error: '',
         isLoading: true,
       }
@@ -60,6 +70,11 @@
           .then(items => this.items = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
+      },
+
+
+      chooseTab(tabName) {
+        this.activeTab = tabName
       }
     },
 

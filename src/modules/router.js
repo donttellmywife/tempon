@@ -4,8 +4,8 @@ import VueRouter from 'vue-router'
 import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
 import { Create, Update, Read, Assist } from 'PAGE/order'
+import { CreateFBM, ReadFBM } from 'PAGE/shipment/fbm'
 import { CreateFBA } from 'PAGE/shipment/fba'
-import { CreateFBM } from 'PAGE/shipment/fbm'
 import ListFBA from 'PAGE/shipment/List.vue'
 
 
@@ -45,6 +45,7 @@ const routes = [
 
 
   { path: '/shipment/fbm/new', component: CreateFBM, beforeEnter: notGuest },
+  { path: '/shipment/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },
   // { path: '/shipment/fbm/', component: ListFBM, beforeEnter: notGuest },
 
 

@@ -23,9 +23,9 @@
       <button @click="addEmptyTrack">add tracking</button>
     </label><br>
 
-    <label>labels<br>
+    <!-- <label>labels<br>
       <input v-model.trim="labels" placeholder="link to gdocs" type="text">
-    </label><br>
+    </label><br> -->
 
     <button type="submit">let us handle it!</button>
   </form>
@@ -46,7 +46,7 @@
         tracking: [{
           value: '',
         }],
-        labels: '',
+        // labels: '',
 
         error: '',
         isLoading: false,
@@ -67,7 +67,7 @@
           tracking: this.tracking.map(track => track.value)
             .map(track => track.trim())
             .filter(track => track.length > 0),
-          labels: this.labels,
+          // labels: this.labels,
           comment: '',
         }
 

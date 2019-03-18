@@ -1,9 +1,10 @@
 <template>
   <li>
+    <router-link :to="{ name: 'viewFBM', params: { sid: shipment._id }}">{{ shipment.description }}</router-link>
+
     <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
     <div>
       <span>STATUS: {{ shipment.status }}</span>
-      <span>DESCRIPTION: {{ shipment.description }}</span>
       <span>ADDRESS: {{ shipment.address }}</span>
     </div>
 

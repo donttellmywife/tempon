@@ -39,6 +39,8 @@ const schema = new Schema({
 
 
   description: String,
+  courier: String,
+  packing: [String],
 
 
   createdBy: {

@@ -1,3 +1,1 @@
-export function atleastOne(array) {
-  return array.length > 0
-}
+export const atleastOne = array => array.length > 0

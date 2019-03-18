@@ -47,7 +47,7 @@ export default {
 
     handleFetch(prms) {
       prms
-        .then(parse)
+        .then(({ data }) => data)
         .then((shipment) => { this.shipment = shipment })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })
@@ -58,15 +58,6 @@ export default {
       this.isLoading = true
       this.error = ''
     },
-
-
-    // addEmptyTrack(e) {
-    //   e.preventDefault();
-    //   e.stopImmediatePropagation();
-    //   this.order.tracking = this.order.tracking.concat({
-    //     value: '',
-    //   })
-    // },
   },
 
 
@@ -74,17 +65,4 @@ export default {
     MainLayout,
     Loading,
   },
-}
-
-
-// for array model iterations
-function makeValueObject(value) {
-  return { value }
-}
-
-function parse(res) {
-  return {
-    ...res.data,
-    tracking: res.data.tracking.map(makeValueObject),
-  }
 }

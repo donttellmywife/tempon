@@ -41,13 +41,13 @@
     <div>
       <span>Any additional packing? {{ packing }}</span>
       <label>
-        <input type="checkbox" id="jack" value="box" v-model="packing">
+        <input type="checkbox" value="box" v-model="packing">
       box</label>
       <label>
-        <input type="checkbox" id="john" value="A4 envelope" v-model="packing">
+        <input type="checkbox" value="A4 envelope" v-model="packing">
       A4 envelope</label>
       <label>
-        <input type="checkbox" id="mike" value="bubble wrap" v-model="packing">
+        <input type="checkbox" value="bubble wrap" v-model="packing">
       bubble wrap</label>
       <br>
     </div>
@@ -78,7 +78,7 @@
       </label>
     </div>
 
-    <button @click="create">let us handle it!</button><br>
+    <button @click="create">create new shipment</button><br>
   </main>
 </main-layout>
 </template>

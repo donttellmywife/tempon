@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
 import { Create, Update, Read, Assist } from 'PAGE/order'
-import { CreateFBM, ReadFBM } from 'PAGE/shipment/fbm'
+import { CreateFBM, ReadFBM, UpdateFBM, AssistFBM } from 'PAGE/shipment/fbm'
 import { CreateFBA } from 'PAGE/shipment/fba'
 import ListFBA from 'PAGE/shipment/List.vue'
 
@@ -26,12 +26,7 @@ const routes = [
     component: Read,
     beforeEnter: notGuest,
   },
-  {
-    path: '/orders/:oid/edit',
-    name: 'editOrder',
-    component: Update,
-    beforeEnter: notGuest,
-  },
+  { path: '/orders/:oid/edit', name: 'editOrder', component: Update, beforeEnter: notGuest },
   {
     path: '/orders/:oid/assist',
     name: 'assistOrder',
@@ -46,6 +41,8 @@ const routes = [
 
   { path: '/shipment/fbm/new', component: CreateFBM, beforeEnter: notGuest },
   { path: '/shipment/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },
+  { path: '/shipment/fbm/:sid/edit', component: UpdateFBM, beforeEnter: notGuest, name: 'updateFBM' },
+  { path: '/shipment/fbm/:sid/assist', component: AssistFBM, beforeEnter: notGuest, name: 'assistFBM' },
   // { path: '/shipment/fbm/', component: ListFBM, beforeEnter: notGuest },
 
 

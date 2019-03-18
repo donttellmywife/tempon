@@ -2,7 +2,7 @@
 <article>
   <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
   STATUS: {{ cargo.status }} <br>
-  <router-link :to="{ name: 'viewOrder', params: { oid: cargo._id }}">{{ cargo.description.expected }}</router-link>
+  <router-link v-if="cargo._id" :to="{ name: 'viewOrder', params: { oid: cargo._id }}">{{ cargo.description.expected }}</router-link>
 
   <div v-bind:class="{ success: !cargo.description.actual, fail: cargo.description.actual }">
     You expecting:
@@ -31,7 +31,7 @@
 
 
   <router-link
-    v-if="$store.getters.user.role === 'client' && cargo.status === 'todo'"
+    v-if="$store.getters.user.role === 'client' && cargo.status === 'todo' && cargo._id"
     :to="{
       name: 'editOrder',
       params: { oid: cargo._id },
@@ -40,7 +40,7 @@
   </router-link>
 
   <router-link
-    v-if="$store.getters.user.role === 'assistant'"
+    v-if="$store.getters.user.role === 'assistant' && cargo._id"
     :to="{
       name: 'assistOrder',
       params: { oid: cargo._id },

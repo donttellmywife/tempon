@@ -4,7 +4,7 @@
 
   <main class="main-content">
     <slot />
-    <info />
+    <!-- <info /> -->
   </main>
 </div>
 </template>

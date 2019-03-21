@@ -18,9 +18,9 @@
 
     <ul v-if="!isGuest" class="navbar-nav navbar-nav--row">
       <li v-if="isClient" class="nav-item"><router-link to="/orders/new">/new order</router-link></li>
-      <li v-if="isClient" class="nav-item"><router-link to="/shipment/fba/new">/new FBA shipment</router-link></li>
-      <li v-if="isClient" class="nav-item"><router-link to="/shipment/fbm/new">/new FBM shipment</router-link></li>
-      <li class="nav-item"><router-link to="/shipment/fba">/ALL shipments</router-link></li>
+      <li v-if="isClient" class="nav-item"><router-link to="/shipments/fba/new">/new FBA shipment</router-link></li>
+      <li v-if="isClient" class="nav-item"><router-link to="/shipments/fbm/new">/new FBM shipment</router-link></li>
+      <li class="nav-item"><router-link to="/shipments">/ALL shipments</router-link></li>
       <li class="nav-item"><a href='/' @click.prevent="logout">/logout</a></li>
     </ul>
   </nav>

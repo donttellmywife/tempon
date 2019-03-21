@@ -89,6 +89,8 @@
   import { MainLayout } from 'LAYOUT'
   import { Loading } from 'COMPONENT'
 
+  // ["DHL", "USPS", "FEDEX", "OTHER"]
+
 
   export default {
     data() {

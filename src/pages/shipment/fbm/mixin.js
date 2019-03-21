@@ -6,8 +6,16 @@ import { Loading } from 'COMPONENT'
 export default {
   data() {
     return {
-      shipment: {},
+      shipment: {
+        description: '',
+        cargos: [],
+        packing: [],
+        address: '',
+        courier: '',
+      },
 
+      orders: [],
+      customCourier: '',
       error: '',
       isLoading: false,
     }
@@ -16,6 +24,14 @@ export default {
 
   created() {
     this.fetchData()
+  },
+
+
+  computed: {
+    showCustomCourier() {
+      const { courier } = this.shipment
+      return courier === 'OTHER' || ['DHL', 'USPS', 'FEDEX'].indexOf(courier) < 0
+    },
   },
 
 
@@ -47,8 +63,11 @@ export default {
 
     handleFetch(prms) {
       prms
-        .then(({ data }) => data)
-        .then((shipment) => { this.shipment = shipment })
+        .then(getData)
+        .then((shipment) => {
+          this.shipment = shipment
+          this.customCourier = this.shipment.courier
+        })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })
     },
@@ -58,6 +77,15 @@ export default {
       this.isLoading = true
       this.error = ''
     },
+
+
+    fetchOrders() {
+      orders.list()
+        .then(getData)
+        .then((orders) => {
+          this.orders = orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
+        })
+    },
   },
 
 
@@ -66,3 +94,5 @@ export default {
     Loading,
   },
 }
+
+function getData(res) { return res.data }

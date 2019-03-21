@@ -12,6 +12,7 @@ rules:
   import/no-cycle: off # to import app from index
   no-underscore-dangle: off # mongo id
   max-len: warn
+  no-shadow: off
 
   # TODO under: remove when projects starts on and grows
   no-unused-vars: off

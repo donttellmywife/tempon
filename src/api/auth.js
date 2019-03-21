@@ -1,3 +1,4 @@
+import { getJson } from './common.js'
 import config from './config.js'
 
 const { API } = config
@@ -23,7 +24,7 @@ function signup(email, password, role) {
     },
     body,
   })
-    .then(res => res.json())
+    .then(getJson)
     .then((res) => {
       if (!res) return Promise.reject('Something went wrong on server side')
       if (res.error) return Promise.reject(res.error)
@@ -41,7 +42,7 @@ function signin(email, password) {
     },
     body,
   })
-    .then(res => res.json())
+    .then(getJson)
     .then((user) => {
       if (!user) return Promise.reject('Email or password incorrect')
       return user

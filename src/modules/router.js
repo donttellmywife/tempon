@@ -18,32 +18,18 @@ const routes = [
 
   // for client
   { path: '/orders/new', component: Create, beforeEnter: notGuest },
-
-
-  {
-    path: '/orders/:oid',
-    name: 'viewOrder',
-    component: Read,
-    beforeEnter: notGuest,
-  },
+  { path: '/orders/:oid', name: 'viewOrder', component: Read, beforeEnter: notGuest },
   { path: '/orders/:oid/edit', name: 'editOrder', component: Update, beforeEnter: notGuest },
-  {
-    path: '/orders/:oid/assist',
-    name: 'assistOrder',
-    component: Assist,
-    beforeEnter: isAssistant,
-  },
+  { path: '/orders/:oid/assist', name: 'assistOrder', component: Assist, beforeEnter: isAssistant },
 
 
-  { path: '/shipment/fba/new', component: CreateFBA, beforeEnter: notGuest },
-  { path: '/shipment/fba/', component: ListFBA, beforeEnter: notGuest },
+  { path: '/shipments/fbm/new', component: CreateFBM, beforeEnter: notGuest },
+  { path: '/shipments/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },
+  { path: '/shipments/fbm/:sid/edit', component: UpdateFBM, beforeEnter: notGuest, name: 'updateFBM' },
+  { path: '/shipments/fbm/:sid/assist', component: AssistFBM, beforeEnter: notGuest, name: 'assistFBM' },
 
-
-  { path: '/shipment/fbm/new', component: CreateFBM, beforeEnter: notGuest },
-  { path: '/shipment/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },
-  { path: '/shipment/fbm/:sid/edit', component: UpdateFBM, beforeEnter: notGuest, name: 'updateFBM' },
-  { path: '/shipment/fbm/:sid/assist', component: AssistFBM, beforeEnter: notGuest, name: 'assistFBM' },
-  // { path: '/shipment/fbm/', component: ListFBM, beforeEnter: notGuest },
+  { path: '/shipments/fba/new', component: CreateFBA, beforeEnter: notGuest },
+  { path: '/shipments', component: ListFBA, beforeEnter: notGuest },
 
 
   // for guest

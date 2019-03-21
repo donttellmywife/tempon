@@ -4,18 +4,24 @@
     {{ shipment.description }}
   </router-link>
 
-  <router-link v-if="shipment._id" :to="{ name: 'updateFBM', params: { sid: shipment._id }}">
+  <router-link
+    v-if="shipment._id && $store.getters.user.role === 'client' && shipment.status === 'todo'"
+    :to="{ name: 'updateFBM', params: { sid: shipment._id }}">
+
     EDIT
   </router-link>
 
-  <router-link v-if="shipment._id" :to="{ name: 'assistFBM', params: { sid: shipment._id }}">
+  <router-link
+    v-if="shipment._id && $store.getters.user.role === 'assistant' && shipment.status === 'todo'"
+    :to="{ name: 'assistFBM', params: { sid: shipment._id }}">
+
     ASSIST
   </router-link>
 
 
   <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
   <div>
-    <span>STATUS: {{ shipment.status }}</span>
+    <span>STATUS: {{ shipment.status }}</span><br>
     <span>ADDRESS: {{ shipment.address }}</span>
   </div>
 

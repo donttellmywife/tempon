@@ -14,6 +14,8 @@ export default {
         courier: '',
       },
 
+      possibleCourier: ['DHL', 'USPS', 'FEDEX', 'OTHER'],
+      selectedCourier: 'OTHER',
       orders: [],
       customCourier: '',
       error: '',
@@ -29,8 +31,7 @@ export default {
 
   computed: {
     showCustomCourier() {
-      const { courier } = this.shipment
-      return courier === 'OTHER' || ['DHL', 'USPS', 'FEDEX'].indexOf(courier) < 0
+      return this.selectedCourier === 'OTHER'
     },
   },
 
@@ -66,7 +67,7 @@ export default {
         .then(getData)
         .then((shipment) => {
           this.shipment = shipment
-          this.customCourier = this.shipment.courier
+          this.selectedCourier = this.possibleCourier.find(shipment.courier) || 'OTHER'
         })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })

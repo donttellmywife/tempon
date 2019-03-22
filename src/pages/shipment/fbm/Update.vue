@@ -1,6 +1,6 @@
 <template>
 <main-layout>
-  <h2>NEW SHIPMENT</h2>
+  <h2>UPDATE SHIPMENT</h2>
 
   <Loading v-if="isLoading" />
 
@@ -12,7 +12,7 @@
 
     <label v-for="ord in orders">
       {{ ord.description.expected }}
-      <input type="checkbox" :value="ord" v-model="cargos">
+      <input type="checkbox" :value="ord" v-model="orders">
     </label>
   </aside>
 
@@ -26,59 +26,30 @@
       <input v-model="shipment.description" placeholder="description" type="text">
     </label><br>
 
-    <div v-if="shipment.cargos.length">
-      <hr>
-      <div v-for="ord in cargos">
-        <div>{{ ord.description.expected }}</div>
-
-        <label>and how many?<br>
-          <input placeholder="quantity" type="number" v-model="ord.quantity.left">
-        </label>
-      </div>
+    <hr>
+    <div v-for="ord in shipment.cargos">
+      {{ ord.quantity }} of {{ ord._id }}<br>
     </div>
 
 
     <div>
       <span>Any additional packing? {{ shipment.packing }}</span>
-      <label>
-        <input type="checkbox" value="box" v-model="shipment.packing">
-      box</label>
-      <label>
-        <input type="checkbox" value="A4 envelope" v-model="shipment.packing">
-      A4 envelope</label>
-      <label>
-        <input type="checkbox" value="bubble wrap" v-model="shipment.packing">
-      bubble wrap</label>
-      <br>
+      <label v-for="type in ['box', 'A4 envelope', 'bubble wrap']">
+        <input type="checkbox" :value="type" v-model="shipment.packing">
+        {{ type }}
+        <br>
+      </label>
     </div>
 
 
     <div>
-      <span>Select courier! {{ courier }}</span><br>
-      <label>
-        <input type="radio" value="DHL" v-model="shipment.courier">
-      DHL</label>
-      <br>
+      <span>Select courier! {{ shipment.courier }}</span><br>
+      <label v-for="cour in possibleCourier">
+        <input type="radio" :value="cour" v-model="selectedCourier">
+      {{ cour }}</label><br>
 
-      <label>
-        <input type="radio" value="USPS" v-model="shipment.courier">
-      USPS</label>
-
-      <label>
-        <input type="radio" value="FEDEX" v-model="shipment.courier">
-      FEDEX</label>
-      <br>
-      <!-- Others -->
-      <!-- <label>
-        <input type="radio" value="OTHER" v-model="shipment.courier">
-      OTHER</label> -->
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model="showCustom">
-        <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-      </div>
-      <br>
-      <label v-if="showCustom">custom courier:
-        <input v-model="customCourier" placeholder="input your courier" />
+      <label v-if="showCustomCourier">custom courier:
+        <input v-model="shipment.courier" placeholder="input your courier" /><br>
       </label>
     </div>
 
@@ -94,33 +65,5 @@
 
   export default {
     mixins: [fbmMixin],
-
-
-    data() {
-      return {
-        showCustom: false,
-      }
-    },
-
-
-    created() {
-      this.fetchOrders()
-    },
-
-
-    // computed: {
-    //   showCustomCourier: function() {
-    //     return this.courier === 'OTHER'
-    //   }
-    // },
-
-
-    // methods: {},
-
-
-    components: {
-      // MainLayout,
-      // Loading,
-    },
   }
 </script>

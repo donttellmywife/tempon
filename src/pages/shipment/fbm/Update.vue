@@ -33,12 +33,13 @@
 
 
     <div>
-      <span>Any additional packing? {{ shipment.packing }}</span>
+      <span>Any additional packing?</span>
       <label v-for="type in ['box', 'A4 envelope', 'bubble wrap']">
         <input type="checkbox" :value="type" v-model="shipment.packing">
         {{ type }}
         <br>
       </label>
+      {{ shipment.packing }}
     </div>
 
 
@@ -53,7 +54,7 @@
       </label>
     </div>
 
-    <!-- <button @click="create">create new shipment</button><br> -->
+    <button @click="update">update shipment</button><br>
   </main>
 </main-layout>
 </template>

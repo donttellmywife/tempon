@@ -39,20 +39,17 @@ export default {
   methods: {
     update() {
       this.startFetch()
-      // this.handleFetch(orders.update({
-      //   ...this.order,
-      //   tracking: this.order.tracking.map(track => track.value)
-      //     .filter(track => track.length > 0),
-      //   quantity: {
-      //     expected: this.order.quantity.expected,
-      //     actual: this.order.quantity.actual,
-      //     left: this.order.quantity.expected,
-      //   },
-      //   description: {
-      //     expected: this.order.description.expected,
-      //     actual: this.order.description.actual,
-      //   },
-      // }))
+
+      const shipment = {
+        _id: this.shipment._id,
+        description: this.shipment.description,
+        address: this.shipment.address,
+        packing: this.shipment.packing,
+        courier: this.showCustomCourier ? this.shipment.courier : this.selectedCourier,
+        cargos: this.shipment.cargos,
+      }
+
+      this.handleFetch(fbm.update(shipment))
     },
 
 
@@ -67,7 +64,7 @@ export default {
         .then(getData)
         .then((shipment) => {
           this.shipment = shipment
-          this.selectedCourier = this.possibleCourier.find(shipment.courier) || 'OTHER'
+          this.selectedCourier = this.possibleCourier.find(c => c === shipment.courier) || 'OTHER'
         })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })

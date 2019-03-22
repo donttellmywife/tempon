@@ -1,7 +1,11 @@
 <!doctype html>
+<html lang="en">
 <title>tempon</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <div id="vueapp" />
+
+<!-- HACK: make bundle path always look in one place, instead of being relative to url -->
+<script src="/<%= htmlWebpackPlugin.files.js %>"></script>

@@ -1,3 +1,3 @@
 <template>
-  <div>loading...</div>
+  <div>Loading...</div>
 </template>

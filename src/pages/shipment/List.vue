@@ -25,9 +25,7 @@
 
       <ul v-if="fbms.length && (!activeTab || activeTab === 'fbms')">
         FBMS:
-        <fbm-client v-if="isClient" v-for="ship in fbms" :key="ship._id" :shipment="ship" />
-
-        <fbm-assist v-if="!isClient" v-for="ship in fbms" :key="ship._id" :shipment="ship" />
+        <fbm-client v-for="ship in fbms" :key="ship._id" :shipment="ship" />
       </ul>
     </div>
   </main-layout>

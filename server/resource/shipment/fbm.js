@@ -41,6 +41,11 @@ const schema = new Schema({
   description: String,
   courier: String,
   packing: [String],
+  priority: {
+    type: String,
+    enum: ['', 'low', 'medium', 'high', 'urgent'],
+    default: '',
+  },
 
 
   createdBy: {

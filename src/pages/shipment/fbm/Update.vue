@@ -18,6 +18,7 @@
 
 
   <main>
+    <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
     <label>Where to? <br>
       <input type="text" v-model="shipment.address">
     </label><br>

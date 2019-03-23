@@ -1,9 +1,12 @@
 import { orders, fbm } from 'API'
 import { MainLayout } from 'LAYOUT'
 import { Loading } from 'COMPONENT'
+import { methodDate } from 'MIXIN'
 
 
 export default {
+  mixins: [methodDate],
+
   data() {
     return {
       shipment: {
@@ -12,6 +15,8 @@ export default {
         packing: [],
         address: '',
         courier: '',
+        priority: '',
+        tracking: '',
       },
 
       possibleCourier: ['DHL', 'USPS', 'FEDEX', 'OTHER'],
@@ -41,12 +46,8 @@ export default {
       this.startFetch()
 
       const shipment = {
-        _id: this.shipment._id,
-        description: this.shipment.description,
-        address: this.shipment.address,
-        packing: this.shipment.packing,
+        ...this.shipment,
         courier: this.showCustomCourier ? this.shipment.courier : this.selectedCourier,
-        cargos: this.shipment.cargos,
       }
 
       this.handleFetch(fbm.update(shipment))

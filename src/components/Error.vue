@@ -8,11 +8,5 @@
     props: {
       msg: String
     },
-
-    // data() {
-    //   return {
-    //     msg: this.$props.msg || 'ERROR',
-    //   }
-    // },
   }
 </script>

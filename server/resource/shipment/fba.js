@@ -10,6 +10,13 @@ const schema = new Schema({
   },
 
 
+  priority: {
+    type: String,
+    enum: ['', 'low', 'medium', 'high', 'urgent'],
+    default: '',
+  },
+
+
   fnsku: {
     type: String,
     required: true,

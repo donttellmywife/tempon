@@ -12,7 +12,7 @@
   </router-link>
 
   <router-link
-    v-if="shipment._id && $store.getters.user.role === 'assistant' && shipment.status === 'todo'"
+    v-if="shipment._id && $store.getters.user.role === 'assistant'"
     :to="{ name: 'assistFBM', params: { sid: shipment._id }}">
 
     ASSIST

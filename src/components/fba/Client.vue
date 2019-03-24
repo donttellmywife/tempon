@@ -6,7 +6,6 @@
   <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
   <div>
     <span>{{ shipment.status }}</span>
-    <!-- <span>{{ shipment.description }}</span> -->
     <span>{{ shipment.fnsku }}</span>
   </div>
 

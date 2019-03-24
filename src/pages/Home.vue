@@ -1,6 +1,6 @@
 <template>
 <main-layout>
-  <p>Welcome home</p>
+  <p>LIST OF ALL ORDERS</p>
 
   <Loading v-if="isLoading" />
 

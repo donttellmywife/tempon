@@ -12,7 +12,7 @@
 
     <label v-for="ord in orders">
       {{ ord.description.expected }}
-      <input type="checkbox" :value="ord" v-model="orders">
+      <!-- <input type="checkbox" :value="ord" v-model="orders"> -->
     </label>
   </aside>
 
@@ -78,10 +78,6 @@
 
     data() {
       return {
-        shipment: {
-          priority: '',
-          tracking: '',
-        },
         possiblePriority: ['', 'low', 'medium', 'high', 'urgent'],
       }
     },

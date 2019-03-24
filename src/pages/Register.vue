@@ -36,7 +36,6 @@
           .then(user => this.$store.commit('login', user))
           .then(() => this.$router.push('/'))
           .catch(err => {
-            console.log(err)
             this.error = err
           })
       }

@@ -78,7 +78,9 @@
           cargos,
         }
 
-        fba.add(shipment).then(console.log).catch(err => this.error = err)
+        fba.add(shipment)
+          .then(({ data }) => this.$router.push({ name: 'viewFBA', params: { sid: data._id }}))
+          .catch(err => this.error = err)
       },
 
 

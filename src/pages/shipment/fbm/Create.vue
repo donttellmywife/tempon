@@ -133,7 +133,9 @@
           cargos,
         }
 
-        fbm.add(shipment).then(console.log).catch(err => this.error = err)
+        fbm.add(shipment)
+          .then(({ data }) => this.$router.push({ name: 'viewFBM', params: { sid: data._id }}))
+          .catch(err => this.error = err)
       },
 
 

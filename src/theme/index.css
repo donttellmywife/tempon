@@ -1,23 +1,15 @@
 /* OVERRIDES AND ADDITIONS FOR THEME */
-@import url('./offline.css');
-@import url('./superhero.min.css');
-
-
-/* COMMON */
-html,
-body {
-  height: 100%;
-}
-
-a {
-  /* TODO: user root colors */
-  color: #fff;
-}
-
+@import url('./_variables.scss');
+@import url('./_bootswatch.scss');
+@import url('./bootstrap.css');
 
 /* NAVIGATION  */
 .navbar {
-  justify-content: space-between;
+  /* justify-content: space-between; */
+
+  flex-direction: row;
+  padding: 0;
+  border: 0;
 }
 
 .navbar-nav--row {
@@ -29,14 +21,21 @@ a {
   }
 }
 
-
 /* LAYOUT */
 .main-layout {
-  /* background-color: #4E5D6C */
+  & > header {
+    padding:  1.5em 1em;
+  }
 }
 
 .main-content {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

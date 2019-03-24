@@ -13,27 +13,29 @@ Vue.use(VueRouter)
 
 
 const routes = [
+  // for registered user
   { path: '/', component: Home, beforeEnter: notGuest },
 
 
-  // for client
+  { path: '/orders', component: Home, beforeEnter: notGuest },
   { path: '/orders/new', component: Create, beforeEnter: notGuest },
-  { path: '/orders/:oid', name: 'viewOrder', component: Read, beforeEnter: notGuest },
-  { path: '/orders/:oid/edit', name: 'editOrder', component: Update, beforeEnter: notGuest },
-  { path: '/orders/:oid/assist', name: 'assistOrder', component: Assist, beforeEnter: isAssistant },
+  { path: '/orders/:oid', component: Read, beforeEnter: notGuest, name: 'viewOrder' },
+  { path: '/orders/:oid/edit', component: Update, beforeEnter: notGuest, name: 'editOrder' },
+  { path: '/orders/:oid/assist', component: Assist, beforeEnter: isAssistant, name: 'assistOrder' },
 
+
+  { path: '/shipments', component: ListFBA, beforeEnter: notGuest },
 
   { path: '/shipments/fbm/new', component: CreateFBM, beforeEnter: notGuest },
   { path: '/shipments/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },
   { path: '/shipments/fbm/:sid/edit', component: UpdateFBM, beforeEnter: notGuest, name: 'updateFBM' },
   { path: '/shipments/fbm/:sid/assist', component: AssistFBM, beforeEnter: notGuest, name: 'assistFBM' },
 
+
   { path: '/shipments/fba/new', component: CreateFBA, beforeEnter: notGuest },
   { path: '/shipments/fba/:sid', component: ReadFBA, beforeEnter: notGuest, name: 'viewFBA' },
   { path: '/shipments/fba/:sid/edit', component: UpdateFBA, beforeEnter: notGuest, name: 'updateFBA' },
   { path: '/shipments/fba/:sid/assist', component: AssistFBA, beforeEnter: isAssistant, name: 'assistFBA' },
-
-  { path: '/shipments', component: ListFBA, beforeEnter: notGuest },
 
 
   // for guest

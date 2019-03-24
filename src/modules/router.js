@@ -5,7 +5,7 @@ import { store } from 'APP'
 import { Home, Login, Register, NotFound } from 'PAGE'
 import { Create, Update, Read, Assist } from 'PAGE/order'
 import { CreateFBM, ReadFBM, UpdateFBM, AssistFBM } from 'PAGE/shipment/fbm'
-import { CreateFBA } from 'PAGE/shipment/fba'
+import { CreateFBA, ReadFBA, AssistFBA, UpdateFBA } from 'PAGE/shipment/fba'
 import ListFBA from 'PAGE/shipment/List.vue'
 
 
@@ -29,6 +29,10 @@ const routes = [
   { path: '/shipments/fbm/:sid/assist', component: AssistFBM, beforeEnter: notGuest, name: 'assistFBM' },
 
   { path: '/shipments/fba/new', component: CreateFBA, beforeEnter: notGuest },
+  { path: '/shipments/fba/:sid', component: ReadFBA, beforeEnter: notGuest, name: 'viewFBA' },
+  { path: '/shipments/fba/:sid/edit', component: UpdateFBA, beforeEnter: notGuest, name: 'updateFBA' },
+  { path: '/shipments/fba/:sid/assist', component: AssistFBA, beforeEnter: isAssistant, name: 'assistFBA' },
+
   { path: '/shipments', component: ListFBA, beforeEnter: notGuest },
 
 
@@ -65,6 +69,6 @@ function isGuest(to, from, next) {
 
 function isAssistant(to, from, next) {
   return store.getters.user.role === 'assistant'
-    ? next({ path: to })
-    : next({ path: to })
+    ? next()
+    : next({ path: from })
 }

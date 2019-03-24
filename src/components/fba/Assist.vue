@@ -41,7 +41,7 @@
         dimensions: {
           depth: '',
           height: '',
-          width: ',',
+          width: '',
           weight: '',
         },
       }

@@ -24,6 +24,7 @@ const schema = new Schema({
 
 
   description: String,
+  labels: String,
 
 
   cargos: {
@@ -63,7 +64,6 @@ const schema = new Schema({
   },
   price: String,
   pricePerUnit: String,
-  labels: String,
 }, {
   timestamps: true
 })

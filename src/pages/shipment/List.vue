@@ -1,40 +1,38 @@
 <template>
-  <main-layout>
-    <p>Welcome home</p>
+<main-layout>
+  <p>Welcome home</p>
 
-    <Loading v-if="isLoading" />
+  <Loading v-if="isLoading" />
 
-    <div v-if="!isLoading">
-      <div v-if="error">{{ error }}</div>
+  <div v-if="!isLoading">
+    <div v-if="error">{{ error }}</div>
 
-      <div>
-        SHOWING ONLY: {{ activeTab.toUpperCase() || 'ALL' }}
-        <div @click="(e) => chooseTab('')">ALL</div>
-        <div @click="(e) => chooseTab('fbas')">TO AMAZON</div>
-        <div @click="(e) => chooseTab('fbms')">TO CLIENT</div>
-      </div>
-
-      <ul v-if="fbas.length && (!activeTab || activeTab === 'fbas')">
-        FBAS:
-        <fba-client v-if="isClient" v-for="ship in fbas" :key="ship._id" :shipment="ship" />
-
-        <fba-assist v-if="!isClient" v-for="ship in fbas" :key="ship._id" :shipment="ship" />
-      </ul>
-
-      <hr />
-
-      <ul v-if="fbms.length && (!activeTab || activeTab === 'fbms')">
-        FBMS:
-        <fbm-client v-for="ship in fbms" :key="ship._id" :shipment="ship" />
-      </ul>
+    <div>
+      SHOWING ONLY: {{ activeTab.toUpperCase() || 'ALL' }}
+      <div @click="(e) => chooseTab('')">ALL</div>
+      <div @click="(e) => chooseTab('fbas')">TO AMAZON</div>
+      <div @click="(e) => chooseTab('fbms')">TO CLIENT</div>
     </div>
-  </main-layout>
+
+    <ul v-if="fbas.length && (!activeTab || activeTab === 'fbas')">
+      FBAS:
+      <fba-client v-for="ship in fbas" :key="ship._id" :shipment="ship" />
+    </ul>
+
+    <hr>
+
+    <ul v-if="fbms.length && (!activeTab || activeTab === 'fbms')">
+      FBMS:
+      <fbm-client v-for="ship in fbms" :key="ship._id" :shipment="ship" />
+    </ul>
+  </div>
+</main-layout>
 </template>
 
 
 <script>
   import { MainLayout } from 'LAYOUT'
-  import { Loading, FbaClient, FbaAssist, FbmClient, FbmAssist } from 'COMPONENT'
+  import { Loading, FbaClient, FbmClient } from 'COMPONENT'
   import { fba, fbm, shipment } from 'API'
 
 
@@ -87,9 +85,7 @@
       MainLayout,
       Loading,
       FbaClient,
-      FbaAssist,
       FbmClient,
-      FbmAssist,
     },
   }
 </script>

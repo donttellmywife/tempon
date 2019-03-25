@@ -7,17 +7,29 @@
   <p v-if="error" class="error">{{ error }}</p>
 
   <form v-if="!(isLoading && error)" @submit.prevent="update">
-    <label>what's in the box?<input v-model="order.description.expected" placeholder="description" type="text"></label><br>
-    <label>and how many?<input v-model="order.quantity.expected" placeholder="quantity" type="number"></label><br>
-    <label>how to find it<br>
-      <div v-for="track in order.tracking">
-        <input v-model.trim="track.value" placeholder="tracking" type="text">
-      </div>
-      <button @click="addEmptyTrack">add tracking</button>
-    </label><br>
-    <label>labels<input v-model.trim="order.labels" placeholder="link to gdocs" type="text"></label><br>
+    <div class="form-group">
+      <label>Describe order
+        <input v-model="order.description.expected" class="form-control" placeholder="description" type="text">
+      </label>
+    </div>
 
-    <button type="submit">SAVE</button><br>
+    <div class="form-group">
+      <label>In quantity of
+        <input v-model="order.quantity.expected" class="form-control" placeholder="quantity" type="number">
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Track with <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
+        <!-- <span class="badge badge-secondary">Secondary</span> -->
+        <div v-for="track in order.tracking">
+          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text">
+        </div>
+
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">save order</button>
   </form>
 </main-layout>
 </template>

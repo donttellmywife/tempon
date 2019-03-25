@@ -1,6 +1,6 @@
 import { orders } from 'API'
 import { MainLayout } from 'LAYOUT'
-
+import { Loading, CargoClient } from 'COMPONENT'
 
 export default {
   data() {
@@ -83,6 +83,8 @@ export default {
 
   components: {
     MainLayout,
+    Loading,
+    CargoClient,
   },
 }
 

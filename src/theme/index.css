@@ -73,8 +73,13 @@ ul {
 
 /* COMPONENTS */
 .card-body {
+  &:empty {
+    display: none;
+    height: 0;
+    /* border: 1px solid red; */
+  }
+
   & .list-group {
-    /* padding: 0; */
     list-style: none;
   }
 }

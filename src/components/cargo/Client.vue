@@ -4,7 +4,8 @@
     'border-warning': cargo.status === 'todo',
     'border-success': cargo.status === 'done',
     'border-danger': cargo.status === 'fail'
-  }" class="card mb-3">
+    }" class="card mb-3">
+
     <div class="card-header">
       <h3>
         <router-link v-if="cargo._id" :to="{ name: 'viewOrder', params: { oid: cargo._id }}">
@@ -12,11 +13,6 @@
         </router-link>
       </h3>
       <h6>status: {{ cargo.status }}</h6>
-    </div>
-
-    <div v-if="cargo.description.actual" class="card-body">
-      You were expecting: {{ cargo.description.expected }}<br>
-      But there was: {{ cargo.description.actual }}
     </div>
 
     <div v-if="cargo.description.actual" class="card-body card-body--2clm">

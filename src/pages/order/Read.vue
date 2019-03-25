@@ -1,7 +1,5 @@
 <template>
 <main-layout>
-  <!-- <h2>JUST OBSERVE ORDER</h2> -->
-
   <Loading v-if="isLoading" />
 
   <p v-if="error" class="error">{{ error }}</p>
@@ -12,17 +10,10 @@
 
 
 <script>
-  import { Loading, CargoClient } from 'COMPONENT'
   import orderMixin from './mixin.js'
 
 
   export default {
     mixins: [orderMixin],
-
-
-    components: {
-      CargoClient,
-      Loading,
-    },
   }
 </script>

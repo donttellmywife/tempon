@@ -2,32 +2,36 @@
 <main-layout>
   <h2>NEW ORDER</h2>
 
-  <span v-if="isLoading">loading...</span>
-
   <p v-if="error" class="error">{{ error }}</p>
 
-  <form v-if="!isLoading" @submit.prevent="create">
-    <label>what's in the box?<br>
-      <input v-model="description" placeholder="description" type="text">
-    </label>
-    <br>
+  <form @submit.prevent="create">
+    <div class="form-group">
+      <label>Describe order
+        <input v-model="description" class="form-control" placeholder="description" type="text">
+      </label>
+    </div>
 
-    <label>and how many?<br>
-      <input v-model="quantity" placeholder="quantity" type="number">
-    </label><br>
+    <div class="form-group">
+      <label>In quantity of
+        <input v-model="quantity" class="form-control" placeholder="quantity" type="number">
+      </label>
+    </div>
 
-    <label>how to find it<br>
-      <div v-for="track in tracking">
-        <input v-model.trim="track.value" placeholder="tracking" type="text">
-      </div>
-      <button @click="addEmptyTrack">add tracking</button>
-    </label><br>
+    <div class="form-group">
+      <label>Track with <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
+        <!-- <span class="badge badge-secondary">Secondary</span> -->
+        <div v-for="track in tracking">
+          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text">
+        </div>
+
+      </label>
+    </div>
 
     <!-- <label>labels<br>
       <input v-model.trim="labels" placeholder="link to gdocs" type="text">
     </label><br> -->
 
-    <button type="submit">let us handle it!</button>
+    <button type="submit" class="btn btn-primary">create new order</button>
   </form>
 </main-layout>
 </template>
@@ -49,7 +53,6 @@
         // labels: '',
 
         error: '',
-        isLoading: false,
       }
     },
 

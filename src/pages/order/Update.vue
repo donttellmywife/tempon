@@ -21,7 +21,6 @@
 
     <div class="form-group">
       <label>Track with <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
-        <!-- <span class="badge badge-secondary">Secondary</span> -->
         <div v-for="track in order.tracking">
           <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text">
         </div>

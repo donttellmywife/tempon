@@ -1,8 +1,12 @@
 import { orders } from 'API'
 import { MainLayout } from 'LAYOUT'
 import { Loading, CargoClient } from 'COMPONENT'
+import { methodDate } from 'MIXIN'
 
 export default {
+  mixins: [methodDate],
+
+
   data() {
     return {
       order: {

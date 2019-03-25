@@ -1,19 +1,26 @@
 <template>
 <main-layout>
-  <form @submit.prevent="login">
-    <fieldset>
-      <legend>LOGIN</legend>
-      <p v-if="error" class="text-danger">{{ error }}</p>
-      <div class="form-group">
-        <!-- TODO: type email after dev done -->
-        <label>Email address<input v-model="email" class="form-control" placeholder="email" type="text" aria-describedby="emailHelp"></label>
-      </div>
-      <div class="form-group">
-        <label>Password<input v-model="pwd" placeholder="password" type="password" class="form-control"></label><br>
-      </div>
-      <button type="submit" class="btn btn-primary">ENTER</button>
-    </fieldset>
+<div class="login-page">
+  <h2>LOGIN</h2>
+
+  <form @submit.prevent="login" class="register-form">
+    <p v-if="error" class="error">{{ error }}</p>
+
+    <div class="form-group">
+      <label>Email address
+        <input v-model="email" placeholder="email@example.com" class="form-control" type="email">
+      </label><br>
+    </div>
+
+    <div class="form-group">
+      <label>Password
+        <input v-model="pwd" placeholder="password" class="form-control" type="password">
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">LOGIN</button><br>
   </form>
+</div>
 </main-layout>
 </template>
 

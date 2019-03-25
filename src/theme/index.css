@@ -5,8 +5,6 @@
 
 /* NAVIGATION  */
 .navbar {
-  /* justify-content: space-between; */
-
   flex-direction: row;
   padding: 0;
   border: 0;
@@ -21,10 +19,17 @@
   }
 }
 
+.nav--close {
+  & .nav-item {
+    margin-right: 0;
+  }
+}
+
 /* LAYOUT */
 .main-layout {
   & > header {
     padding:  1.5em 1em;
+    border-bottom: 1px solid #000;
   }
 }
 
@@ -38,4 +43,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+/* PAGES */
+.register-page,
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 5em;
+}
+
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.orders-page {
+
 }

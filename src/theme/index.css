@@ -3,6 +3,13 @@
 @import url('./_bootswatch.scss');
 @import url('./bootstrap.css');
 
+
+/* COMMON */
+ul {
+  padding: 0;
+}
+
+
 /* NAVIGATION  */
 .navbar {
   flex-direction: row;
@@ -28,6 +35,7 @@
 /* LAYOUT */
 .main-layout {
   & > header {
+    margin-bottom: 2em;
     padding:  1.5em 1em;
     border-bottom: 1px solid #000;
   }
@@ -63,6 +71,19 @@
 }
 
 
-.orders-page {
+/* COMPONENTS */
+.card-body {
+  & .list-group {
+    /* padding: 0; */
+    list-style: none;
+  }
+}
 
+.card-body--2clm {
+  display: flex;
+  flex-direction: row;
+
+  & > div:not(:last-of-type) {
+    margin-right: 2em;
+  }
 }

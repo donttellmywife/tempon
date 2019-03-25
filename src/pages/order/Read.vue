@@ -1,6 +1,6 @@
 <template>
 <main-layout>
-  <h2>JUST OBSERVE ORDER</h2>
+  <!-- <h2>JUST OBSERVE ORDER</h2> -->
 
   <Loading v-if="isLoading" />
 

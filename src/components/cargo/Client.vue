@@ -1,52 +1,89 @@
 <template>
 <article>
-  <div>Created At: {{ formatDate(cargo.createdAt) }}</div>
-  STATUS: {{ cargo.status }} <br>
-  <router-link v-if="cargo._id" :to="{ name: 'viewOrder', params: { oid: cargo._id }}">{{ cargo.description.expected }}</router-link>
-
-  <div v-bind:class="{ success: !cargo.description.actual, fail: cargo.description.actual }">
-    You expecting:
-    <span>{{ cargo.description.expected }}</span>
-    <span v-if="cargo.description.actual">
-      you know, actualy we've found there {{ cargo.description.actual }}
-    </span>
-  </div>
-
-  <div v-bind:class="{ success: !cargo.quantity.actual, fail: cargo.quantity.actual }">
-    Was in amount of:
-    <b>{{ cargo.quantity.expected }}</b><br>
-
-    <div v-if="cargo.status === 'done'">
-      Left in amount of:
-      <b>{{ cargo.quantity.left }}</b>
+  <div :class="{
+    'border-warning': cargo.status === 'todo',
+    'border-success': cargo.status === 'done',
+    'border-danger': cargo.status === 'fail'
+  }" class="card mb-3">
+    <div class="card-header">
+      <h3>
+        <router-link v-if="cargo._id" :to="{ name: 'viewOrder', params: { oid: cargo._id }}">
+          {{ cargo.description.expected }} <small v-if="cargo.description.actual">({{ cargo.description.actual }})</small>
+        </router-link>
+      </h3>
+      <h6>status: {{ cargo.status }}</h6>
     </div>
 
-    <span v-if="cargo.quantity.actual">
-      but actualy we've found there <b>{{ cargo.quantity.actual }}</b>
-    </span>
+    <div v-if="cargo.description.actual" class="card-body">
+      You were expecting: {{ cargo.description.expected }}<br>
+      But there was: {{ cargo.description.actual }}
+    </div>
+
+    <div v-if="cargo.description.actual" class="card-body card-body--2clm">
+      <div>
+        Description
+      </div>
+      <div>
+        <div>expected: {{ cargo.description.expected }}</div>
+        <div>actual: {{ cargo.description.actual }}</div>
+      </div>
+    </div>
+
+    <div class="card-body card-body--2clm">
+      <div>
+        Quantity
+      </div>
+      <div>
+        <div>expected: {{ cargo.quantity.expected }}</div>
+        <div v-if="cargo.quantity.actual">actual: {{ cargo.quantity.actual }}</div>
+        <div v-if="cargo.status === 'done'">left: {{ cargo.quantity.left }}</div>
+      </div>
+    </div>
+
+    <div class="card-body card-body--2clm">
+      <div>
+        Tracking
+      </div>
+      <div>
+        <ul class="list-group">
+          <li v-for="track in cargo.tracking">{{ track.value }}<br></li>
+        </ul>
+      </div>
+    </div>
+
+    <div v-if="cargo.labels" class="card-body">
+      Labels: {{ cargo.labels }}
+    </div>
+
+    <div v-if="cargo.comment" class="card-body">
+      Comment: {{ cargo.comment }}
+    </div>
+
+    <div class="card-body">
+      <router-link
+        v-if="$store.getters.user.role === 'client' && cargo.status === 'todo' && cargo._id"
+        :to="{
+          name: 'editOrder',
+          params: { oid: cargo._id },
+        }">
+        EDIT
+      </router-link>
+
+      <router-link
+        v-if="$store.getters.user.role === 'assistant' && cargo._id"
+        :to="{
+          name: 'assistOrder',
+          params: { oid: cargo._id },
+        }">
+        ASSIST
+      </router-link>
+    </div>
+
+    <div class="card-footer text-muted">
+      <small>created: {{ formatDate(cargo.createdAt) }}</small><br>
+      <small>updated: {{ formatDate(cargo.updatedAt) }}</small>
+    </div>
   </div>
-
-  with tracking: <span v-for="track in cargo.tracking">{{ track.value }}<br></span>
-  and labels: {{ cargo.labels }}<br>
-
-
-  <router-link
-    v-if="$store.getters.user.role === 'client' && cargo.status === 'todo' && cargo._id"
-    :to="{
-      name: 'editOrder',
-      params: { oid: cargo._id },
-    }">
-    EDIT
-  </router-link>
-
-  <router-link
-    v-if="$store.getters.user.role === 'assistant' && cargo._id"
-    :to="{
-      name: 'assistOrder',
-      params: { oid: cargo._id },
-    }">
-    ASSIST
-  </router-link>
 </article>
 </template>
 
@@ -55,7 +92,7 @@
   import { methodDate } from 'MIXIN'
 
   // for array model iterations
-  const makeValueObject = value => ({ value })
+  // const makeValueObject = value => ({ value })
 
   export default {
     props: ['cargo'],

@@ -25,6 +25,8 @@ settings:
     webpack:
       config: 'webpack/config.js'
 
+globals:
+  USER_API: false
 
 env:
   browser: true

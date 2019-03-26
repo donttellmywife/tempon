@@ -1,3 +1,3 @@
 export default {
-  API: 'http://localhost:4001',
+  API: USER_API,
 }

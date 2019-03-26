@@ -1,4 +1,4 @@
-const { HotModuleReplacementPlugin } = require('webpack')
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack')
 
 const { smart } = require('webpack-merge')
 // respect previous loaders loaders, and concatinates to them
@@ -40,5 +40,8 @@ module.exports = smart({
 
   plugins: [
     new HotModuleReplacementPlugin(),
+    new DefinePlugin({
+      USER_API: JSON.stringify('http://localhost:4001'),
+    }),
   ],
 }, common)

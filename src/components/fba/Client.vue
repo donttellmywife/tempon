@@ -16,9 +16,9 @@
   </div>
 
   <div v-if="shipment.status === 'todo'">
-    {{ description }}
-    {{ fnsku }}
-    {{ cargos }}
+    {{ shipment.description }}
+    {{ shipment.fnsku }}
+    {{ shipment.cargos }}
   </div>
 
   <div v-if="shipment.status === 'in progress'">

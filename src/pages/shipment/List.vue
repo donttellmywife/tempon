@@ -1,18 +1,26 @@
 <template>
 <main-layout>
-  <p>Welcome home</p>
+  <h2>SHIPMENTS</h2>
 
   <Loading v-if="isLoading" />
 
   <div v-if="!isLoading">
     <div v-if="error">{{ error }}</div>
 
-    <div>
-      SHOWING ONLY: {{ activeTab.toUpperCase() || 'ALL' }}
-      <div @click="(e) => chooseTab('')">ALL</div>
-      <div @click="(e) => chooseTab('fbas')">TO AMAZON</div>
-      <div @click="(e) => chooseTab('fbms')">TO CLIENT</div>
-    </div>
+
+    <ul class="nav nav-pills nav--close">
+      <li class="nav-item">
+        <div @click="(e) => chooseTab('')" :class="{ active: activeTab === ''}" class="nav-link">ALL</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseTab('fbas')" :class="{ active: activeTab === 'fbas'}" class="nav-link">TO AMAZON</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseTab('fbms')" :class="{ active: activeTab === 'fbms'}" class="nav-link">TO CLIENT</div>
+      </li>
+    </ul>
+    <br>
+
 
     <ul v-if="fbas.length && (!activeTab || activeTab === 'fbas')">
       FBAS:

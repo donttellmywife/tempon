@@ -87,9 +87,6 @@
 <script>
   import { methodDate } from 'MIXIN'
 
-  // for array model iterations
-  // const makeValueObject = value => ({ value })
-
   export default {
     props: ['cargo'],
     mixins: [methodDate],

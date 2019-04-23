@@ -4,7 +4,13 @@ import { atleastOne } from '../validator.js'
 
 const schema = new Schema({
   tracking: {
-    type: [String],
+    type: [{
+      type: String,
+      validate: {
+        validator: ({ length }) => length >= 6 && length <= 16,
+      },
+      message: 'Tracking length not match (6-16)'
+    }],
     validate: [atleastOne, '{PATH} need at least one tracking'],
   },
 

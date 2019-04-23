@@ -25,3 +25,6 @@
 
 ## Production:
   > npm run build
+
+  on server:
+  > cp dist/* /etc/nginx/data/www

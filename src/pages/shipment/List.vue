@@ -13,10 +13,10 @@
         <div @click="(e) => chooseTab('')" :class="{ active: activeTab === ''}" class="nav-link">ALL</div>
       </li>
       <li class="nav-item">
-        <div @click="(e) => chooseTab('fbas')" :class="{ active: activeTab === 'fbas'}" class="nav-link">TO AMAZON</div>
+        <div @click="(e) => chooseTab('fbas')" :class="{ active: activeTab === 'fbas'}" class="nav-link">FBA shipments</div>
       </li>
       <li class="nav-item">
-        <div @click="(e) => chooseTab('fbms')" :class="{ active: activeTab === 'fbms'}" class="nav-link">TO CLIENT</div>
+        <div @click="(e) => chooseTab('fbms')" :class="{ active: activeTab === 'fbms'}" class="nav-link">FBM shipments</div>
       </li>
     </ul>
     <br>

@@ -22,10 +22,10 @@
   </div>
 
   <div v-if="shipment.status === 'in progress'">
-    {{ shipment.dimensions.depth }}
-    {{ shipment.dimensions.height }}
-    {{ shipment.dimensions.width }}
-    {{ shipment.dimensions.weight }}
+    Length: {{ shipment.dimensions.depth }}
+    Width: {{ shipment.dimensions.width }}
+    Height: {{ shipment.dimensions.height }}
+    Weight: {{ shipment.dimensions.weight }}
 
     <router-link
       v-if="$store.getters.user.role === 'client' && shipment._id"

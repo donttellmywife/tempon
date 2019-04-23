@@ -22,7 +22,6 @@
       </li>
     </ul>
     <br>
-    <!-- SHOWING {{ activeTab.toUpperCase() || 'ALL' }} -->
 
     <ul v-if="items.length && !error">
       <cargo-client v-for="ord in items" v-if="!activeTab || ord.status === activeTab" :key="ord._id" :cargo="ord" />

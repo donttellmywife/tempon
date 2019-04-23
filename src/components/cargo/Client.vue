@@ -21,7 +21,7 @@
       </div>
       <div>
         <div>expected: {{ cargo.description.expected }}</div>
-        <div>actual: {{ cargo.description.actual }}</div>
+        <div>arrived: {{ cargo.description.actual }}</div>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
       </div>
       <div>
         <div>expected: {{ cargo.quantity.expected }}</div>
-        <div v-if="cargo.quantity.actual">actual: {{ cargo.quantity.actual }}</div>
+        <div v-if="cargo.quantity.actual">arrived: {{ cargo.quantity.actual }}</div>
         <div v-if="cargo.status === 'done'">left: {{ cargo.quantity.left }}</div>
       </div>
     </div>

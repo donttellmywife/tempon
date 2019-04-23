@@ -12,18 +12,18 @@
     </div>
 
     <div class="form-group">
-      <label>In quantity of
+      <label>Total qty
         <input v-model="quantity" class="form-control" placeholder="quantity" type="number">
       </label>
     </div>
 
     <div class="form-group">
-      <label>Track with <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
-        <!-- <span class="badge badge-secondary">Secondary</span> -->
-        <div v-for="track in tracking">
-          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text">
+      <label>Track with
+        <div v-for="(track, index) in tracking" style="display: flex">
+          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16">
+          <span @click="(e) => removeTrack(e, index)" class="badge badge-light">remove</span>
         </div>
-
+        <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
       </label>
     </div>
 
@@ -70,7 +70,6 @@
           tracking: this.tracking.map(track => track.value)
             .map(track => track.trim())
             .filter(track => track.length > 0),
-          // labels: this.labels,
           comment: '',
         }
 
@@ -83,6 +82,12 @@
         this.tracking = this.tracking.concat({
           value: '',
         })
+      },
+
+      removeTrack(e, index) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        this.tracking = this.tracking.slice(0, index).concat(this.tracking.slice(index + 1))
       }
     },
 

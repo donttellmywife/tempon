@@ -41,7 +41,7 @@ export const signup = async (req, res, next) => {
     return signin(req, res)
   } catch (e) {
     if (e.code === 11000) {
-      res.status(500).json({ error: 'duplicate email' })
+      res.status(500).json({ error: 'this user already exists' })
     }
     return res.status(500).end('something went wrong due to singup on server')
   }

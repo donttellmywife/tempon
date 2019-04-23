@@ -51,6 +51,9 @@ export default {
           actual: this.order.description.actual,
         },
       }))
+        .then(() => {
+          this.$router.push({ name: 'viewOrder', params: { oid: this.order._id }})
+        })
     },
 
 
@@ -61,7 +64,7 @@ export default {
 
 
     handleFetch(prms) {
-      prms
+      return prms
         .then(parse)
         .then((order) => { this.order = order })
         .catch((err) => { this.error = err })

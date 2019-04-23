@@ -3,7 +3,6 @@
   <h2>UPDATE ORDER</h2>
 
   <span v-if="isLoading">loading...</span>
-
   <p v-if="error" class="error">{{ error }}</p>
 
   <form v-if="!(isLoading && error)" @submit.prevent="update">

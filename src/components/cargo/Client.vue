@@ -13,6 +13,28 @@
         </router-link>
       </h3>
       <h6>status: {{ cargo.status }}</h6>
+
+      <div class="absolute-right">
+        <button type="button" class="btn btn-link btn-sm">
+          <router-link
+            v-if="$store.getters.user.role === 'client' && cargo.status === 'todo' && cargo._id"
+            :to="{
+              name: 'editOrder',
+              params: { oid: cargo._id },
+            }">
+            EDIT
+          </router-link>
+
+          <router-link
+            v-if="$store.getters.user.role === 'assistant' && cargo._id"
+            :to="{
+              name: 'assistOrder',
+              params: { oid: cargo._id },
+            }">
+            ASSIST
+          </router-link>
+        </button>
+      </div>
     </div>
 
     <div v-if="cargo.description.actual" class="card-body card-body--2clm">
@@ -47,32 +69,22 @@
       </div>
     </div>
 
-    <div v-if="cargo.labels" class="card-body">
-      Labels: {{ cargo.labels }}
+    <div v-if="cargo.labels" class="card-body card-body--2clm">
+      <div>
+        Labels
+      </div>
+      <div>
+        {{ cargo.labels }}
+      </div>
     </div>
 
-    <div v-if="cargo.comment" class="card-body">
-      Comment: {{ cargo.comment }}
-    </div>
-
-    <div class="card-body">
-      <router-link
-        v-if="$store.getters.user.role === 'client' && cargo.status === 'todo' && cargo._id"
-        :to="{
-          name: 'editOrder',
-          params: { oid: cargo._id },
-        }">
-        EDIT
-      </router-link>
-
-      <router-link
-        v-if="$store.getters.user.role === 'assistant' && cargo._id"
-        :to="{
-          name: 'assistOrder',
-          params: { oid: cargo._id },
-        }">
-        ASSIST
-      </router-link>
+    <div v-if="cargo.comment" class="card-body card-body--2clm">
+      <div>
+        Comment
+      </div>
+      <div>
+        {{ cargo.comment }}
+      </div>
     </div>
 
     <div class="card-footer text-muted">

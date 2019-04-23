@@ -44,6 +44,9 @@ export default {
     update() {
       this.startFetch()
       this.handleFetch(fba.update(this.shipment))
+        .then(() => {
+          this.$router.push({ name: 'viewFBA', params: { sid: this.shipment._id }})
+        })
     },
 
 
@@ -54,7 +57,7 @@ export default {
 
 
     handleFetch(prms) {
-      prms
+      return prms
         .then(getData)
         .then((shipment) => {
           this.shipment = shipment

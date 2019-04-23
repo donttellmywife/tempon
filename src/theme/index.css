@@ -9,6 +9,11 @@ ul {
   padding: 0;
 }
 
+.absolute-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 /* NAVIGATION  */
 .navbar {

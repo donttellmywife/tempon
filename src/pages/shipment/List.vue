@@ -9,29 +9,47 @@
 
 
     <ul class="nav nav-pills nav--close">
+      type:
       <li class="nav-item">
-        <div @click="(e) => chooseTab('')" :class="{ active: activeTab === ''}" class="nav-link">ALL</div>
+        <div @click="(e) => chooseType('')" :class="{ active: activeType === ''}" class="nav-link">ALL</div>
       </li>
       <li class="nav-item">
-        <div @click="(e) => chooseTab('fbas')" :class="{ active: activeTab === 'fbas'}" class="nav-link">FBA shipments</div>
+        <div @click="(e) => chooseType('fbas')" :class="{ active: activeType === 'fbas'}" class="nav-link">FBA shipments</div>
       </li>
       <li class="nav-item">
-        <div @click="(e) => chooseTab('fbms')" :class="{ active: activeTab === 'fbms'}" class="nav-link">FBM shipments</div>
+        <div @click="(e) => chooseType('fbms')" :class="{ active: activeType === 'fbms'}" class="nav-link">FBM shipments</div>
+      </li>
+
+      &nbsp; &nbsp; &nbsp; status:
+      <li class="nav-item">
+        <div @click="(e) => chooseStatus('')" :class="{ active: activeStatus === ''}" class="nav-link">ALL</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseStatus('todo')" :class="{ active: activeStatus === 'todo'}" class="nav-link">todo</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseStatus('in progress')" :class="{ active: activeStatus === 'in progress'}" class="nav-link">in progress</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseStatus('ready')" :class="{ active: activeStatus === 'ready'}" class="nav-link">ready</div>
+      </li>
+      <li class="nav-item">
+        <div @click="(e) => chooseStatus('shipped')" :class="{ active: activeStatus === 'shipped'}" class="nav-link">shipped</div>
       </li>
     </ul>
     <br>
 
 
-    <ul v-if="fbas.length && (!activeTab || activeTab === 'fbas')">
+    <ul v-if="fbas.length && (!activeType || activeType === 'fbas')">
       FBAS:
-      <fba-client v-for="ship in fbas" :key="ship._id" :shipment="ship" />
+      <fba-client v-for="ship in fbas" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
     </ul>
 
     <hr>
 
-    <ul v-if="fbms.length && (!activeTab || activeTab === 'fbms')">
+    <ul v-if="fbms.length && (!activeType || activeType === 'fbms')">
       FBMS:
-      <fbm-client v-for="ship in fbms" :key="ship._id" :shipment="ship" />
+      <fbm-client v-for="ship in fbms" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
     </ul>
   </div>
 </main-layout>
@@ -50,7 +68,8 @@
         fbas: [],
         fbms: [],
 
-        activeTab: '',
+        activeType: '',
+        activeStatus: '',
 
         error: '',
         isLoading: true,
@@ -83,8 +102,12 @@
       },
 
 
-      chooseTab(tabName) {
-        this.activeTab = tabName
+      chooseType(tabName) {
+        this.activeType = tabName
+      },
+
+      chooseStatus(statusName) {
+        this.activeStatus = statusName
       }
     },
 

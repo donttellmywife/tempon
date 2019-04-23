@@ -1,5 +1,6 @@
 <template>
 <main-layout>
+  <h2>order</h2>
   <Loading v-if="isLoading" />
 
   <p v-if="error" class="error">{{ error }}</p>

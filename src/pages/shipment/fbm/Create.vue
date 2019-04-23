@@ -1,6 +1,6 @@
 <template>
 <main-layout>
-  <h2>NEW SHIPMENT</h2>
+  <h2>NEW FBM SHIPMENT</h2>
 
   <Loading v-if="isLoading" />
 

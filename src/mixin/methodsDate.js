@@ -6,5 +6,9 @@ export default {
     formatDate(incDate) {
       return date.formatDate(incDate)
     },
+
+    formatUrl(possibleUrl) {
+      return possibleUrl.indexOf('http') > -1 ? possibleUrl : `http://${possibleUrl}`
+    },
   },
 }

@@ -1,62 +1,67 @@
 <template>
 <main-layout>
-  <h2>UPDATE SHIPMENT</h2>
-
+  <h2>UPDATE FBM SHIPMENT</h2>
   <Loading v-if="isLoading" />
-
   <p v-if="error" class="error">{{ error }}</p>
 
 
-  <aside v-if="orders.length">
-    SIDE BAR WITH POSSIBLE ORDERS
+  <div class="two-sides">
+    <main class="clm">
+      <form @submit.prevent="update">
+        <div class="form-group">
+          <label>Where to? <br>
+            <input v-model="shipment.address" class="form-control" placeholder="some avenue" type="text">
+          </label><br>
+        </div>
 
-    <label v-for="ord in orders">
-      {{ ord.description.expected }}
-      <input type="checkbox" :value="ord" v-model="orders">
-    </label>
-  </aside>
+        <div class="form-group">
+          <label>describe contents <br>
+            <input v-model="shipment.description" class="form-control" placeholder="starwars lego" type="text">
+          </label><br>
+        </div>
 
-
-  <main>
-    <div>Created At: {{ formatDate(shipment.createdAt) }}</div>
-    <label>Where to? <br>
-      <input type="text" v-model="shipment.address">
-    </label><br>
-
-    <label>what's in the box?<br>
-      <input v-model="shipment.description" placeholder="description" type="text">
-    </label><br>
-
-    <hr>
-    <div v-for="ord in shipment.cargos">
-      {{ ord.quantity }} of {{ ord._id }}<br>
-    </div>
-
-
-    <div>
-      <span>Any additional packing?</span>
-      <label v-for="type in ['box', 'A4 envelope', 'bubble wrap']">
-        <input type="checkbox" :value="type" v-model="shipment.packing">
-        {{ type }}
-        <br>
-      </label>
-      {{ shipment.packing }}
-    </div>
+        <div v-if="shipment.cargos.length" class="form-group">
+          <hr>
+          <div v-for="ord in shipment.cargos">
+            <label>in amount of
+              <input v-model="ord.quantity" class="form-control form-control-sm" placeholder="1" type="number" disabled>
+            </label><br>
+          </div>
+        </div>
 
 
-    <div>
-      <span>Select courier! {{ shipment.courier }}</span><br>
-      <label v-for="cour in possibleCourier">
-        <input type="radio" :value="cour" v-model="selectedCourier">
-      {{ cour }}</label><br>
+        <div class="form-group">
+          Additional packing:<br>
+          <label v-for="type in ['box', 'A4 envelope', 'bubble wrap']">
+            <input type="checkbox" :value="type" v-model="shipment.packing">
+            {{ type }}
+            <br>
+          </label>
+        </div>
 
-      <label v-if="showCustomCourier">custom courier:
-        <input v-model="shipment.courier" placeholder="input your courier" /><br>
-      </label>
-    </div>
 
-    <button @click="update">update shipment</button><br>
-  </main>
+        <div class="form-group">
+          Select courier<br>
+          <label v-for="cour in possibleCourier">
+            <input type="radio" :value="cour" v-model="selectedCourier">
+          {{ cour }}</label><br>
+
+          <input v-if="showCustomCourier" v-model="customCourier" class="form-control form-control-sm" placeholder="input your courier" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">update fbm shipment</button>
+      </form>
+    </main>
+
+    <aside v-if="orders.length" class="clm">
+      Choose orders:
+
+      <label v-for="ord in orders">
+        <input type="checkbox" :value="ord" v-model="cargos">
+        {{ ord.description.expected }}
+      </label><br>
+    </aside>
+  </div>
 </main-layout>
 </template>
 

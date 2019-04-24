@@ -1,44 +1,44 @@
 <template>
 <main-layout>
   <h2>NEW FBA SHIPMENT</h2>
-
   <Loading v-if="isLoading" />
-
   <p v-if="error" class="error">{{ error }}</p>
 
 
-  <aside v-if="orders.length">
-    SIDE BAR WITH POSSIBLE ORDERS
+  <div class="two-sides">
+    <main class="clm">
+      <label>fnsku: <br>
+        <input type="text" v-model="fnsku">
+      </label><br>
 
-    <label v-for="ord in orders">
-      {{ ord._id }}
-      <input type="checkbox" :value="ord" v-model="cargos">
-    </label>
-  </aside>
+      <label>what's in the box?<br>
+        <input v-model="description" placeholder="description" type="text">
+      </label><br>
 
+      <div v-if="cargos.length">
+        <hr>
+        <div v-for="ord in cargos">
+          <div>{{ ord.description.expected }}</div>
 
-  <main>
-    <label>fnsku: <br>
-      <input type="text" v-model="fnsku">
-    </label><br>
-
-    <label>what's in the box?<br>
-      <input v-model="description" placeholder="description" type="text">
-    </label><br>
-
-    <div v-if="cargos.length">
-      <hr>
-      <div v-for="ord in cargos">
-        <div>{{ ord.description.expected }}</div>
-
-        <label>and how many?<br>
-          <input placeholder="quantity" type="number" v-model="ord.quantity.left">
-        </label>
+          <label>and how many?<br>
+            <input placeholder="quantity" type="number" v-model="ord.quantity.left">
+          </label>
+        </div>
       </div>
-    </div>
 
-    <button v-on:click="create">let us handle it!</button><br>
-  </main>
+      <button v-on:click="create">let us handle it!</button><br>
+    </main>
+
+
+    <aside v-if="orders.length" class="clm">
+      Choose orders:
+
+      <label v-for="ord in orders">
+        <input type="checkbox" :value="ord" v-model="cargos">
+        {{ ord.description.expected }}
+      </label><br>
+    </aside>
+  </div>
 </main-layout>
 </template>
 

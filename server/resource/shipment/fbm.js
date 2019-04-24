@@ -43,8 +43,8 @@ const schema = new Schema({
   packing: [String],
   priority: {
     type: String,
-    enum: ['', 'low', 'medium', 'high', 'urgent'],
-    default: '',
+    enum: ['low', 'normal', 'high', 'urgent'],
+    default: 'normal',
   },
 
 

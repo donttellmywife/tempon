@@ -15,6 +15,18 @@ ul {
   right: 0;
 }
 
+.two-sides {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 2em;
+}
+
+.clm {
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* NAVIGATION  */
 .navbar {
   flex-direction: row;
@@ -36,6 +48,7 @@ ul {
     margin-right: 0;
   }
 }
+
 
 /* LAYOUT */
 .main-layout {

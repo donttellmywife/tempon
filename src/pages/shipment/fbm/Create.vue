@@ -1,85 +1,88 @@
 <template>
 <main-layout>
   <h2>NEW FBM SHIPMENT</h2>
-
   <Loading v-if="isLoading" />
-
   <p v-if="error" class="error">{{ error }}</p>
 
+  <div class="two-sides">
+    <main>
+      <form @submit.prevent="create">
+        <div class="form-group">
+          <label>Where to? <br>
+            <input v-model="address" class="form-control" placeholder="some avenue" type="text">
+          </label><br>
+        </div>
 
-  <aside v-if="orders.length">
-    SIDE BAR WITH POSSIBLE ORDERS
+        <div class="form-group">
+          <label>describe contents <br>
+            <input v-model="description" class="form-control" placeholder="starwars lego" type="text">
+          </label><br>
+        </div>
 
-    <label v-for="ord in orders">
-      {{ ord.description.expected }}
-      <input type="checkbox" :value="ord" v-model="cargos">
-    </label>
-  </aside>
-
-
-  <main>
-    <label>Where to? <br>
-      <input type="text" v-model="address">
-    </label><br>
-
-    <label>what's in the box?<br>
-      <input v-model="description" placeholder="description" type="text">
-    </label><br>
-
-    <div v-if="cargos.length">
-      <hr>
-      <div v-for="ord in cargos">
-        <div>{{ ord.description.expected }}</div>
-
-        <label>and how many?<br>
-          <input placeholder="quantity" type="number" v-model="ord.quantity.left">
-        </label>
-      </div>
-    </div>
+        <div v-if="cargos.length" class="form-group">
+          <hr>
+          <div v-for="ord in cargos">
+            <label><span class="text-primary">{{ ord.description.expected }}</span> in amount of
+              <input v-model="ord.quantity.left" class="form-control form-control-sm" placeholder="1" type="number">
+            </label><br>
+          </div>
+        </div>
 
 
-    <div>
-      <span>Any additional packing? {{ packing }}</span>
-      <label>
-        <input type="checkbox" value="box" v-model="packing">
-      box</label>
-      <label>
-        <input type="checkbox" value="A4 envelope" v-model="packing">
-      A4 envelope</label>
-      <label>
-        <input type="checkbox" value="bubble wrap" v-model="packing">
-      bubble wrap</label>
-      <br>
-    </div>
+        <div class="form-group">
+          Additional packing:<br>
+          <label>
+            <input v-model="packing" type="checkbox" value="box" >
+          box</label>
+
+          <label>
+            <input v-model="packing" type="checkbox" value="A4 envelope">
+          A4 envelope</label>
+
+          <label>
+            <input v-model="packing" type="checkbox" value="bubble wrap">
+          bubble wrap</label>
+          <br>
+        </div>
 
 
-    <div>
-      <span>Select courier! {{ courier }}</span><br>
-      <label>
-        <input type="radio" value="DHL" v-model="courier">
-      DHL</label>
-      <br>
+        <div class="form-group">
+          Select courier<br>
+          <label>
+            <input type="radio" value="DHL" v-model="courier">
+          DHL</label>
+          <br>
 
-      <label>
-        <input type="radio" value="USPS" v-model="courier">
-      USPS</label>
+          <label>
+            <input type="radio" value="USPS" v-model="courier">
+          USPS</label><br>
 
-      <label>
-        <input type="radio" value="FEDEX" v-model="courier">
-      FEDEX</label>
-      <br>
-      <!-- Others -->
-      <label>
-        <input type="radio" value="OTHER" v-model="courier">
-      OTHER</label>
-      <br>
-      <label v-if="showCustomCourier">custom courier:
-        <input v-model="customCourier" placeholder="input your courier" />
-      </label>
-    </div>
+          <label>
+            <input type="radio" value="FEDEX" v-model="courier">
+          FEDEX</label>
+          <br>
+          <!-- Others -->
+          <label>
+            <input type="radio" value="OTHER" v-model="courier">
+          OTHER</label>
+          <br>
 
-    <button @click="create">create new shipment</button><br>
-  </main>
+          <input v-if="showCustomCourier" v-model="customCourier" class="form-control form-control-sm" placeholder="input your courier" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">create new fbm shipment</button>
+      </form>
+    </main>
+
+    <aside v-if="orders.length" class="clm">
+      Choose orders:
+
+      <label v-for="ord in orders">
+        <input type="checkbox" :value="ord" v-model="cargos">
+        {{ ord.description.expected }}
+      </label><br>
+    </aside>
+  </div>
 </main-layout>
 </template>
 

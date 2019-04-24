@@ -51,6 +51,9 @@ export default {
       }
 
       this.handleFetch(fbm.update(shipment))
+        .then(() => {
+          this.$router.push({ name: 'viewFBM', params: { sid: this.shipment._id }})
+        })
     },
 
 
@@ -61,7 +64,7 @@ export default {
 
 
     handleFetch(prms) {
-      prms
+      return prms
         .then(getData)
         .then((shipment) => {
           this.shipment = shipment

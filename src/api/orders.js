@@ -7,6 +7,7 @@ export default {
   get,
   update,
   list,
+  del,
 }
 
 const { API } = config
@@ -49,13 +50,9 @@ function list() {
 }
 
 
-// HELPERS
-// function getJson(res) { return res.json() }
-//
-// function authHeader() {
-//   const { token } = store.getters.user
-//   return {
-//     Authorization: `Bearer ${token}`,
-//     'Content-Type': 'application/json',
-//   }
-// }
+function del(id) {
+  return fetch(`${API}/orders/${id}`, {
+    method: 'DELETE',
+    headers: authHeader(),
+  }).then(getJson)
+}

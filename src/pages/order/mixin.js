@@ -21,6 +21,7 @@ export default {
         },
         tracking: [{ value: '' }],
         labels: '',
+        status: 'done', // so delete button will be disabled on start
       },
 
       error: '',
@@ -53,6 +54,15 @@ export default {
       }))
         .then(() => {
           this.$router.push({ name: 'viewOrder', params: { oid: this.order._id }})
+        })
+    },
+
+
+    remove() {
+      this.startFetch()
+      this.handleFetch(orders.del(this.$route.params.oid))
+        .then(() => {
+          this.$router.push({ name: 'listOrders' })
         })
     },
 

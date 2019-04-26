@@ -12,6 +12,7 @@ router.route('/')
 router.route('/:id')
   .get(getOne)
   .put(updateOne)
+  .delete(deleteOne)
 
 
 async function createCargo(req, res) {
@@ -84,6 +85,24 @@ async function updateOne(req, res) {
     if (!updatedDoc) return res.status(400).end()
 
     res.status(200).json({ data: updatedDoc })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+
+async function deleteOne(req, res) {
+  const lookFor = {
+    _id: req.params.id
+  }
+  if (req.user.role === 'client') lookFor.createdBy = req.user._id
+
+  try {
+    const data = await Cargo.deleteOne(lookFor).exec()
+    if (!data) return res.status(400).end()
+
+    res.status(200).json({ data })
   } catch (e) {
     console.error(e)
     res.status(400).end()

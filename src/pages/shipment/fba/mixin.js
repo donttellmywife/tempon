@@ -18,7 +18,7 @@ export default {
     return {
       shipment: {
         status: '',
-        priority: '',
+        priority: 'normal',
         fnsku: '',
         description: '',
         labels: '',

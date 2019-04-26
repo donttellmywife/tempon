@@ -17,7 +17,7 @@ const routes = [
   { path: '/', component: Home, beforeEnter: notGuest },
 
 
-  { path: '/orders', component: Home, beforeEnter: notGuest },
+  { path: '/orders', component: Home, beforeEnter: notGuest, name: 'listOrders' },
   { path: '/orders/new', component: Create, beforeEnter: notGuest },
   { path: '/orders/:oid', component: Read, beforeEnter: notGuest, name: 'viewOrder' },
   { path: '/orders/:oid/edit', component: Update, beforeEnter: notGuest, name: 'editOrder' },

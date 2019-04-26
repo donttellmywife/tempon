@@ -6,6 +6,8 @@
   <p v-if="error" class="error">{{ error }}</p>
 
   <cargo-client  v-if="!(isLoading && error)" :key="order._id" :cargo="order" />
+
+  <button v-if="order.status !== 'done'" class="btn btn-danger" @click="remove">delete order</button>
 </main-layout>
 </template>
 

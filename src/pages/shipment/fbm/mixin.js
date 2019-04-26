@@ -15,7 +15,7 @@ export default {
         packing: [],
         address: '',
         courier: '',
-        priority: '',
+        priority: 'normal',
         tracking: '',
       },
 

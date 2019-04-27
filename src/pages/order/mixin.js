@@ -21,7 +21,7 @@ export default {
         },
         tracking: [{ value: '' }],
         labels: '',
-        status: 'done', // so delete button will be disabled on start
+        status: 'shipped', // so delete button will be disabled on start
       },
 
       error: '',

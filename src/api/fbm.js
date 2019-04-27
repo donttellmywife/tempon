@@ -6,6 +6,7 @@ export default {
   get,
   update,
   list,
+  del,
 }
 
 const { API } = config
@@ -27,6 +28,14 @@ function add(shipment) {
 
 function get(id) {
   return fetch(`${API}/shipment/fbm/${id}`, {
+    headers: authHeader(),
+  }).then(getJson)
+}
+
+
+function del(id) {
+  return fetch(`${API}/shipment/fbm/${id}`, {
+    method: 'DELETE',
     headers: authHeader(),
   }).then(getJson)
 }

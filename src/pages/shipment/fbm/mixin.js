@@ -17,6 +17,7 @@ export default {
         courier: '',
         priority: 'normal',
         tracking: '',
+        status: 'shipped',
       },
 
       possibleCourier: ['DHL', 'USPS', 'FEDEX', 'OTHER'],
@@ -54,6 +55,12 @@ export default {
         .then(() => {
           this.$router.push({ name: 'viewFBM', params: { sid: this.shipment._id }})
         })
+    },
+
+
+    remove() {
+      this.startFetch()
+      fbm.del(this.shipment._id).then(() => this.$router.push({ name: 'listShipments' }))
     },
 
 

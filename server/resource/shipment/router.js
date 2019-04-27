@@ -44,6 +44,7 @@ router.route('/fba')
 router.route('/fba/:id')
   .get(getOneFBA)
   .put(updateOneFBA)
+  // .delete(deleteOneFBA)
 
 
 async function createFBA(req, res) {
@@ -158,12 +159,12 @@ router.route('/fbm')
 router.route('/fbm/:id')
   .get(getOneFBM)
   .put(updateOneFBM)
+  .delete(deleteOneFBM)
 
 
 async function createFBM(req, res) {
   const createdBy = req.user._id
 
-  // TODO: implement cargos validations
   try {
     const ids = req.body.cargos.map(c => c._id)
     const orders = await Cargo.find({ _id: { $in: ids }}).exec()
@@ -227,15 +228,9 @@ async function updateOneFBM(req, res) {
   const lookFor = {
     _id: req.params.id
   }
-
-
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
-
-
   // TODO: more booletproof checks?
-  if (req.user.role === 'assistant') {
-    if (req.body.status === 'todo') req.body.status = 'shipped'
-  }
+  if (req.user.role === 'assistant' && req.body.status === 'todo') req.body.status = 'shipped'
 
 
   try {
@@ -251,6 +246,33 @@ async function updateOneFBM(req, res) {
     if (!updatedDoc) return res.status(400).end()
 
     res.status(200).json({ data: updatedDoc })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+
+async function deleteOneFBM(req, res) {
+  const lookFor = { _id: req.params.id }
+  if (req.user.role === 'client') lookFor.createdBy = req.user._id
+
+  try {
+    const shipment = await FBM.findOne(lookFor).exec()
+    const ids = shipment.cargos.map(c => c._id)
+    const orders = await Cargo.find({ _id: { $in: ids }}).exec()
+
+    await Promise.all(ids.map(async (_id, i) => {
+      const ord = await Cargo.findById(_id)
+      ord.quantity.left += shipment.cargos[i].quantity
+      ord.save()
+    }))
+
+
+    const data = await FBM.findOneAndDelete(lookFor).exec()
+    if (!data) return res.status(400).end()
+
+    res.status(200).json({ data })
   } catch (e) {
     console.error(e)
     res.status(400).end()

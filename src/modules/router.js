@@ -24,7 +24,7 @@ const routes = [
   { path: '/orders/:oid/assist', component: Assist, beforeEnter: isAssistant, name: 'assistOrder' },
 
 
-  { path: '/shipments', component: ListFBA, beforeEnter: notGuest },
+  { path: '/shipments', component: ListFBA, beforeEnter: notGuest, name: 'listShipments' },
 
   { path: '/shipments/fbm/new', component: CreateFBM, beforeEnter: notGuest },
   { path: '/shipments/fbm/:sid', component: ReadFBM, beforeEnter: notGuest, name: 'viewFBM' },

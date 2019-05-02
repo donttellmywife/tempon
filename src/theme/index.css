@@ -27,6 +27,28 @@ ul {
 }
 
 
+/* OVERRIDE */
+.card {
+  &:hover {
+    &.border-success {
+      box-shadow: 0 0 0 0.25em rgba(75, 191, 115, 0.8);
+    }
+
+    &.border-warning {
+      box-shadow: 0 0 0 0.25em rgba(240, 173, 78, 0.8);
+    }
+
+    &.border-danger {
+      box-shadow: 0 0 0 0.25em rgba(217, 83, 79, 0.8);
+    }
+
+    &.border-info {
+      box-shadow: 0 0 0 0.25em rgba(31, 155, 207, 0.8);
+    }
+  }
+}
+
+
 /* NAVIGATION  */
 .navbar {
   flex-direction: row;

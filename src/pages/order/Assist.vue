@@ -3,7 +3,6 @@
   <h2>ASSIST WITH ORDER</h2>
 
   <Loading v-if="isLoading" />
-
   <p v-if="error" class="error">{{ error }}</p>
 
 
@@ -17,6 +16,7 @@
         <input v-model="order.description.expected" :disabled="order.status === 'done'" class="form-control" placeholder="description" type="text">
       </label>
 
+
       <div v-if="order.status !== 'done'" class="form-check">
         <label class="form-check-label">
           <input v-model="order.description.status" class="form-check-input" type="checkbox"> exactly the same
@@ -26,6 +26,7 @@
         </label>
       </div>
     </div>
+
 
     <div class="form-group">
       <label>In quantity
@@ -42,11 +43,26 @@
       </div>
     </div>
 
+
     <div class="form-group">
-      <label>Track with <button v-if="order.status !== 'done'" @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
-        <div v-for="track in order.tracking">
-          <input v-model.trim="track.value" :disabled="order.status === 'done'" class="form-control" placeholder="tracking" type="text">
+      <label>Link to product or image of a product
+        <div v-for="(info, index) in order.productInfo" style="display: flex">
+          <input v-model.trim="info.url" :disabled="order.status === 'done'" class="form-control" placeholder="http://amazon.com/product" type="url">
+          <span @click.prevent="(e) => removeInfo(e, index)" class="badge badge-light">remove</span>
         </div>
+        <button v-if="order.status !== 'done'" @click.prevent="addEmptyInfo" class="btn btn-outline-secondary btn-sm">add link</button>
+      </label>
+    </div>
+
+
+    <div class="form-group">
+      <label>Track with
+        <div v-for="(track, index) in order.tracking" style="display: flex">
+          <input v-model.trim="track.value" :disabled="order.status === 'done'" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16"> >
+          <input v-model.trim="track.quantity" :disabled="order.status === 'done'" class="form-control" placeholder="in amount of" type="number" min="0">
+          <span @click.prevent="(e) => removeTrack(e, index)" class="badge badge-light">remove</span>
+        </div>
+        <button v-if="order.status !== 'done'" @click.prevent="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
       </label>
     </div>
 

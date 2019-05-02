@@ -60,11 +60,22 @@
 
     <div class="card-body card-body--2clm">
       <div>
+        Product info
+      </div>
+      <div>
+        <ul class="list-group">
+          <li v-for="info in cargo.productInfo"><a :href="info.url">{{ info.url }}</a><br></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-body card-body--2clm">
+      <div>
         Tracking
       </div>
       <div>
         <ul class="list-group">
-          <li v-for="track in cargo.tracking">{{ track.value }}<br></li>
+          <li v-for="track in cargo.tracking">{{ track.value }} - {{ track.quantity }}<br></li>
         </ul>
       </div>
     </div>

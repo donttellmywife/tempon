@@ -38,17 +38,6 @@
   const { list } = orders
 
 
-  function makeValueObject(value) {
-    return { value }
-  }
-
-  function parse(order) {
-    return {
-      ...order,
-      tracking: order.tracking.map(makeValueObject),
-    }
-  }
-
   export default {
     data() {
       return {
@@ -73,7 +62,6 @@
 
         list()
           .then(res => res.data)
-          .then(items => items.map(parse))
           .then(items => this.items = items)
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)

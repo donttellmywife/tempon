@@ -12,18 +12,33 @@
       </label>
     </div>
 
+
     <div class="form-group">
       <label>In quantity of
         <input v-model="order.quantity.expected" class="form-control" placeholder="quantity" type="number">
       </label>
     </div>
 
-    <div class="form-group">
-      <label>Track with <button @click="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
-        <div v-for="track in order.tracking">
-          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text">
-        </div>
 
+    <div class="form-group">
+      <label>Link to product or image of a product
+        <div v-for="(info, index) in order.productInfo" style="display: flex">
+          <input v-model.trim="info.url" class="form-control" placeholder="http://amazon.com/product" type="url">
+          <span @click.prevent="(e) => removeInfo(e, index)" class="badge badge-light">remove</span>
+        </div>
+        <button @click.prevent="addEmptyInfo" class="btn btn-outline-secondary btn-sm">add link</button>
+      </label>
+    </div>
+
+
+    <div class="form-group">
+      <label>Track with
+        <div v-for="(track, index) in order.tracking" style="display: flex">
+          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16"> >
+          <input v-model.trim="track.quantity" class="form-control" placeholder="in amount of" type="number" min="0">
+          <span @click.prevent="(e) => removeTrack(e, index)" class="badge badge-light">remove</span>
+        </div>
+        <button @click.prevent="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
       </label>
     </div>
 

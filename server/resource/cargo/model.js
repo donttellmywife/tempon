@@ -5,12 +5,21 @@ import { atleastOne } from '../validator.js'
 const schema = new Schema({
   tracking: {
     type: [{
-      type: String,
-      // validate: {
-      //   validator: ({ length }) => length >= 6 && length <= 16,
-      // },
-      // message: 'Tracking length not match (6-16)'
+      value: {
+        type: String,
+        validate: {
+          validator: ({ length }) => length >= 6 && length <= 16,
+          message: 'Tracking length not match (6-16)'
+        },
+      },
+
+      quantity: {
+        type: Number,
+        min: 0,
+        default: 0,
+      }
     }],
+
     validate: [atleastOne, '{PATH} need at least one tracking'],
   },
 
@@ -42,6 +51,13 @@ const schema = new Schema({
     },
   },
 
+  // productInfo: [String],
+  productInfo: {
+    type: [{
+      url: String,
+    }],
+  },
+
 
   createdBy: {
     ref: 'user',
@@ -65,9 +81,9 @@ const schema = new Schema({
 
 
 // TODO: set 'left' on creation
-schema.pre('save', function(next) {
-  next();
-});
+// schema.pre('save', function(next) {
+//   next();
+// });
 
 
 schema.methods.canShip = function(wantToShip) {

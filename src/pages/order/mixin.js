@@ -19,9 +19,13 @@ export default {
           actual: '',
           left: '',
         },
-        tracking: [{ value: '' }],
+        tracking: [{
+          value: '',
+          quantity: '',
+        }],
         labels: '',
         status: 'shipped', // so delete button will be disabled on start
+        productInfo: [{ url: '' }],
       },
 
       error: '',
@@ -40,8 +44,7 @@ export default {
       this.startFetch()
       this.handleFetch(orders.update({
         ...this.order,
-        tracking: this.order.tracking.map(track => track.value)
-          .filter(track => track.length > 0),
+        tracking: this.order.tracking.filter(({ value }) => value.length > 0),
         quantity: {
           expected: this.order.quantity.expected,
           actual: this.order.quantity.actual,
@@ -51,6 +54,7 @@ export default {
           expected: this.order.description.expected,
           actual: this.order.description.actual,
         },
+        productInfo: this.order.productInfo,
       }))
         .then(() => {
           this.$router.push({ name: 'viewOrder', params: { oid: this.order._id }})
@@ -75,8 +79,7 @@ export default {
 
     handleFetch(prms) {
       return prms
-        .then(parse)
-        .then((order) => { this.order = order })
+        .then(({ data }) => { this.order = data })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })
     },
@@ -89,11 +92,18 @@ export default {
 
 
     addEmptyTrack(e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      this.order.tracking = this.order.tracking.concat({
-        value: '',
-      })
+      this.order.tracking = this.order.tracking.concat({ value: '', quantity: '' })
+    },
+    removeTrack(e, index) {
+      this.order.tracking = this.order.tracking.slice(0, index).concat(this.order.tracking.slice(index + 1))
+    },
+
+
+    addEmptyInfo(e) {
+      this.order.productInfo = this.order.productInfo.concat({ url: '' })
+    },
+    removeInfo(e, index) {
+      this.order.productInfo = this.order.productInfo.slice(0, index).concat(this.order.productInfo.slice(index + 1))
     },
   },
 
@@ -103,17 +113,4 @@ export default {
     Loading,
     CargoClient,
   },
-}
-
-
-// for array model iterations
-function makeValueObject(value) {
-  return { value }
-}
-
-function parse(res) {
-  return {
-    ...res.data,
-    tracking: res.data.tracking.map(makeValueObject),
-  }
 }

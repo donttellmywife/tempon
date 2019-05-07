@@ -1,12 +1,12 @@
 <template>
 <main-layout>
   <h2>SHIPMENT</h2>
-
   <Loading v-if="isLoading" />
-
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
 
   <fba-client v-if="!(isLoading && error)" :key="shipment._id" :shipment="shipment" />
+
+  <button v-if="shipment.status !== 'shipped'" class="btn btn-danger" @click="remove">delete fba shipment</button>
 </main-layout>
 </template>
 

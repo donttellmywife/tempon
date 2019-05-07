@@ -2,31 +2,38 @@
 <main-layout>
   <h2>NEW FBA SHIPMENT</h2>
   <Loading v-if="isLoading" />
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
 
 
   <div class="two-sides">
     <main class="clm">
-      <label>fnsku: <br>
-        <input type="text" v-model="fnsku">
-      </label><br>
-
-      <label>what's in the box?<br>
-        <input v-model="description" placeholder="description" type="text">
-      </label><br>
-
-      <div v-if="cargos.length">
-        <hr>
-        <div v-for="ord in cargos">
-          <div>{{ ord.description.expected }}</div>
-
-          <label>and how many?<br>
-            <input placeholder="quantity" type="number" v-model="ord.quantity.left">
+      <form @submit.prevent="create">
+        <div class="form-group">
+          <label>fnsku: <br>
+            <input v-model="fnsku" class="form-control" placeholder="some avenue" type="text">
           </label>
         </div>
-      </div>
 
-      <button v-on:click="create">let us handle it!</button><br>
+
+        <div class="form-group">
+          <label>describe contents <br>
+            <input v-model="description" class="form-control" placeholder="starwars lego" type="text">
+          </label>
+        </div>
+
+
+        <div v-if="cargos.length" class="form-group">
+          <hr>
+          <div v-for="ord in cargos">
+            <label><span class="text-primary">{{ ord.description.expected }}</span> in amount of
+              <input v-model="ord.quantity.left" class="form-control form-control-sm" placeholder="1" type="number">
+            </label><br>
+          </div>
+        </div>
+
+
+        <button class="btn btn-primary" type="submit">create new fba shipment</button>
+      </form>
     </main>
 
 
@@ -46,7 +53,7 @@
 <script>
   import { orders, fba } from 'API'
   import { MainLayout } from 'LAYOUT'
-  import { Loading } from 'COMPONENT'
+  import { Loading, Err } from 'COMPONENT'
 
 
   export default {
@@ -79,6 +86,10 @@
         }
 
         fba.add(shipment)
+          .then(response => {
+            if (response.error) return Promise.reject(response.error)
+            return response
+          })
           .then(({ data }) => this.$router.push({ name: 'viewFBA', params: { sid: data._id }}))
           .catch(err => this.error = err)
       },
@@ -102,6 +113,7 @@
     components: {
       MainLayout,
       Loading,
+      Err,
     },
   }
 </script>

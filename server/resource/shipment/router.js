@@ -36,7 +36,10 @@ async function getAll(req, res) {
 }
 
 
-// FBA
+
+/* --- */
+/* FBA */
+/* --- */
 router.route('/fba')
   .get(getManyFBA)
   .post(createFBA)
@@ -44,7 +47,7 @@ router.route('/fba')
 router.route('/fba/:id')
   .get(getOneFBA)
   .put(updateOneFBA)
-  // .delete(deleteOneFBA)
+  .delete(deleteOneFBA)
 
 
 async function createFBA(req, res) {
@@ -56,7 +59,7 @@ async function createFBA(req, res) {
     const orders = await Cargo.find({ _id: { $in: ids }}).exec()
 
     // if amount of items is bigger then there is - don't ship
-    if (orders.some((ord, i) => !ord.canShip(req.body.cargos[i].quantity))) res.status(400).json({ error: `not possible amount` })
+    if (orders.some((ord, i) => !ord.canShip(req.body.cargos[i].quantity))) return res.status(400).json({ error: `not possible amount` })
 
     await Promise.all(ids.map(async (_id, i) => {
       const ord = await Cargo.findById(_id)
@@ -151,7 +154,36 @@ async function updateOneFBA(req, res) {
 }
 
 
-// FBM
+async function deleteOneFBA(req, res) {
+  const lookFor = { _id: req.params.id }
+  if (req.user.role === 'client') lookFor.createdBy = req.user._id
+
+  try {
+    const shipment = await FBA.findOne(lookFor).exec()
+    const ids = shipment.cargos.map(c => c._id)
+    const orders = await Cargo.find({ _id: { $in: ids }}).exec()
+
+    await Promise.all(ids.map(async (_id, i) => {
+      const ord = await Cargo.findById(_id)
+      ord.quantity.left += shipment.cargos[i].quantity
+      ord.save()
+    }))
+
+
+    const data = await FBA.findOneAndDelete(lookFor).exec()
+    if (!data) return res.status(400).end()
+
+    res.status(200).json({ data })
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+
+/* --- */
+/* FBM */
+/* --- */
 router.route('/fbm')
   .get(getManyFBM)
   .post(createFBM)

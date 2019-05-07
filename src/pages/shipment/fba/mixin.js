@@ -1,6 +1,6 @@
 import { orders, fba } from 'API'
 import { MainLayout } from 'LAYOUT'
-import { Loading } from 'COMPONENT'
+import { Loading, Err } from 'COMPONENT'
 import { methodDate } from 'MIXIN'
 
 const emptyDimensions = {
@@ -50,6 +50,12 @@ export default {
     },
 
 
+    remove() {
+      this.startFetch()
+      fba.del(this.shipment._id).then(() => this.$router.push({ name: 'listShipments' }))
+    },
+
+
     fetchData() {
       this.startFetch()
       this.handleFetch(fba.get(this.$route.params.sid))
@@ -91,6 +97,7 @@ export default {
   components: {
     MainLayout,
     Loading,
+    Err,
   },
 }
 

@@ -15,7 +15,13 @@ const store = new Vuex.Store({
       ...guest,
       ...prevUser,
     },
-    orders: [],
+
+    // orders: {
+    //   showStatus: '',
+    // },
+    // shipments: {
+    //
+    // },
   },
 
 
@@ -31,7 +37,7 @@ const store = new Vuex.Store({
     },
     logout(state) {
       localStorage.setItem('user', JSON.stringify(guest))
-      state.user = guest
+      state.user = {...guest}
     },
   },
 })

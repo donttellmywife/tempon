@@ -74,10 +74,7 @@
   "keywords": [
     "javascript",
     "webpack",
-    "vue",
-    "express",
-    "mongoose",
-    "ramda"
+    "vue"
   ],
   "author": "Vova Puchkov",
   "license": "ISC"

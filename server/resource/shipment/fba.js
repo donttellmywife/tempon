@@ -18,8 +18,7 @@ const schema = new Schema({
 
 
   fnsku: {
-    type: String,
-    // required: true,
+    type: [String],
   },
 
 

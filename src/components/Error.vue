@@ -1,5 +1,5 @@
 <template>
-  <div>{{ msg || 'ERROR' }}</div>
+  <div  class="text-danger">ERROR: {{ msg || 'ERROR' }}</div>
 </template>
 
 

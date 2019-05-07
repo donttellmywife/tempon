@@ -2,7 +2,8 @@
 <main-layout>
   <h2>NEW FBM SHIPMENT</h2>
   <Loading v-if="isLoading" />
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
+
 
   <div class="two-sides">
     <main>
@@ -90,9 +91,7 @@
 <script>
   import { orders, fbm } from 'API'
   import { MainLayout } from 'LAYOUT'
-  import { Loading } from 'COMPONENT'
-
-  // ["DHL", "USPS", "FEDEX", "OTHER"]
+  import { Loading, Err } from 'COMPONENT'
 
 
   export default {
@@ -137,6 +136,10 @@
         }
 
         fbm.add(shipment)
+          .then(response => {
+            if (response.error) return Promise.reject(response.error)
+            return response
+          })
           .then(({ data }) => this.$router.push({ name: 'viewFBM', params: { sid: data._id }}))
           .catch(err => this.error = err)
       },
@@ -160,6 +163,7 @@
     components: {
       MainLayout,
       Loading,
+      Err,
     },
   }
 </script>

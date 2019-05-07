@@ -87,7 +87,7 @@ const schema = new Schema({
 
 
 schema.methods.canShip = function(wantToShip) {
-  return wantToShip <= this.quantity.left
+  return 0 < wantToShip && wantToShip <= this.quantity.left
 }
 
 

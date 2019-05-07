@@ -33,7 +33,7 @@
 
 <script>
   import { MainLayout } from 'LAYOUT'
-  import { Loading, CargoClient, CargoAssist } from 'COMPONENT'
+  import { Loading, CargoClient } from 'COMPONENT'
   import { orders } from 'API'
   const { list } = orders
 

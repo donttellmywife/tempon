@@ -20,6 +20,38 @@
           </label><br>
         </div>
 
+        <div class="form-group">
+          Deliver to: <br>
+          <label>Recipient <br>
+            <input v-model="deliverTo.recipient" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>Company <br>
+            <input v-model="deliverTo.company" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>Address <br>
+            <input v-for="line in deliverTo.address" v-model="line.line" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>City <br>
+            <input v-model="deliverTo.city" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>State <br>
+            <input v-model="deliverTo.state" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>Zip <br>
+            <input v-model="deliverTo.zip" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>Country <br>
+            <input v-model="deliverTo.country" class="form-control" placeholder="" type="text">
+          </label><br>
+          <label>Phone <br>
+            <input v-model="deliverTo.phone" class="form-control" placeholder="" type="phone">
+          </label><br>
+          <label>Email <br>
+            <input v-model="deliverTo.email" class="form-control" placeholder="" type="email">
+          </label><br>
+        </div>
+
+
         <div v-if="cargos.length" class="form-group">
           <hr>
           <div v-for="ord in cargos">
@@ -104,6 +136,20 @@
         packing: [],
         courier: '',
         customCourier: '',
+        deliverTo: {
+          recipient: '',
+          company: '',
+          address: [{
+            line: ''
+          }, {
+            line: ''
+          }],
+          state: '',
+          zip: '',
+          country: '',
+          phone: '',
+          email: '',
+        },
 
         error: '',
         isLoading: false,
@@ -132,6 +178,7 @@
           address: this.address,
           wrap: this.wrap,
           courier: this.customCourier || this.courier,
+          deliverTo: this.deliverTo,
           cargos,
         }
 

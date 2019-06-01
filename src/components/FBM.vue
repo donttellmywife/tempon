@@ -33,8 +33,18 @@
   </div>
 
   <div class="card-body card-body--2clm">
-    <div>ADDRESS</div>
-    <div>{{ shipment.address }}</div>
+    <div>Deliver to</div>
+    <div>
+      Recipient - {{ shipment.deliverTo.recipient }}<br>
+      Company - {{ shipment.deliverTo.company }} <br>
+      Address - <span v-for="line in shipment.deliverTo.address">{{ line.line }}</span> <br>
+      City - {{ shipment.deliverTo.city }} <br>
+      State - {{ shipment.deliverTo.state }}<br>
+      Zip - {{ shipment.deliverTo.zip }} <br>
+      Country - {{ shipment.deliverTo.country }}<br>
+      Phone - {{ shipment.deliverTo.phone }} <br>
+      Email - {{ shipment.deliverTo.email }}<br>
+    </div>
   </div>
 
   <div class="card-body card-body--2clm" v-if="shipment.status === 'shipped'">

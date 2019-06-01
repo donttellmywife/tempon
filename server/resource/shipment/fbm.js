@@ -32,9 +32,21 @@ const schema = new Schema({
   },
 
 
-  address: {
+  deliverTo: {
     required: true,
-    type: String,
+    type: {
+      recipient: String,
+      company: String,
+      address: [{
+        line: String,
+      }],
+      recipient: String,
+      state: String,
+      zip: String,
+      country: String,
+      phone: String,
+      email: String,
+    },
   },
 
 

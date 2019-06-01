@@ -13,7 +13,20 @@ export default {
         description: '',
         cargos: [],
         packing: [],
-        address: '',
+        deliverTo: {
+          recipient: '',
+          company: '',
+          address: [{
+            line: '',
+          }, {
+            line: '',
+          }],
+          state: '',
+          zip: '',
+          country: '',
+          phone: '',
+          email: '',
+        },
         courier: '',
         priority: 'normal',
         tracking: '',

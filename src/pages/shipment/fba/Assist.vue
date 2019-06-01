@@ -1,9 +1,9 @@
 <template>
 <main-layout>
   <h2>ASSIST SHIPMENT</h2>
-
   <Loading v-if="isLoading" />
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
+
 
   <form v-if="!(isLoading && error)" @submit.prevent="update">
     <h6>status: {{ shipment.status }}</h6>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-      <label>what's in the box?<br>
+      <label>what's in the shipment?<br>
         <input
           v-model="shipment.description"
           class="form-control"
@@ -27,12 +27,14 @@
     </div>
 
     <div class="form-group">
-      <label>Link to fnksu<br>
+      <label>Links to fnksu<br>
         <input
-          v-model="shipment.fnsku"
+          v-for="fnsku in shipment.fnsku"
+          v-model="fnsku.url"
           class="form-control"
           placeholder="http://docs.google.com/"
-          type="text">
+          type="text"
+          disabled>
       </label>
     </div>
 
@@ -42,19 +44,24 @@
     </div>
 
     <div class="form-group">
-      Box dimensions (could be many?):<br>
+      Boxes info:<br>
+      <div v-for="(b, index) in shipment.box" style="display: flex">
+        <label>Description<br>
+          <input v-model="b.descirption" class="form-control form-control-sm" placeholder="something about order" type="text">
+        </label><br>
         <label>Length<br>
-          <input v-model="shipment.dimensions.depth" class="form-control form-control-sm" placeholder="10ft" type="number">
+          <input v-model="b.length" class="form-control form-control-sm" placeholder="10ft" type="number">
         </label><br>
         <label>Width<br>
-          <input v-model="shipment.dimensions.width" class="form-control form-control-sm" placeholder="5ft" type="number">
+          <input v-model="b.width" class="form-control form-control-sm" placeholder="5ft" type="number">
         </label><br>
         <label>Height<br>
-          <input v-model="shipment.dimensions.height" class="form-control form-control-sm" placeholder="5ft" type="number">
+          <input v-model="b.height" class="form-control form-control-sm" placeholder="5ft" type="number">
         </label><br>
         <label>Weight<br>
-          <input v-model="shipment.dimensions.weight" class="form-control form-control-sm" placeholder="10lbs" type="text">
+          <input v-model="b.weight" class="form-control form-control-sm" placeholder="10lbs" type="text">
         </label><br>
+      </div>
 
       <label>Link to labels<br>
         <input

@@ -51,7 +51,7 @@ const schema = new Schema({
     },
   },
 
-  // productInfo: [String],
+
   productInfo: {
     type: [{
       url: String,

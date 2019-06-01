@@ -9,8 +9,25 @@
     <main class="clm">
       <form @submit.prevent="create">
         <div class="form-group">
-          <label>fnsku: <br>
-            <input v-model="fnsku" class="form-control" placeholder="some avenue" type="text">
+          <label>fnsku:
+            <div v-for="(label, index) in fnsku" style="display: flex">
+              <input v-model.trim="label.url" class="form-control" placeholder="http://gdocs.com" type="url">
+              <span @click.prevent="(e) => removeFNSKU(e, index)" class="badge badge-light">remove</span>
+            </div>
+
+            <button @click.prevent="addEmptyFNSKU" class="btn btn-outline-secondary btn-sm">add label</button>
+          </label>
+        </div>
+
+
+        <div class="form-group">
+          <label>How many boxes do you want?
+            <div v-for="(b, index) in box" style="display: flex">
+              <input v-model.trim="b.description" class="form-control" placeholder="whats in the box?" type="text">
+              <span @click.prevent="(e) => removeBox(e, index)" class="badge badge-light">remove</span>
+            </div>
+
+            <button @click.prevent="addEmptyBox" class="btn btn-outline-secondary btn-sm">add box</button>
           </label>
         </div>
 
@@ -62,7 +79,12 @@
         description: '',
         orders: [],
         cargos: [],
-        fnsku: '',
+        fnsku: [{
+          url: '',
+        }],
+        box: [{
+          description: '',
+        }],
 
         error: '',
         isLoading: false,
@@ -83,6 +105,7 @@
           description: this.description,
           fnsku: this.fnsku,
           cargos,
+          box: this.box,
         }
 
         fba.add(shipment)
@@ -106,6 +129,20 @@
           })
           .catch(err => this.error = err.toString())
           .then(() => this.isLoading = false)
+      },
+
+
+      addEmptyFNSKU(e) {
+        this.fnsku = this.fnsku.concat({ url: '' })
+      },
+      removeFNSKU(e, index) {
+        this.fnsku = this.fnsku.slice(0, index).concat(this.fnsku.slice(index + 1))
+      },
+      addEmptyBox(e) {
+        this.box = this.box.concat({ description: '' })
+      },
+      removeBox(e, index) {
+        this.box = this.box.slice(0, index).concat(this.box.slice(index + 1))
       },
     },
 

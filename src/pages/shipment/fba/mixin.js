@@ -4,10 +4,11 @@ import { Loading, Err } from 'COMPONENT'
 import { methodDate } from 'MIXIN'
 
 const emptyDimensions = {
-  depth: '',
+  length: '',
   height: '',
   width: '',
   weight: '',
+  description: '',
 }
 
 
@@ -19,16 +20,22 @@ export default {
       shipment: {
         status: '',
         priority: 'normal',
-        fnsku: '',
+        fnsku: [{
+          url: '',
+        }],
         description: '',
-        labels: '',
+        labels: [{
+          url: '',
+        }],
         cargos: [],
-        dimensions: {
+        box: [{
           ...emptyDimensions,
-        },
+        }],
       },
 
       orders: [],
+
+
       error: '',
       isLoading: false,
     }
@@ -67,8 +74,8 @@ export default {
         .then(getData)
         .then((shipment) => {
           this.shipment = shipment
-          if (!this.shipment.dimensions) {
-            this.shipment.dimensions = {
+          if (!this.shipment.box.length) {
+            this.shipment.box = {
               ...emptyDimensions,
             }
           }
@@ -90,6 +97,13 @@ export default {
         .then((orders) => {
           this.orders = orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
         })
+    },
+
+    addEmptyLabel(e) {
+      this.shipment.labels = this.shipment.labels.concat({ url: '' })
+    },
+    removeLabel(e, index) {
+      this.shipment.labels = this.shipment.labels.slice(0, index).concat(this.shipment.labels.slice(index + 1))
     },
   },
 

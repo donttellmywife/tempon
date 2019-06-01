@@ -1,11 +1,8 @@
 <template>
 <main-layout>
   <h2>UPDATE FBA SHIPMENT</h2>
-
-  <span v-if="isLoading">loading...</span>
-  <p v-if="error" class="error">{{ error }}</p>
-
-  <!-- <div>Created At: {{ formatDate(shipment.createdAt) }}</div> -->
+  <Loading v-if="isLoading" />
+  <Err v-if="error" :msg="error" />
 
 
   <form v-if="!(isLoading && error)" @submit.prevent="update">
@@ -21,9 +18,10 @@
     </div>
 
     <div class="form-group">
-      <label>Link to fnksu<br>
+      <label>Links to fnksu<br>
         <input
-          v-model="shipment.fnsku"
+          v-for="fnsku in shipment.fnsku"
+          v-model="fnsku.url"
           :disabled="shipment.status !== 'todo'"
           class="form-control"
           placeholder="http://docs.google.com/"
@@ -37,20 +35,29 @@
     </div>
 
     <div v-if="shipment.status !== 'todo'" class="form-group">
-      Box dimensions:
-        length: {{ shipment.dimensions.depth }} <br>
-        width: {{ shipment.dimensions.width }} <br>
-        height: {{ shipment.dimensions.height }} <br>
-        weight: {{ shipment.dimensions.weight }} <br>
+      <div v-for="box in shipment.box">
+      Box size for {{ box.description }}:
+        length: {{ box.length }} <br>
+        width: {{ box.width }} <br>
+        height: {{ box.height }} <br>
+        weight: {{ box.weight }} <br>
+      </div>
 
-      <label>Link to labels<br>
-        <input
-          v-model="shipment.labels"
-          :disabled="shipment.status !== 'in progress'"
-          class="form-control"
-          placeholder="http://docs.google.com/"
-          type="text">
-      </label>
+      <div class="form-group" style="display: flex; flex-direction: column">
+        Shipping labels<br>
+        <label v-for="(label, index) in shipment.labels">
+          <input
+            v-model="label.url"
+            :disabled="shipment.status !== 'in progress'"
+            class="form-control"
+            placeholder="http://docs.google.com/"
+            type="text">
+          <span @click.prevent="(e) => removeLabel(e, index)" class="badge badge-light">remove</span>
+        </label>
+        <button @click.prevent="addEmptyLabel" class="btn btn-outline-secondary btn-sm">add label</button>
+      </div>
+
+
       <button type="submit" class="btn btn-primary">yes, please ship it</button>
     </div>
 

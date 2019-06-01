@@ -1,4 +1,5 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
+import { atleastOne } from '../validator.js'
 
 
 const schema = new Schema({
@@ -18,12 +19,16 @@ const schema = new Schema({
 
 
   fnsku: {
-    type: [String],
+    type: [{
+      url: String,
+    }],
   },
 
 
   description: String,
-  labels: String,
+  labels: [{
+    url: String,
+  }],
 
 
   cargos: {
@@ -43,8 +48,7 @@ const schema = new Schema({
         },
       },
     ],
-
-    required: true,
+    validate: [atleastOne, '{PATH} need atleast one cargo'],
   },
 
 
@@ -55,14 +59,17 @@ const schema = new Schema({
   },
 
 
-  dimensions: {
-    depth: Number,
-    height: Number,
+  box: [{
+    length: Number,
     width: Number,
+    height: Number,
     weight: String,
-  },
-  price: String,
-  pricePerUnit: String,
+    description: String, // do we need it here?
+  }],
+
+
+  // price: String,
+  // pricePerUnit: String,
 }, {
   timestamps: true
 })

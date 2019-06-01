@@ -58,19 +58,21 @@
   <div v-if="shipment.status === 'in progress'">
     <div class="card-body card-body--2clm">
       <div>
-        Dimensions
+        Boxes
       </div>
-      <div>
-        Length: {{ shipment.dimensions.depth }} <br>
-        Width: {{ shipment.dimensions.width }} <br>
-        Height: {{ shipment.dimensions.height }} <br>
-        Weight: {{ shipment.dimensions.weight }} <br>
+      <div v-for="box in shipment.box">
+        Description: {{ box.description }} <br>
+        Length: {{ box.length }} <br>
+        Width: {{ box.width }} <br>
+        Height: {{ box.height }} <br>
+        Weight: {{ box.weight }} <br>
       </div>
     </div>
   </div>
 
   <div class="card-body">
-    <a :href="formatUrl(shipment.fnsku)">FNSKU</a>
+    FNSKU:
+    <a v-for="fnsku in shipment.fnsku" :href="formatUrl(fnsku.url)">{{ fnsku.url }}</a>
   </div>
 
   <div class="card-footer text-muted">

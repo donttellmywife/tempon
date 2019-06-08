@@ -3,12 +3,8 @@ import { merge } from 'ramda'
 
 import config from 'CONFIG'
 import { User } from 'USER'
+import { emailValidation } from 'RESOURCE/validator.js'
 
-
-function emailValidation(email) {
-  // any chras till @ any chars till dot any chars after
-  return /^.+[@].+\..+$/.test(email)
-}
 
 
 const secret = config.secrets.jwt
@@ -29,7 +25,7 @@ export const verifyToken = token =>
   })
 
 
-export const signup = async (req, res, next) => {
+export const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) return res.status(400).send({ message: 'need email and password' })
   if (!emailValidation(req.body.email)) {
     res.status(500).json({ error: 'not valid email' })

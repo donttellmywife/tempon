@@ -15,8 +15,17 @@ router.route('/:id')
   .delete(deleteOne)
 
 
-async function createCargo(req, res) {
+async function createCargo(req, res, next) {
   const createdBy = req.user._id
+  const { quantity, tracking } = req.body
+
+  // quantity of all trackings should match given quantity
+  if (parseInt(quantity.expected) > tracking.reduce((sum, track) => sum + parseInt(track.quantity), 0))
+    return res.status(506).json({
+      error: `Amount of ${quantity.expected} not equal to amounts in trackings`
+    })
+    // next()
+
   try {
     const doc = await Cargo.create({ ...req.body, createdBy })
     res.status(201).json({ data: doc })

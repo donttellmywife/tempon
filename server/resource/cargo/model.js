@@ -1,6 +1,8 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
 import { atleastOne } from '../validator.js'
 
+// const minTracking = 6
+// const maxTracking = 16
 
 const schema = new Schema({
   tracking: {
@@ -8,15 +10,15 @@ const schema = new Schema({
       value: {
         type: String,
         validate: {
-          validator: ({ length }) => length >= 6 && length <= 16,
+          validator: ({ length }) => length >= 6 && length <= 16, // from requirements
           message: 'Tracking length not match (6-16)'
         },
       },
 
       quantity: {
         type: Number,
-        min: 0,
-        default: 0,
+        min: 1,
+        default: 1,
       }
     }],
 

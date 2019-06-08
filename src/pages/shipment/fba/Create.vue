@@ -11,7 +11,7 @@
         <div class="form-group">
           <label>fnsku:
             <div v-for="(label, index) in fnsku" style="display: flex">
-              <input v-model.trim="label.url" class="form-control" placeholder="http://gdocs.com" type="url">
+              <input v-model.trim="label.url" class="form-control" placeholder="http://gdocs.com" type="text">
               <span @click.prevent="(e) => removeFNSKU(e, index)" class="badge badge-light">remove</span>
             </div>
 

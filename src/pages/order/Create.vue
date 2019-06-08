@@ -22,7 +22,7 @@
     <div class="form-group">
       <label>Link to product or image of a product
         <div v-for="(info, index) in productInfo" style="display: flex">
-          <input v-model.trim="info.url" class="form-control" placeholder="http://amazon.com/product" type="url">
+          <input v-model.trim="info.url" class="form-control" placeholder="http://amazon.com/product" type="text">
           <span @click.prevent="(e) => removeInfo(e, index)" class="badge badge-light">remove</span>
         </div>
         <button @click.prevent="addEmptyInfo" class="btn btn-outline-secondary btn-sm">add link</button>

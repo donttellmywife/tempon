@@ -24,7 +24,6 @@ async function createCargo(req, res, next) {
     return res.status(506).json({
       error: `Amount of ${quantity.expected} not equal to amounts in trackings`
     })
-    // next()
 
   try {
     const doc = await Cargo.create({ ...req.body, createdBy })

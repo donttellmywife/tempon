@@ -21,7 +21,9 @@ function add(order) {
   })
     .then(getJson)
     .then((ord) => {
+      console.log('ord: ', ord)
       if (!ord) return Promise.reject('Something went wrong on server side')
+      if (ord.error) return Promise.reject(ord.error)
       return ord
     })
 }

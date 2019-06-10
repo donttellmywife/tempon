@@ -1,20 +1,19 @@
 <template>
 <main-layout>
   <h2>NEW ORDER</h2>
-
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
 
   <form @submit.prevent="create">
     <div class="form-group">
       <label>Describe order
-        <input v-model="description" class="form-control" placeholder="description" type="text">
+        <input v-model.trim="description" class="form-control" placeholder="description" type="text" minlength="1" required>
       </label>
     </div>
 
 
     <div class="form-group">
       <label>Total qty
-        <input v-model="quantity" class="form-control" placeholder="quantity" type="number">
+        <input v-model="quantity" class="form-control" placeholder="quantity" type="number" min="1" required>
       </label>
     </div>
 
@@ -33,11 +32,12 @@
     <div class="form-group">
       <label>Track with
         <div v-for="(track, index) in tracking" style="display: flex">
-          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16"> >
-          <input v-model.trim="track.quantity" class="form-control" placeholder="in amount of" type="number" min="0">
+          <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16" required>
+          >
+          <input v-model.trim="track.quantity" class="form-control" placeholder="in amount of" type="number" min="1">
           <span @click.prevent="(e) => removeTrack(e, index)" class="badge badge-light">remove</span>
         </div>
-        <button @click.prevent="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add tracking</button>
+        <button @click.prevent="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add track</button>
       </label>
     </div>
 
@@ -45,7 +45,7 @@
       <input v-model.trim="labels" placeholder="link to gdocs" type="text">
     </label><br> -->
 
-    <button type="submit" class="btn btn-primary">create new order</button>
+    <button type="submit" class="btn btn-primary" :disabled="!isCreatable">create new order</button>
   </form>
 </main-layout>
 </template>
@@ -54,24 +54,29 @@
 <script>
   import { orders } from 'API'
   import { MainLayout } from 'LAYOUT'
+  import { Err } from 'COMPONENT'
 
 
   export default {
     data() {
       return {
         description: '',
-        quantity: '',
-        productInfo: [{
-          url: ''
-        }],
-        tracking: [{
-          value: '',
-          quantity: 0,
-        }],
+        quantity: 0,
+        productInfo: [],
+        tracking: [],
 
         // labels: '',
         error: '',
       }
+    },
+
+
+    computed: {
+      isCreatable() {
+        const all = parseInt(this.quantity)
+        const sum = this.tracking.reduce((sum, track) => sum + track.quantity, 0)
+        return all && all === sum
+      },
     },
 
 
@@ -96,7 +101,9 @@
 
 
       addEmptyTrack(e) {
-        this.tracking = this.tracking.concat({ value: '', quantity: '' })
+        const sum = this.tracking.reduce((sum, track) => sum + track.quantity, 0)
+        const left = this.quantity - sum
+        this.tracking = this.tracking.concat({ value: '', quantity: left })
       },
       removeTrack(e, index) {
         this.tracking = this.tracking.slice(0, index).concat(this.tracking.slice(index + 1))
@@ -114,6 +121,7 @@
 
     components: {
       MainLayout,
+      Err,
     },
   }
 </script>

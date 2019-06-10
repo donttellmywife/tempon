@@ -103,15 +103,24 @@
       <small>updated: {{ formatDate(cargo.updatedAt) }}</small>
     </div>
   </div>
+  <div class="svelteapp"></div>
 </article>
 </template>
 
 
 <script>
   import { methodDate } from 'MIXIN'
+  import SvelteApp from '../App.svelte'
 
   export default {
     props: ['cargo'],
     mixins: [methodDate],
   }
+
+  new SvelteApp({
+    target: document.querySelector('.svelteapp'),
+    props: {
+      msg: 'woot',
+    },
+  })
 </script>

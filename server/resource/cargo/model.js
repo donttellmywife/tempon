@@ -1,8 +1,6 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
 import { atleastOne } from '../validator.js'
 
-// const minTracking = 6
-// const maxTracking = 16
 
 const schema = new Schema({
   tracking: {

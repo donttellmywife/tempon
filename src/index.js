@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { router, store } from 'APP'
+// import SvelteApp from './App.svelte'
 
 import './theme/index.css';
 
@@ -17,3 +18,10 @@ const app = ($root) => {
 export default app
 
 app('#vueapp')
+
+// const app2 = new SvelteApp({
+//   target: document.svelteapp,
+//   props: {
+//     timetable: [],
+//   },
+// })

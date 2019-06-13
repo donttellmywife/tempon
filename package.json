@@ -1,6 +1,6 @@
 {
   "name": "tempon",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "basic warehouse webapp",
   "main": "src/index.js",
   "scripts": {

@@ -1,32 +1,32 @@
 <template>
 <main-layout>
-  <h2>ORDERS</h2>
+<h2>ORDERS</h2>
 
-  <Loading v-if="isLoading" />
+<Loading v-if="isLoading" />
 
-  <div v-if="!isLoading">
-    <div v-if="error">{{ error }}</div>
+<div v-if="!isLoading">
+  <div v-if="error">{{ error }}</div>
 
-    <ul class="nav nav-pills nav--close">
-      <li class="nav-item">
-        <div @click="(e) => chooseTab('')" :class="{ active: activeTab === ''}" class="nav-link">ALL</div>
-      </li>
-      <li class="nav-item">
-        <div @click="(e) => chooseTab('todo')" :class="{ active: activeTab === 'todo'}" class="nav-link">TODO</div>
-      </li>
-      <li class="nav-item">
-        <div @click="(e) => chooseTab('done')" :class="{ active: activeTab === 'done'}" class="nav-link">DONE</div>
-      </li>
-      <li class="nav-item">
-        <div @click="(e) => chooseTab('fail')" :class="{ active: activeTab === 'fail'}" class="nav-link">FAIL</div>
-      </li>
-    </ul>
-    <br>
+  <ul class="nav nav-pills nav--close">
+    <li class="nav-item">
+      <div @click="(e) => chooseTab('')" :class="{ active: activeTab === ''}" class="nav-link">ALL</div>
+    </li>
+    <li class="nav-item">
+      <div @click="(e) => chooseTab('todo')" :class="{ active: activeTab === 'todo'}" class="nav-link">TODO</div>
+    </li>
+    <li class="nav-item">
+      <div @click="(e) => chooseTab('done')" :class="{ active: activeTab === 'done'}" class="nav-link">DONE</div>
+    </li>
+    <li class="nav-item">
+      <div @click="(e) => chooseTab('fail')" :class="{ active: activeTab === 'fail'}" class="nav-link">FAIL</div>
+    </li>
+  </ul>
+  <br>
 
-    <ul v-if="items.length && !error">
-      <cargo-client v-for="ord in items" v-if="!activeTab || ord.status === activeTab" :key="ord._id" :cargo="ord" />
-    </ul>
-  </div>
+  <ul v-if="items.length && !error">
+    <cargo-client v-for="ord in items" v-if="!activeTab || ord.status === activeTab" :key="ord._id" :cargo="ord" />
+  </ul>
+</div>
 </main-layout>
 </template>
 

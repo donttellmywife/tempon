@@ -1,25 +1,25 @@
 <template>
 <main-layout>
 <div class="login-page">
-  <h2>LOGIN</h2>
+<h2>LOGIN</h2>
 
-  <form @submit.prevent="login" class="register-form">
-    <p v-if="error" class="error">{{ error }}</p>
+<form @submit.prevent="login" class="register-form">
+  <p v-if="error" class="error">{{ error }}</p>
 
-    <div class="form-group">
-      <label>Email address
-        <input v-model="email" placeholder="email@example.com" class="form-control" type="email">
-      </label><br>
-    </div>
+  <div class="form-group">
+    <label>Email address
+      <input v-model="email" placeholder="email@example.com" class="form-control" type="email">
+    </label><br>
+  </div>
 
-    <div class="form-group">
-      <label>Password
-        <input v-model="pwd" placeholder="password" class="form-control" type="password">
-      </label>
-    </div>
+  <div class="form-group">
+    <label>Password
+      <input v-model="pwd" placeholder="password" class="form-control" type="password">
+    </label>
+  </div>
 
-    <button class="btn btn-primary" type="submit">LOGIN</button><br>
-  </form>
+  <button class="btn btn-primary" type="submit">LOGIN</button><br>
+</form>
 </div>
 </main-layout>
 </template>

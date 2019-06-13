@@ -10,7 +10,8 @@
   - npm start
 
   And visit `localhost:4001`
+  You need `mongo` running via `mongod --dbpath=./data/db`
 
 
 ## Production:
-  > npm run build
+  > npm start

@@ -1,14 +1,14 @@
 <template>
 <main-layout>
-  <h2>JUST OBSERVE SHIPMENT</h2>
+<h2>JUST OBSERVE SHIPMENT</h2>
 
-  <Loading v-if="isLoading" />
+<Loading v-if="isLoading" />
 
-  <p v-if="error" class="error">{{ error }}</p>
+<p v-if="error" class="error">{{ error }}</p>
 
-  <fbm-client v-if="!(isLoading && error)" :key="shipment._id" :shipment="shipment" />
+<fbm-client v-if="!(isLoading && error)" :key="shipment._id" :shipment="shipment" />
 
-  <button v-if="shipment.status !== 'shipped'" class="btn btn-danger" @click="remove">delete fbm shipment</button>
+<button v-if="shipment.status !== 'shipped'" class="btn btn-danger" @click="remove">delete fbm shipment</button>
 </main-layout>
 </template>
 

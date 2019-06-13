@@ -1,6 +1,6 @@
 import { orders } from 'API'
 import { MainLayout } from 'LAYOUT'
-import { Loading, CargoClient } from 'COMPONENT'
+import { Loading, CargoClient, Err } from 'COMPONENT'
 import { methodDate } from 'MIXIN'
 
 export default {
@@ -112,5 +112,6 @@ export default {
     MainLayout,
     Loading,
     CargoClient,
+    Err,
   },
 }

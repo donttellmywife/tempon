@@ -73,8 +73,8 @@
 
     computed: {
       isCreatable() {
-        const all = parseInt(this.quantity)
-        const sum = this.tracking.reduce((sum, track) => sum + track.quantity, 0)
+        const all = parseInt(this.quantity, 10)
+        const sum = this.tracking.reduce((sum, track) => sum + parseInt(track.quantity, 10), 0)
         return all && all === sum
       },
     },
@@ -101,8 +101,8 @@
 
 
       addEmptyTrack(e) {
-        const sum = this.tracking.reduce((sum, track) => sum + track.quantity, 0)
-        const left = this.quantity - sum
+        const sum = this.tracking.reduce((sum, track) => sum + parseInt(track.quantity, 10), 0)
+        const left = parseInt(this.quantity, 10) - sum
         this.tracking = this.tracking.concat({ value: '', quantity: left })
       },
       removeTrack(e, index) {

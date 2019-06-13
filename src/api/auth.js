@@ -14,15 +14,13 @@ export default {
 }
 
 
-function signup(email, password, role) {
-  const body = JSON.stringify({ email, password, role })
-
+function signup(body) {
   return fetch(`${API}/signup/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body,
+    body: JSON.stringify(body),
   })
     .then(getJson)
     .then((res) => {

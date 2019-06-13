@@ -66,6 +66,16 @@ const schema = new Schema({
   },
 
 
+  user: {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    }
+  },
+
+
   status: {
     type: String,
     enum: ['todo', 'done', 'fail'],

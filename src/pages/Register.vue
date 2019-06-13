@@ -4,11 +4,16 @@
   <h2>Register</h2>
 
   <form @submit.prevent="register" class="register-form">
-    <p v-if="error" class="error">{{ error }}</p>
+    <Err v-if="error" :msg="error" />
+    <div class="form-group">
+      <label>Name
+        <input v-model="name" placeholder="name" class="form-control" type="text" required>
+      </label>
+    </div>
     <div class="form-group">
       <label>Email address
         <input v-model="email" placeholder="email@example.com" class="form-control" type="email">
-      </label><br>
+      </label>
     </div>
 
     <div class="form-group">
@@ -36,6 +41,7 @@
 <script>
   import { user } from 'API'
   import { MainLayout } from 'LAYOUT'
+  import { Err } from 'COMPONENT'
 
 
   export default {
@@ -43,6 +49,7 @@
       return {
         email: '',
         pwd: '',
+        name: '',
         error: '',
         assistant: false,
       }
@@ -52,7 +59,12 @@
     methods: {
       register() {
         const role = this.assistant ? 'assistant' : 'client'
-        user.signup(this.email, this.pwd, role)
+        user.signup({
+          email: this.email,
+          password: this.pwd,
+          name: this.name,
+          role,
+        })
           .then(user => this.$store.commit('login', user))
           .then(() => this.$router.push('/'))
           .catch(err => {
@@ -63,7 +75,8 @@
 
 
     components: {
-      MainLayout
+      MainLayout,
+      Err,
     },
   }
 </script>

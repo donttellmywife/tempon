@@ -20,13 +20,13 @@ async function createCargo(req, res, next) {
   const { quantity, tracking } = req.body
 
   // quantity of all trackings should match given quantity
-  if (parseInt(quantity.expected) > tracking.reduce((sum, track) => sum + parseInt(track.quantity), 0))
+  if (parseInt(quantity.expected, 10) > tracking.reduce((sum, track) => sum + parseInt(track.quantity, 10), 0))
     return res.status(506).json({
       error: `Amount of ${quantity.expected} not equal to amounts in trackings`
     })
 
   try {
-    const doc = await Cargo.create({ ...req.body, createdBy })
+    const doc = await Cargo.create({ ...req.body, createdBy, user: req.user })
     res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)

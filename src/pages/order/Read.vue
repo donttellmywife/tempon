@@ -2,8 +2,7 @@
 <main-layout>
   <h2>order</h2>
   <Loading v-if="isLoading" />
-
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" /> 
 
   <cargo-client  v-if="!(isLoading && error)" :key="order._id" :cargo="order" />
 

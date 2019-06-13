@@ -12,6 +12,9 @@
       </router-link>
     </h3>
     <h6>status: {{ shipment.status }}</h6>
+    <h6 v-if="shipment.user && shipment.user.name && $store.getters.user.role === 'assistant'">
+      client: {{ shipment.user.name }}
+    </h6>
 
     <div class="absolute-right">
       <button type="button" class="btn btn-link btn-sm">

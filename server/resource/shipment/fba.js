@@ -59,6 +59,16 @@ const schema = new Schema({
   },
 
 
+  user: {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    }
+  },
+
+
   box: [{
     length: Number,
     width: Number,

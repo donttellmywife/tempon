@@ -67,6 +67,16 @@ const schema = new Schema({
   },
 
 
+  user: {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    }
+  },
+
+
   price: String,
   tracking: String,
 }, {

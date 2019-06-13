@@ -43,7 +43,7 @@
       return {
         items: [],
 
-        activeTab: '',
+        activeTab: this.$store.getters.user.role === 'assistant' ? 'todo' : '',
         error: '',
         isLoading: true,
       }

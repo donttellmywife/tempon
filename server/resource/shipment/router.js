@@ -67,7 +67,7 @@ async function createFBA(req, res) {
       ord.save()
     }))
 
-    const doc = await FBA.create({ ...req.body, createdBy })
+    const doc = await FBA.create({ ...req.body, createdBy, user: req.user })
     res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)
@@ -210,7 +210,7 @@ async function createFBM(req, res) {
       ord.save()
     }))
 
-    const doc = await FBM.create({ ...req.body, createdBy })
+    const doc = await FBM.create({ ...req.body, createdBy, user: req.user })
     res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)

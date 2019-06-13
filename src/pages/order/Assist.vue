@@ -1,14 +1,16 @@
 <template>
 <main-layout>
   <h2>ASSIST WITH ORDER</h2>
-
   <Loading v-if="isLoading" />
-  <p v-if="error" class="error">{{ error }}</p>
+  <Err v-if="error" :msg="error" />
 
 
   <form v-if="!(isLoading && error)" @submit.prevent="update">
     <div class="form-group">
       status: {{ order.status }}
+    </div>
+    <div class="form-group" v-if="order.user && order.user.name">
+      client: {{ order.user.name }}
     </div>
 
     <div class="form-group">

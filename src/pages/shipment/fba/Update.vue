@@ -17,7 +17,7 @@
       </label>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Links to fnksu<br>
         <input
           v-for="fnsku in shipment.fnsku"
@@ -26,6 +26,17 @@
           class="form-control"
           placeholder="http://docs.google.com/"
           type="text">
+      </label>
+    </div> -->
+
+    <div class="form-group">
+      <label>fnsku:
+        <div v-for="(label, index) in shipment.fnsku" style="display: flex">
+          <input v-model.trim="label.url" class="form-control" placeholder="http://gdocs.com" type="text">
+          <span @click.prevent="(e) => removeFNSKU(e, index)" class="badge badge-light">remove</span>
+        </div>
+
+        <button @click.prevent="addEmptyFNSKU" class="btn btn-outline-secondary btn-sm">add label</button>
       </label>
     </div>
 

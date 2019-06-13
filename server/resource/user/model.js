@@ -22,6 +22,12 @@ const schema = new Schema({
     enum: ['client', 'assistant'],
     default: 'client',
   },
+
+
+  name: {
+    type: String,
+    required: true,
+  }
 }, {
   timestamps: true
 })

@@ -9,12 +9,6 @@
     <main>
       <form @submit.prevent="create">
         <div class="form-group">
-          <label>Where to? <br>
-            <input v-model="address" class="form-control" placeholder="some avenue" type="text">
-          </label><br>
-        </div>
-
-        <div class="form-group">
           <label>describe contents <br>
             <input v-model="description" class="form-control" placeholder="starwars lego" type="text">
           </label><br>
@@ -132,7 +126,6 @@
         description: '',
         orders: [],
         cargos: [],
-        address: '',
         packing: [],
         courier: '',
         customCourier: '',

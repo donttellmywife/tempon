@@ -16,7 +16,7 @@
     <div class="absolute-right">
       <button type="button" class="btn btn-link btn-sm">
         <router-link
-          v-if="$store.getters.user.role === 'client' && shipment._id"
+          v-if="$store.getters.user.role === 'client' && shipment._id && shipment.status !== 'shipped'"
           :to="{
             name: 'updateFBA',
             params: { sid: shipment._id },
@@ -73,6 +73,11 @@
   <div class="card-body">
     FNSKU:
     <a v-for="fnsku in shipment.fnsku" :href="formatUrl(fnsku.url)">{{ fnsku.url }}</a>
+  </div>
+
+  <div class="card-body">
+    SHIPPING LABELS:
+    <a v-for="label in shipment.labels" :href="formatUrl(label.url)">{{ label.url }}</a>
   </div>
 
   <div class="card-footer text-muted">

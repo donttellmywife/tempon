@@ -46,7 +46,7 @@
     <div class="form-group">
       Boxes info:<br>
       <div v-for="(b, index) in shipment.box" style="display: flex">
-        <label>Description<br>
+        <label>box #{{ index + 1 }}<br>
           <input v-model="b.descirption" class="form-control form-control-sm" placeholder="something about order" type="text">
         </label><br>
         <label>Length<br>
@@ -60,16 +60,42 @@
         </label><br>
         <label>Weight<br>
           <input v-model="b.weight" class="form-control form-control-sm" placeholder="10lbs" type="text">
-        </label><br>
+        </label>
+        <span @click.prevent="(e) => removeBox(e, index)" class="badge badge-light">remove</span><br>
       </div>
+      <button @click.prevent="addEmptyBox" class="btn btn-outline-secondary btn-sm">add box</button>
 
-      <label>Link to labels<br>
+      <!-- <div class="form-group">
+        <label>How many boxes do you want?
+          <div v-for="(b, index) in box" style="display: flex">
+            <input v-model.trim="b.description" class="form-control" placeholder="whats in the box?" type="text">
+            <span @click.prevent="(e) => removeBox(e, index)" class="badge badge-light">remove</span>
+          </div>
+
+          <button @click.prevent="addEmptyBox" class="btn btn-outline-secondary btn-sm">add box</button>
+        </label>
+      </div> -->
+
+      <!-- <label>Link to labels<br>
         <input
           v-model="shipment.labels"
           class="form-control"
           placeholder="http://docs.google.com/"
           type="text">
+      </label> -->
+    </div>
+
+    <div class="form-group" style="display: flex; flex-direction: column">
+      Shipping labels<br>
+      <label v-for="(label, index) in shipment.labels">
+        <input
+          v-model="label.url"
+          class="form-control"
+          placeholder="http://docs.google.com/"
+          type="text">
+        <span @click.prevent="(e) => removeLabel(e, index)" class="badge badge-light">remove</span>
       </label>
+      <button @click.prevent="addEmptyLabel" class="btn btn-outline-secondary btn-sm">add label</button>
     </div>
 
     <button v-if="shipment.status !== 'shipped'" type="submit" class="btn btn-primary">

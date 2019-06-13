@@ -105,6 +105,20 @@ export default {
     removeLabel(e, index) {
       this.shipment.labels = this.shipment.labels.slice(0, index).concat(this.shipment.labels.slice(index + 1))
     },
+
+    addEmptyFNSKU(e) {
+      this.shipment.fnsku = this.shipment.fnsku.concat({ url: '' })
+    },
+    removeFNSKU(e, index) {
+      this.shipment.fnsku = this.shipment.fnsku.slice(0, index).concat(this.shipment.fnsku.slice(index + 1))
+    },
+
+    addEmptyBox(e) {
+      this.shipment.box = this.shipment.box.concat({ ...emptyDimensions })
+    },
+    removeBox(e, index) {
+      this.shipment.box = this.shipment.box.slice(0, index).concat(this.shipment.box.slice(index + 1))
+    },
   },
 
 

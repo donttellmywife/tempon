@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { orders } from 'API'
+import { orders, fba } from 'API'
 
-const { list } = orders
 const { parse, stringify } = JSON
 
 Vue.use(Vuex)
@@ -10,7 +9,8 @@ Vue.use(Vuex)
 
 const guest = { role: 'guest' }
 const prevUser = parse(localStorage.getItem('user')) || {}
-const prevOrderStatusTab = localStorage.getItem('ordersStatusTab')
+const prevOrderStatusTab = localStorage.getItem('ORDERS_STATUS')
+const prevFBAStatusTab = localStorage.getItem('FBA_STATUS')
 
 
 const store = new Vuex.Store({
@@ -20,6 +20,7 @@ const store = new Vuex.Store({
       ...prevUser,
     },
 
+
     ui: {
       orders: {
         status: prevOrderStatusTab || '',
@@ -27,24 +28,32 @@ const store = new Vuex.Store({
         isLoading: false,
         error: '',
       },
+      fbas: {
+        status: prevFBAStatusTab || '',
+
+        isLoading: false,
+        error: '',
+      },
     },
 
+
     orders: [],
-    shipments: {
-      fba: [],
-      fbm: [],
-    },
+    fbas: [],
+    fbms: [],
   },
 
 
   getters: {
     user: state => state.user,
 
-    // orders
+
     orders: state => state.orders,
     ui_ordersStatus: state => state.ui.orders.status,
     ui_ordersLoading: state => state.ui.orders.isLoading,
     ui_ordersError: state => state.ui.orders.error,
+
+
+    fbas: state => state.fbas,
   },
 
 
@@ -59,11 +68,8 @@ const store = new Vuex.Store({
       state.user = {...guest}
     },
 
+
     // ORDERS
-    filterOrdersByStatus(state, status) {
-      localStorage.setItem('ordersStatusTab', status)
-      state.ui.orders.status = status
-    },
     orders(state, orders) {
       state.orders = orders
     },
@@ -73,22 +79,52 @@ const store = new Vuex.Store({
     ordersError(state, error) {
       state.ui.orders.error = error
     },
+    filterOrdersByStatus(state, status) {
+      localStorage.setItem('ORDERS_STATUS', status)
+      state.ui.orders.status = status
+    },
+
 
     // SHIPMENTS
     // FBA
+    fbas(state, shipments) {
+      state.fbas = shipments
+    },
+    fbasLoading(state, isLoading) {
+      state.ui.fbas.isLoading = isLoading
+    },
+    fbasError(state, error) {
+      state.ui.fbas.error = error
+    },
+    filterFBAByStatus(state, status) {
+      localStorage.setItem('FBA_STATUS', status)
+      state.ui.fbas.status = status
+    },
   },
 
 
   actions: {
     loadOrders({ commit }) {
-      commit('ordersLoading', false)
-      commit('ordersLoading', '')
+      commit('ordersLoading', true)
+      commit('ordersError', '')
 
-      list()
+      orders.list()
         .then(res => res.data)
         .then(items => commit('orders', items))
         .catch(err => commit('ordersError', err.toString()))
         .then(() => commit('ordersLoading', false))
+    },
+
+
+    loadFBAS({ commit }) {
+      commit('fbasLoading', true)
+      commit('fbasError', '')
+
+      fba.list()
+        .then(res => res.data)
+        .then(items => commit('fbas', items))
+        .catch(err => commit('fbasError', err.toString()))
+        .then(() => commit('fbasLoading', false))
     },
   },
 })

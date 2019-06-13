@@ -77,7 +77,6 @@
     data() {
       return {
         description: '',
-        orders: [],
         cargos: [],
         fnsku: [{
           url: '',
@@ -92,8 +91,15 @@
     },
 
 
+    computed: {
+      orders() {
+        return this.$store.getters.orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
+      },
+    },
+
+
     mounted() {
-      this.fetchData()
+      this.$store.dispatch('loadOrders')
     },
 
 
@@ -115,20 +121,6 @@
           })
           .then(({ data }) => this.$router.push({ name: 'viewFBA', params: { sid: data._id }}))
           .catch(err => this.error = err)
-      },
-
-
-      fetchData() {
-        this.isLoading = true
-        this.error = ''
-
-        orders.list()
-          .then(res => res.data)
-          .then(orders => {
-            this.orders = orders.filter(order => order.status === 'done')
-          })
-          .catch(err => this.error = err.toString())
-          .then(() => this.isLoading = false)
       },
 
 

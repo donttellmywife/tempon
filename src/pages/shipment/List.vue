@@ -40,7 +40,7 @@
   <br>
 
 
-  <ul v-if="fbas.length && (!activeType || activeType === 'fbas')">
+  <ul v-if="showFba">
     FBAS:
     <fba-client v-for="ship in fbas" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
   </ul>
@@ -65,7 +65,6 @@
   export default {
     data() {
       return {
-        fbas: [],
         fbms: [],
 
         activeType: '',
@@ -78,8 +77,19 @@
     },
 
 
+    computed: {
+      fbas() {
+        return this.$store.getters.fbas
+      },
+      showFba() {
+        return this.$store.getters.fbas.length && (!this.activeType || this.activeType === 'fbas')
+      }
+    },
+
+
     mounted() {
       this.fetchData()
+      this.$store.dispatch('loadFBAS')
     },
 
 
@@ -87,12 +97,6 @@
       fetchData() {
         this.isLoading = true
         this.error = ''
-
-        fba.list()
-          .then(res => res.data)
-          .then(items => this.fbas = items)
-          .catch(err => this.error = err.toString())
-          .then(() => this.isLoading = false)
 
         fbm.list()
           .then(res => res.data)

@@ -124,7 +124,6 @@
     data() {
       return {
         description: '',
-        orders: [],
         cargos: [],
         packing: [],
         courier: '',
@@ -150,15 +149,19 @@
     },
 
 
-    mounted() {
-      this.fetchData()
-    },
-
-
     computed: {
       showCustomCourier: function() {
         return this.courier === 'OTHER'
-      }
+      },
+
+      orders() {
+        return this.$store.getters.orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
+      },
+    },
+
+
+    mounted() {
+      this.$store.dispatch('loadOrders')
     },
 
 
@@ -182,20 +185,6 @@
           })
           .then(({ data }) => this.$router.push({ name: 'viewFBM', params: { sid: data._id }}))
           .catch(err => this.error = err)
-      },
-
-
-      fetchData() {
-        this.isLoading = true
-        this.error = ''
-
-        orders.list()
-          .then(res => res.data)
-          .then(orders => {
-            this.orders = orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
-          })
-          .catch(err => this.error = err.toString())
-          .then(() => this.isLoading = false)
       },
     },
 

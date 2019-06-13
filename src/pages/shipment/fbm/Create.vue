@@ -17,28 +17,28 @@
         <div class="form-group">
           Deliver to: <br>
           <label>Recipient <br>
-            <input v-model="deliverTo.recipient" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.recipient" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>Company <br>
-            <input v-model="deliverTo.company" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.company" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>Address <br>
             <input v-for="line in deliverTo.address" v-model="line.line" class="form-control" placeholder="" type="text">
           </label><br>
           <label>City <br>
-            <input v-model="deliverTo.city" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.city" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>State <br>
-            <input v-model="deliverTo.state" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.state" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>Zip <br>
-            <input v-model="deliverTo.zip" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.zip" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>Country <br>
-            <input v-model="deliverTo.country" class="form-control" placeholder="" type="text">
+            <input v-model="deliverTo.country" class="form-control" placeholder="" type="text" required>
           </label><br>
           <label>Phone <br>
-            <input v-model="deliverTo.phone" class="form-control" placeholder="" type="phone">
+            <input v-model="deliverTo.phone" class="form-control" placeholder="" type="phone" required>
           </label><br>
           <label>Email <br>
             <input v-model="deliverTo.email" class="form-control" placeholder="" type="email">

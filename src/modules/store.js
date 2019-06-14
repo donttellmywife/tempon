@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { orders, fba } from 'API'
+import { orders, fba, fbm } from 'API'
 
 const { parse, stringify } = JSON
 
@@ -11,6 +11,7 @@ const guest = { role: 'guest' }
 const prevUser = parse(localStorage.getItem('user')) || {}
 const prevOrderStatusTab = localStorage.getItem('ORDERS_STATUS')
 const prevFBAStatusTab = localStorage.getItem('FBA_STATUS')
+const prevFBMStatusTab = localStorage.getItem('FBM_STATUS')
 
 
 const store = new Vuex.Store({
@@ -21,6 +22,11 @@ const store = new Vuex.Store({
     },
 
 
+    orders: [],
+    fbas: [],
+    fbms: [],
+
+
     ui: {
       orders: {
         status: prevOrderStatusTab || '',
@@ -28,18 +34,25 @@ const store = new Vuex.Store({
         isLoading: false,
         error: '',
       },
+
+      shipments: {
+
+      },
+
       fbas: {
         status: prevFBAStatusTab || '',
 
         isLoading: false,
         error: '',
       },
+
+      fbms: {
+        status: prevFBMStatusTab || '',
+
+        isLoading: false,
+        error: '',
+      },
     },
-
-
-    orders: [],
-    fbas: [],
-    fbms: [],
   },
 
 
@@ -54,6 +67,13 @@ const store = new Vuex.Store({
 
 
     fbas: state => state.fbas,
+    ui_fbasLoading: state => state.ui.fbas.isLoading,
+    ui_fbasError: state => state.ui.fbas.error,
+
+
+    fbms: state => state.fbms,
+    ui_fbmsLoading: state => state.ui.fbms.isLoading,
+    ui_fbmsError: state => state.ui.fbms.error,
   },
 
 
@@ -100,6 +120,22 @@ const store = new Vuex.Store({
       localStorage.setItem('FBA_STATUS', status)
       state.ui.fbas.status = status
     },
+
+
+    // FBM
+    fbms(state, shipments) {
+      state.fbms = shipments
+    },
+    fbmsLoading(state, isLoading) {
+      state.ui.fbms.isLoading = isLoading
+    },
+    fbmsError(state, error) {
+      state.ui.fbms.error = error
+    },
+    filterFBMByStatus(state, status) {
+      localStorage.setItem('FBM_STATUS', status)
+      state.ui.fbms.status = status
+    },
   },
 
 
@@ -125,6 +161,18 @@ const store = new Vuex.Store({
         .then(items => commit('fbas', items))
         .catch(err => commit('fbasError', err.toString()))
         .then(() => commit('fbasLoading', false))
+    },
+
+
+    loadFBMS({ commit }) {
+      commit('fbmsLoading', true)
+      commit('fbmsError', '')
+
+      fbm.list()
+        .then(res => res.data)
+        .then(items => commit('fbms', items))
+        .catch(err => commit('fbmsError', err.toString()))
+        .then(() => commit('fbmsLoading', false))
     },
   },
 })

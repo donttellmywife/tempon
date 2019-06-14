@@ -2,12 +2,7 @@
 <main-layout>
 <h2>SHIPMENTS</h2>
 
-<Loading v-if="isLoading" />
-
-<div v-if="!isLoading">
-  <div v-if="error">{{ error }}</div>
-
-
+<div>
   <ul class="nav nav-pills nav--close">
     type:
     <li class="nav-item">
@@ -39,18 +34,25 @@
   </ul>
   <br>
 
+  <div>
+    <Loading v-if="fbaLoader" />
+    <Err v-if="fbaError" :msg="fbaError" />
 
-  <ul v-if="showFba">
-    FBAS:
-    <fba-client v-for="ship in fbas" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
-  </ul>
+    <ul v-if="fbaShow">
+      FBAS:
+      <fba-client v-for="ship in fbas" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
+    </ul>
+  </div>
 
-  <hr>
+  <div>
+    <Loading v-if="fbmLoader" />
+    <Err v-if="fbmError" :msg="fbmError" />
 
-  <ul v-if="fbms.length && (!activeType || activeType === 'fbms')">
-    FBMS:
-    <fbm-client v-for="ship in fbms" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
-  </ul>
+    <ul v-if="fbmShow">
+      FBMS:
+      <fbm-client v-for="ship in fbms" v-if="!activeStatus || ship.status === activeStatus" :key="ship._id" :shipment="ship" />
+    </ul>
+  </div>
 </div>
 </main-layout>
 </template>
@@ -58,21 +60,15 @@
 
 <script>
   import { MainLayout } from 'LAYOUT'
-  import { Loading, FbaClient, FbmClient } from 'COMPONENT'
+  import { Loading, FbaClient, FbmClient, Err } from 'COMPONENT'
   import { fba, fbm, shipment } from 'API'
 
 
   export default {
     data() {
       return {
-        fbms: [],
-
         activeType: '',
         activeStatus: '',
-
-        error: '',
-        isLoading: true,
-        isClient: this.$store.getters.user.role === 'client',
       }
     },
 
@@ -81,31 +77,43 @@
       fbas() {
         return this.$store.getters.fbas
       },
-      showFba() {
+      fbaShow() {
         return this.$store.getters.fbas.length && (!this.activeType || this.activeType === 'fbas')
-      }
+      },
+      fbaError() {
+        return this.$store.getters.ui_fbasError
+      },
+      fbaLoader() {
+        return this.$store.getters.ui_ordersLoading
+      },
+
+
+      fbms() {
+        return this.$store.getters.fbms
+      },
+      fbmShow() {
+        return this.$store.getters.fbms.length && (!this.activeType || this.activeType === 'fbms')
+      },
+      fbmError() {
+        return this.$store.getters.ui_fbmsError
+      },
+      fbmLoader() {
+        return this.$store.getters.ui_fbmsLoader
+      },
+
+      isClient() {
+        return this.$store.getters.user.role === 'client'
+      },
     },
 
 
     mounted() {
-      this.fetchData()
       this.$store.dispatch('loadFBAS')
+      this.$store.dispatch('loadFBMS')
     },
 
 
     methods: {
-      fetchData() {
-        this.isLoading = true
-        this.error = ''
-
-        fbm.list()
-          .then(res => res.data)
-          .then(items => this.fbms = items)
-          .catch(err => this.error = err.toString())
-          .then(() => this.isLoading = false)
-      },
-
-
       chooseType(tabName) {
         this.activeType = tabName
       },
@@ -121,6 +129,7 @@
       Loading,
       FbaClient,
       FbmClient,
+      Err,
     },
   }
 </script>

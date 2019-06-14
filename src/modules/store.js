@@ -33,10 +33,7 @@ const store = new Vuex.Store({
 
         isLoading: false,
         error: '',
-      },
-
-      shipments: {
-
+        fetchAt: '',
       },
 
       fbas: {
@@ -52,6 +49,10 @@ const store = new Vuex.Store({
         isLoading: false,
         error: '',
       },
+
+      // shipments: {
+      //
+      // },
     },
   },
 
@@ -61,6 +62,7 @@ const store = new Vuex.Store({
 
 
     orders: state => state.orders,
+    ordersFetched: state => state.ui.orders.fetchAt,
     ui_ordersStatus: state => state.ui.orders.status,
     ui_ordersLoading: state => state.ui.orders.isLoading,
     ui_ordersError: state => state.ui.orders.error,
@@ -92,6 +94,9 @@ const store = new Vuex.Store({
     // ORDERS
     orders(state, orders) {
       state.orders = orders
+    },
+    ordersFetch(state, timestamp) {
+      state.ui.orders.fetchAt = timestamp
     },
     ordersLoading(state, isLoading) {
       state.ui.orders.isLoading = isLoading
@@ -146,7 +151,10 @@ const store = new Vuex.Store({
 
       orders.list()
         .then(res => res.data)
-        .then(items => commit('orders', items))
+        .then((items) => {
+          commit('orders', items)
+          commit('ordersFetch', Date.now())
+        })
         .catch(err => commit('ordersError', err.toString()))
         .then(() => commit('ordersLoading', false))
     },

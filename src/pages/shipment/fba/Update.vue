@@ -63,6 +63,16 @@
   <button v-if="shipment.status === 'todo'" type="submit" class="btn btn-primary">Update</button>
 </form>
 
+
+<aside v-if="showOrders" class="clm">
+  Choose orders:
+
+  <label v-for="ord in orders">
+    <input type="checkbox" :value="ord" v-model="shipment.cargos">
+    {{ ord.description.expected }}
+  </label><br>
+</aside>
+
 </main-layout>
 </template>
 

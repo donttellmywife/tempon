@@ -59,7 +59,7 @@
       },
       orders() {
         return this.$store.getters.orders
-      }
+      },
     },
 
 

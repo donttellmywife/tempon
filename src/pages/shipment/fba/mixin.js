@@ -33,8 +33,6 @@ export default {
         }],
       },
 
-      orders: [],
-
 
       error: '',
       isLoading: false,
@@ -42,8 +40,21 @@ export default {
   },
 
 
-  created() {
+  computed: {
+    orders() {
+      return this.$store.getters.orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
+    },
+
+
+    showOrders() {
+      return this.$store.getters.orders.length
+    },
+  },
+
+
+  mounted() {
     this.fetchData()
+    if (!this.$store.getters.ordersFetched) this.$store.dispatch('loadOrders')
   },
 
 
@@ -90,14 +101,6 @@ export default {
       this.error = ''
     },
 
-
-    fetchOrders() {
-      orders.list()
-        .then(getData)
-        .then((orders) => {
-          this.orders = orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
-        })
-    },
 
     addEmptyLabel(e) {
       this.shipment.labels = this.shipment.labels.concat({ url: '' })

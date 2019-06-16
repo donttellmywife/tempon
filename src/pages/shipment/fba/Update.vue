@@ -68,7 +68,13 @@
   Choose orders:
 
   <label v-for="ord in orders">
-    <input type="checkbox" :value="ord" v-model="shipment.cargos">
+    CheCKED: {{ shipment.cargos.map(c => c._id).indexOf(ord._id) > -1 }}
+    <input
+      :value="ord"
+      v-model="shipment.cargos"
+      :checked="shipment.cargos.map(c => c._id).indexOf(ord._id) > -1"
+      type="checkbox">
+
     {{ ord.description.expected }}
   </label><br>
 </aside>

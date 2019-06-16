@@ -99,7 +99,7 @@
 
 
     mounted() {
-      !this.$store.getters.ordersFetched ? this.$store.dispatch('loadOrders') : ''
+      if (!this.$store.getters.orders.length) this.$store.dispatch('loadOrders')
     },
 
 

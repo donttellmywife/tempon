@@ -1,6 +1,5 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
-import { atleastOne } from '../validator.js'
-
+import { priority, createdBy, user, cargos } from '../common.js'
 
 const schema = new Schema({
   status: {
@@ -8,27 +7,6 @@ const schema = new Schema({
     type: String,
     enum: ['todo', 'shipped'],
     default: 'todo',
-  },
-
-
-  cargos: {
-    type: [
-      {
-        _id: {
-          required: true,
-          ref: 'cargo',
-          type: SchemaTypes.ObjectId,
-        },
-
-
-        quantity: {
-          required: true,
-          type: Number,
-          min: 0,
-        },
-      },
-    ],
-    validate: [atleastOne, '{PATH} need atleast one cargo'],
   },
 
 
@@ -52,33 +30,17 @@ const schema = new Schema({
 
   description: String,
   courier: String,
-  packing: [String],
-  priority: {
-    type: String,
-    enum: ['low', 'normal', 'high', 'urgent'],
-    default: 'normal',
-  },
-
-
-  createdBy: {
-    required: true,
-    ref: 'user',
-    type: SchemaTypes.ObjectId,
-  },
-
-
-  user: {
-    name: {
-      type: String,
-    },
-    email: {
-      type: String,
-    }
-  },
-
-
-  price: String,
   tracking: String,
+  packing: [String],
+
+  // NOT USED
+  price: String,
+
+  // IMPORTED
+  cargos,
+  createdBy,
+  user,
+  priority,
 }, {
   timestamps: true
 })

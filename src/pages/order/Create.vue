@@ -34,7 +34,7 @@
       <div v-for="(track, index) in tracking" style="display: flex">
         <input v-model.trim="track.value" class="form-control" placeholder="tracking" type="text" minlength="6" maxlength="16" required>
         >
-        <input v-model.trim="track.quantity" class="form-control" placeholder="in amount of" type="number" min="1">
+        <input v-model.trim="track.quantity" class="form-control" placeholder="in amount of" type="number" min="1" :max="quantity">
         <span @click.prevent="(e) => removeTrack(e, index)" class="badge badge-light">remove</span>
       </div>
       <button @click.prevent="addEmptyTrack" class="btn btn-outline-secondary btn-sm">add track</button>

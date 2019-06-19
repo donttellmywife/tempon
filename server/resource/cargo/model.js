@@ -1,8 +1,15 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
 import { atleastOne } from '../validator.js'
-
+import { createdBy, user } from '../common.js'
 
 const schema = new Schema({
+  status: {
+    type: String,
+    enum: ['todo', 'done', 'fail'],
+    default: 'todo',
+  },
+
+
   tracking: {
     type: [{
       value: {
@@ -59,32 +66,12 @@ const schema = new Schema({
   },
 
 
-  createdBy: {
-    ref: 'user',
-    type: SchemaTypes.ObjectId,
-    required: true,
-  },
-
-
-  user: {
-    name: {
-      type: String,
-    },
-    email: {
-      type: String,
-    }
-  },
-
-
-  status: {
-    type: String,
-    enum: ['todo', 'done', 'fail'],
-    default: 'todo',
-  },
-
-
   comment: String,
   labels: String,
+
+
+  createdBy,
+  user,
 }, {
   timestamps: true
 })

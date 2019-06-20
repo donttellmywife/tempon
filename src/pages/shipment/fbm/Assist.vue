@@ -8,7 +8,15 @@
 <div class="two-sides">
   <main class="clm">
     <form @submit.prevent="update">
-      <h6>status: {{ shipment.status }}</h6>
+      <!-- <h6>status: {{ shipment.status }}</h6> -->
+
+      <div class="form-group">
+        <label>Set status: <select v-model="shipment.status" class="form-control">
+          <option v-for="option in statuses" :value="option">
+            {{ option }}
+          </option>
+        </select></label>
+      </div>
 
       <div class="form-group">
         <label>Set priority: <select v-model="shipment.priority" class="form-control">
@@ -106,7 +114,8 @@
 
     data() {
       return {
-        possiblePriority: ['', 'low', 'normal', 'high', 'urgent'],
+        possiblePriority: ['normal', 'low', 'high', 'urgent'],
+        statuses: ['todo', 'in progress', 'ready', 'shipped'],
       }
     },
   }

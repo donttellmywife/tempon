@@ -6,7 +6,15 @@
 
 
 <form v-if="!(isLoading && error)" @submit.prevent="update">
-  <h6>status: {{ shipment.status }}</h6>
+  <!-- <h6>status: {{ shipment.status }}</h6> -->
+
+  <div class="form-group">
+    <label>Set status: <select v-model="shipment.status" class="form-control">
+      <option v-for="option in statuses" :value="option">
+        {{ option }}
+      </option>
+    </select></label>
+  </div>
 
   <div class="form-group">
     <label>Set priority: <select v-model="shipment.priority" class="form-control">
@@ -79,7 +87,7 @@
     <button @click.prevent="addEmptyLabel" class="btn btn-outline-secondary btn-sm">add label</button>
   </div>
 
-  <button v-if="shipment.status !== 'shipped'" type="submit" class="btn btn-primary">
+  <button type="submit" class="btn btn-primary">
     {{ shipment.status === 'ready' ? 'START SHIPMENT' : 'UPDATE SHIPMENT' }}
   </button>
 </form>
@@ -97,6 +105,7 @@
     data() {
       return {
         possiblePriority: ['normal', 'low', 'high', 'urgent'],
+        statuses: ['todo', 'in progress', 'ready', 'shipped'],
       }
     },
   }

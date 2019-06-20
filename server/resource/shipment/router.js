@@ -128,10 +128,10 @@ async function updateOneFBA(req, res) {
 
 
   // TODO: more booletproof checks?
-  if (req.user.role === 'assistant') {
-    if (req.body.status === 'todo') req.body.status = 'in progress'
-    if (req.body.status === 'ready') req.body.status = 'shipped'
-  }
+  // if (req.user.role === 'assistant') {
+  //   if (req.body.status === 'todo') req.body.status = 'in progress'
+  //   if (req.body.status === 'ready') req.body.status = 'shipped'
+  // }
 
 
   try {
@@ -262,7 +262,7 @@ async function updateOneFBM(req, res) {
   }
   if (req.user.role === 'client') lookFor.createdBy = req.user._id
   // TODO: more booletproof checks?
-  if (req.user.role === 'assistant' && req.body.status === 'todo') req.body.status = 'shipped'
+  // if (req.user.role === 'assistant' && req.body.status === 'todo') req.body.status = 'shipped'
 
 
   try {

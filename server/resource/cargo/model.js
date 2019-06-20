@@ -1,5 +1,5 @@
 import { Schema, SchemaTypes, model } from 'mongoose'
-import { atleastOne } from '../validator.js'
+import { atleastOne, isTrack } from '../validator.js'
 import { createdBy, user } from '../common.js'
 
 const schema = new Schema({
@@ -15,7 +15,7 @@ const schema = new Schema({
       value: {
         type: String,
         validate: {
-          validator: ({ length }) => length >= 6 && length <= 16, // from requirements
+          validator: isTrack,
           message: 'Tracking length not match (6-16)'
         },
       },

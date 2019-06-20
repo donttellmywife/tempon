@@ -1,4 +1,4 @@
-import { Schema, SchemaTypes, model } from 'mongoose'
+import { Schema, SchemaTypes } from 'mongoose'
 import { atleastOne } from './validator.js'
 
 

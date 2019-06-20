@@ -33,7 +33,6 @@ const store = new Vuex.Store({
 
         isLoading: false,
         error: '',
-        fetchAt: '',
       },
 
       fbas: {

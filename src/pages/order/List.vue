@@ -40,7 +40,7 @@
 
   export default {
     mounted() {
-      this.$store.dispatch('loadOrders')
+      if (!this.$store.getters.orders.length) this.$store.dispatch('loadOrders')
     },
 
 

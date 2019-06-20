@@ -7,8 +7,13 @@
 
 <form v-if="!(isLoading && error)" @submit.prevent="update">
   <div class="form-group">
-    status: {{ order.status }}
+    <label>Set status: <select v-model="order.status" class="form-control">
+      <option v-for="option in statuses" :value="option">
+        {{ option }}
+      </option>
+    </select></label>
   </div>
+
   <div class="form-group" v-if="order.user && order.user.name">
     client: {{ order.user.name }}
   </div>
@@ -73,7 +78,7 @@
     <small>updated: {{ formatDate(order.updatedAt) }}</small>
   </div>
 
-  <button v-if="order.status === 'todo'" class="btn btn-primary" type="submit">assist</button>
+  <button class="btn btn-primary" type="submit">assist</button>
 </form>
 </main-layout>
 </template>
@@ -85,5 +90,12 @@ import orderMixin from './mixin.js'
 
 export default {
   mixins: [orderMixin],
+
+
+  data() {
+    return {
+      statuses: ['todo', 'done', 'fail'],
+    }
+  },
 }
 </script>

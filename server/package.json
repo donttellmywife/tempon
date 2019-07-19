@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect --exec babel-node ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "putout module",
+    "lint:fix": "putout module --fix"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -14,7 +16,8 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.3",
-    "ramda": "^0.26.1"
+    "ramda": "^0.26.1",
+    "try-catch": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -24,7 +27,8 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "dotenv": "^6.2.0",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "putout": "^4.54.0"
   },
   "keywords": [],
   "author": "",

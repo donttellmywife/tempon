@@ -31,7 +31,7 @@
 
   function emailValidation(email) {
     // any chras till @ any chars till dot any chars after
-    return /^.+[@].+\..+$/.test(email)
+    return /^.+@.+\..+$/.test(email)
   }
 
 

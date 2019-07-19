@@ -39,9 +39,9 @@
       </div>
 
 
-      <div v-if="cargos.length" class="form-group">
+      <div v-if="selectedOrders.length" class="form-group">
         <hr>
-        <div v-for="ord in cargos">
+        <div v-for="ord in selectedOrders">
           <label><span class="text-primary">{{ ord.description.expected }}</span> in amount of
             <input v-model="ord.quantity.left" class="form-control form-control-sm" placeholder="1" type="number">
           </label><br>
@@ -54,12 +54,20 @@
   </main>
 
 
-  <aside v-if="orders.length" class="clm">
+  <!-- <aside v-if="orders.length" class="clm">
     Choose orders:
 
     <label v-for="ord in orders">
       <input type="checkbox" :value="ord" v-model="cargos">
       {{ ord.description.expected }}
+    </label><br>
+  </aside> -->
+
+  <aside v-if="orders.length" class="clm">
+    Choose orders:
+
+    <label v-for="ord in orders">
+      <input type="checkbox" :value="ord._id" @input="updateCargos"> {{ ord.description.expected }}
     </label><br>
   </aside>
 </div>
@@ -93,8 +101,12 @@
 
     computed: {
       orders() {
-        return this.$store.getters.orders.filter(order => order.status === 'done').filter(order => order.quantity.left > 0)
+        return this.$store.getters.orders.filter(({ status }) => status === 'done').filter(({ quantity: { left }}) => left)
       },
+
+      selectedOrders() {
+        return this.$store.getters.ui_ordersSelected
+      }
     },
 
 
@@ -105,7 +117,7 @@
 
     methods: {
       create() {
-        const cargos = this.cargos.map(c => ({ _id: c._id, quantity: c.quantity.left }))
+        const cargos = this.selectedOrders.map(c => ({ _id: c._id, quantity: c.quantity.left }))
 
         const shipment = {
           description: this.description,
@@ -114,6 +126,7 @@
           box: this.box,
         }
 
+        // TODO: move to store
         fba.add(shipment)
           .then(response => {
             if (response.error) return Promise.reject(response.error)
@@ -121,6 +134,7 @@
           })
           .then(({ data }) => this.$router.push({ name: 'viewFBA', params: { sid: data._id }}))
           .catch(err => this.error = err)
+          .then(() => this.$store.commit('clearSelectedOrders'))
       },
 
 
@@ -136,6 +150,11 @@
       removeBox(e, index) {
         this.box = this.box.slice(0, index).concat(this.box.slice(index + 1))
       },
+
+
+      updateCargos(e) {
+        this.$store.commit('toggleSelectedOrder', { selected: e.target.checked, id: e.target.value })
+      }
     },
 
 

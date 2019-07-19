@@ -13,6 +13,11 @@ const prevOrderStatusTab = localStorage.getItem('ORDERS_STATUS')
 const prevFBAStatusTab = localStorage.getItem('FBA_STATUS')
 const prevFBMStatusTab = localStorage.getItem('FBM_STATUS')
 
+const hasStatus = is => ({ status }) => status === is
+const isDone = hasStatus('done')
+const isTodo = hasStatus('todo')
+const isFail = hasStatus('fail')
+
 
 const store = new Vuex.Store({
   state: {
@@ -30,6 +35,7 @@ const store = new Vuex.Store({
     ui: {
       orders: {
         status: prevOrderStatusTab || '',
+        selected: [],
 
         isLoading: false,
         error: '',
@@ -64,6 +70,7 @@ const store = new Vuex.Store({
     ui_ordersStatus: state => state.ui.orders.status,
     ui_ordersLoading: state => state.ui.orders.isLoading,
     ui_ordersError: state => state.ui.orders.error,
+    ui_ordersSelected: state => state.ui.orders.selected.map(id => state.orders.find(({ _id }) => id === _id)),
 
 
     fbas: state => state.fbas,
@@ -102,6 +109,18 @@ const store = new Vuex.Store({
     filterOrdersByStatus(state, status) {
       localStorage.setItem('ORDERS_STATUS', status)
       state.ui.orders.status = status
+    },
+    toggleSelectedOrder(state, { selected, id }) {
+      // if (state.ui.orders.selected.some(_id => id === _id))  state.ui.orders.selected = state.ui.orders.selected.filter(_id => _id !== id)
+      // else state.ui.orders.selected = state.ui.orders.selected.concat(id)
+      if (selected) state.ui.orders.selected = state.ui.orders.selected.concat(id)
+      else state.ui.orders.selected = state.ui.orders.selected.filter(_id => _id !== id)
+    },
+    clearSelectedOrders(state) {
+      state.ui.orders.selected = []
+    },
+    setSelectedOrders(state, ids) {
+      state.ui.orders.selected = [...ids]
     },
 
 
@@ -146,6 +165,12 @@ const store = new Vuex.Store({
 
       orders.list()
         .then(res => res.data)
+        .then((items) => {
+          const todos = items.filter(isTodo)
+          const fails = items.filter(isFail)
+          const dones = items.filter(isDone)
+          return todos.concat(fails).concat(dones)
+        })
         .then(items => commit('orders', items))
         .catch(err => commit('ordersError', err.toString()))
         .then(() => commit('ordersLoading', false))

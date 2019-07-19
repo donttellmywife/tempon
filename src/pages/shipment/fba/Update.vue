@@ -28,9 +28,20 @@
     </label>
   </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label>Inside consists of such cargos: </label>
     <div v-for="cargo in shipment.cargos">{{ cargo.quantity }} - {{ cargo._id }}</div>
+  </div> -->
+
+  BLABLABLA
+
+  <div v-if="possibleCargos.length" class="form-group">
+    <hr>
+    <div v-for="ord in possibleCargos">
+      <label><span class="text-primary">{{ ord.description }}</span> in amount of
+        <input v-model="ord.quantity" class="form-control form-control-sm" placeholder="1" type="number" min=1>
+      </label><br>
+    </div>
   </div>
 
   <div v-if="shipment.status !== 'todo'" class="form-group">
@@ -63,19 +74,13 @@
   <button v-if="shipment.status === 'todo'" type="submit" class="btn btn-primary">Update</button>
 </form>
 
+POSSIBLE: {{ possibleCargos }}
 
 <aside v-if="showOrders" class="clm">
   Choose orders:
 
   <label v-for="ord in orders">
-    CheCKED: {{ shipment.cargos.map(c => c._id).indexOf(ord._id) > -1 }}
-    <input
-      :value="ord"
-      v-model="shipment.cargos"
-      :checked="shipment.cargos.map(c => c._id).indexOf(ord._id) > -1"
-      type="checkbox">
-
-    {{ ord.description.expected }}
+    <input type="checkbox" :value="ord._id" @input="updateCargos" :checked="selectedOrders.some(({ _id}) => _id === ord._id)"> {{ ord.description.expected }}
   </label><br>
 </aside>
 
@@ -89,5 +94,25 @@
 
   export default {
     mixins: [fbaMixin],
+
+
+    methods: {
+      updateCargos(e) {
+        this.$store.commit('toggleSelectedOrder', { selected: e.target.checked, id: e.target.value })
+      },
+    },
+
+
+    // computed: {
+    //   possibleCargos() {
+    //     console.log('AD: ', this.selectedOrders)
+    //     console.log('BD: ', this.shipment.cargos)
+    //     const a = this.selectedOrders
+    //       .filter(({ _id }) => this.shipment.cargos.some(c => c._id !== _id))
+    //       .concat(this.shipment.cargos)
+    //       .map(({ _id, quantity, description }) => ({ _id, quantity: quantity.left || quantity, description: description && description.expected || ''}))
+    //     return a
+    //   }
+    // }
   }
 </script>

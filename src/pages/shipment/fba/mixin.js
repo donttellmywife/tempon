@@ -49,12 +49,33 @@ export default {
     showOrders() {
       return this.$store.getters.orders.length
     },
+
+
+    selectedOrders() {
+      return this.$store.getters.ui_ordersSelected
+    },
+
+
+    possibleCargos() {
+      // console.log('AD: ', this.selectedOrders)
+      // console.log('BD: ', this.shipment.cargos)
+      const a = this.selectedOrders
+        .filter(some => some)
+        .filter(({ _id }) => this.shipment.cargos.some(c => c._id !== _id))
+        .concat(this.shipment.cargos)
+        .map(({ _id, quantity, description }) => ({
+          _id,
+          quantity: quantity.left || quantity,
+          description: (description && description.expected) || '',
+        }))
+      return a
+    },
   },
 
 
   mounted() {
     this.fetchData()
-    if (!this.$store.getters.ordersFetched) this.$store.dispatch('loadOrders')
+    if (!this.$store.getters.orders.length) this.$store.dispatch('loadOrders')
   },
 
 
@@ -75,6 +96,7 @@ export default {
 
 
     fetchData() {
+      // TODO: move to store
       this.startFetch()
       this.handleFetch(fba.get(this.$route.params.sid))
     },
@@ -90,6 +112,9 @@ export default {
               ...emptyDimensions,
             }
           }
+          this.$store.commit('setSelectedOrders', this.shipment.cargos.map(({ _id }) => _id))
+          console.log('WOOT', this.shipment.cargos.map(({ _id }) => _id))
+          // this.shipment.cargos.forEach(({ _id }) => this.$store.commit('toggleSelectedOrder', { selected: true, id: _id }))
         })
         .catch((err) => { this.error = err })
         .then(() => { this.isLoading = false })

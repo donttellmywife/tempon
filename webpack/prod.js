@@ -21,7 +21,9 @@ module.exports = smart({
   plugins: [
     new Compress(),
     // creates gzip
-    new CSS(),
+    new CSS({
+      filename: '[name].[hash].css',
+    }),
     new DefinePlugin({
       USER_API: JSON.stringify('http://139.59.136.63:4001'),
     }),

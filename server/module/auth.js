@@ -8,7 +8,9 @@ import { emailValidation } from 'RESOURCE/validator.js'
 
 
 const secret = config.secrets.jwt
-const expiresIn = config.jwt.expiresIn
+const {
+  expiresIn
+} = config.jwt
 export const newToken = ({ email, role }) =>
   sign(
     { email, role },

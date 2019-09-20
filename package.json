@@ -9,7 +9,8 @@
     "build": "webpack --config webpack/prod.js",
     "test": "echo \"Error: no test specified\" && exit 0",
     "mock": "node mock/api.js",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "deploy": "npm run build && aws s3 cp dist/ s3://bitprep.me/ --recursive"
   },
   "husky": {
     "hooks": {

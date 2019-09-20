@@ -35,7 +35,7 @@ const store = new Vuex.Store({
     ui: {
       orders: {
         status: prevOrderStatusTab || '',
-        selected: [],
+        selected: [], // ids
 
         isLoading: false,
         error: '',
@@ -111,9 +111,7 @@ const store = new Vuex.Store({
       state.ui.orders.status = status
     },
     toggleSelectedOrder(state, { selected, id }) {
-      // if (state.ui.orders.selected.some(_id => id === _id))  state.ui.orders.selected = state.ui.orders.selected.filter(_id => _id !== id)
-      // else state.ui.orders.selected = state.ui.orders.selected.concat(id)
-      if (selected) state.ui.orders.selected = state.ui.orders.selected.concat(id)
+      if (!state.ui.orders.selected.includes(id)) state.ui.orders.selected = state.ui.orders.selected.concat(id)
       else state.ui.orders.selected = state.ui.orders.selected.filter(_id => _id !== id)
     },
     clearSelectedOrders(state) {

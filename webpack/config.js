@@ -11,6 +11,7 @@ module.exports = {
   entry: './index.js',
   output: {
     path: resolve('dist'),
+    publicPath: '/',
   },
 
 

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon --inspect --exec babel-node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "putout module",
-    "lint:fix": "putout module --fix"
+    "lint": "putout resource",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
